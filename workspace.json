@@ -49,6 +49,11 @@
                 "input": "./packages/vue3-vite",
                 "glob": "executors.json",
                 "output": "."
+              },
+              {
+                "input": "./packages/vue3-vite",
+                "glob": "patch-nx-dep-graph.js",
+                "output": "."
               }
             ]
           }
