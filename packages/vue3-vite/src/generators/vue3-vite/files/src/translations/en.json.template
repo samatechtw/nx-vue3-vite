@@ -1,0 +1,4 @@
+{
+  "name": "<%= projectName %>",
+  "cookies": "Accept cookies"
+}

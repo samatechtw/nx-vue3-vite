@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/schema",
   "executors": {
-    "build": {
-      "implementation": "./src/executors/build/executor",
-      "schema": "./src/executors/build/schema.json",
+    "build-app": {
+      "implementation": "./src/executors/build-app/executor",
+      "schema": "./src/executors/build-app/schema.json",
       "description": "build executor"
     }
   }

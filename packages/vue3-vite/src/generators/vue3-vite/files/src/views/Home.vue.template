@@ -1,0 +1,53 @@
+<template>
+<div class="home-wrap">
+  <div class="home-title">
+    <%= projectName %>
+  </div>
+  <Logo />
+  <div>
+    Project generated via <b>nx-vue3-vite</b>
+  </div>
+  <transition name="hide">
+    <Cookies v-if="showCookies" />
+  </transition>
+</div>
+</template>
+
+<script>
+import { useStore } from '/src/store';
+
+export default {
+  setup() {
+    const store = useStore();
+    return {
+      showCookies: cookiesAccepted,
+    };
+  },
+};
+</script>
+
+<style lang="postcss">
+@import '/src/assets/css/global.css';
+
+.home-wrap {
+  background-color: white;
+  @mixin text 16px;
+  @mixin flex-center;
+
+  .home-title {
+    @mixin title 40px;
+    color: $text-main;
+    margin-bottom: 32px;
+  }
+}
+
+.hide-enter-active,
+.hide-leave-active {
+  transition: opacity 0.3s linear;
+}
+.hide-enter-from,
+.hide-leave-to {
+  opacity: 0;
+}
+
+</style>

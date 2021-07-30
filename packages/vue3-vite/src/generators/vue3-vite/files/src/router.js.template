@@ -1,0 +1,37 @@
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '/src/views/Home.vue';
+
+const router = createRouter({
+  history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    if(to.hash) {
+      return new Promise((resolve, _reject) => {
+        setTimeout(() => {
+          resolve({ selector: to.hash });
+        }, 500);
+      });
+    }
+    if(savedPosition) {
+      return savedPosition;
+    }
+    if(to.meta.noScroll && from.meta.noScroll) {
+      return {};
+    }
+    return { top: 0 };
+  },
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home,
+      meta: { title: 'isMedia NFT' },
+    },
+  ],
+});
+
+router.afterEach((to, _from) => {
+  const parentTitle = to.matched.some(record => record.meta.title);
+  document.title = to.meta.title || parentTitle || '<%= projectName %>';
+});
+
+export default router;

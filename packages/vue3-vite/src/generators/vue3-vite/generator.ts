@@ -26,7 +26,7 @@ function normalizeOptions(
     ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(host).libsDir}/${projectDirectory}`;
+  const projectRoot = `${getWorkspaceLayout(host).appsDir}/${projectDirectory}`;
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -57,9 +57,10 @@ function addFiles(host: Tree, options: NormalizedSchema) {
 
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
+  console.log('ADD CONFIG', `${normalizedOptions.projectRoot}/src`);
   addProjectConfiguration(host, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
-    projectType: 'library',
+    projectType: 'application',
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {

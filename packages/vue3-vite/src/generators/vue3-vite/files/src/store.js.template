@@ -1,0 +1,43 @@
+import { reactive, computed, watch } from 'vue';
+
+const storeName = '<%= projectName %>-store';
+
+// Increment to clear data on start, to avoid broken app state
+const STORE_VERSION = 0;
+
+const initialState = () => ({
+  version: STORE_VERSION,
+  cookiesAccepted: false,
+});
+
+const saveState = (value) => {
+  localStorage.setItem(storeName, JSON.stringify(value));
+};
+
+const initialStateSetup = () => {
+  data = initialState();
+  saveState(data);
+};
+
+const raw = localStorage.getItem(storeName);
+let data = null;
+if(raw) {
+  data = JSON.parse(raw);
+  if(data.version !== STORE_VERSION) {
+    console.log(`Store upgraded from ${data.version} to ${STORE_VERSION}`);
+    initialStateSetup();
+  }
+} else {
+  initialStateSetup();
+}
+
+const state = reactive(data);
+
+watch(state, saveState);
+
+export const useStore = () => ({
+  cookiesAccepted: computed(() => state.cookiesAccepted),
+  setCookiesAccepted: (accepted) => {
+    state.cookiesAccepted = accepted;
+  },
+});

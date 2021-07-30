@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    // Enables stricter inference for data properties on `this`
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "paths": {
+      "/*": ["./*"],
+    }
+  }
+}

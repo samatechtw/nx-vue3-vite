@@ -25,7 +25,7 @@ describe('vue3-vite e2e', () => {
         `generate @nx-vue3-vite/vue3-vite:vue3-vite ${plugin} --directory subdir`
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
+        checkFilesExist(`apps/subdir/${plugin}/src/index.ts`)
       ).not.toThrow();
     }, 120000);
   });

@@ -4,7 +4,7 @@
     "vue3-vite": {
       "root": "packages/vue3-vite",
       "sourceRoot": "packages/vue3-vite/src",
-      "projectType": "library",
+      "projectType": "application",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",

@@ -1,0 +1,38 @@
+
+$text-main: #23262f;
+
+@define-mixin title $size {
+  font-family: 'Avenir', Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: $size;
+}
+
+@define-mixin text $size {
+  font-family: Garamond, serif;
+  font-weight: 400;
+  font-size: $size;
+}
+
+$overlay: rgba(0, 0, 0, 0.6);
+
+@define-mixin flex-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@define-mixin flex-center-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@define-mixin overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
