@@ -64,7 +64,6 @@ function updateDependencies(host: Tree) {
   const deps = Object.keys(Dependencies);
   const devDeps = Object.keys(Dependencies);
   removeDependenciesFromPackageJson(host, devDeps, deps);
-  console.log('ADD DEPS', Dependencies);
   return addDependenciesToPackageJson(host, Dependencies, DevDependencies);
 }
 

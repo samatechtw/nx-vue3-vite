@@ -20,7 +20,7 @@ export default {
   setup() {
     const store = useStore();
     return {
-      showCookies: cookiesAccepted,
+      showCookies: store.cookiesAccepted,
     };
   },
 };
@@ -32,12 +32,15 @@ export default {
 .home-wrap {
   background-color: white;
   @mixin text 16px;
-  @mixin flex-center;
+  @mixin flex-center-col;
+  height: 100%;
 
   .home-title {
     @mixin title 40px;
     color: $text-main;
-    margin-bottom: 32px;
+  }
+  img {
+    margin: 16px 0;
   }
 }
 
