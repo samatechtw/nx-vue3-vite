@@ -8,9 +8,9 @@ import {
 describe('vue3-vite e2e', () => {
   it('should create vue3-vite', async () => {
     const plugin = uniq('vue3-vite');
-    ensureNxProject('@nx-vue3-vite/vue3-vite', 'dist/packages/vue3-vite');
+    ensureNxProject('@samatech/vue3-vite', 'dist/packages/vue3-vite');
     await runNxCommandAsync(
-      `generate @nx-vue3-vite/vue3-vite:vue3-vite ${plugin}`
+      `generate @samatech/vue3-vite:vue3-vite ${plugin}`
     );
 
     const result = await runNxCommandAsync(`build ${plugin}`);
@@ -20,9 +20,9 @@ describe('vue3-vite e2e', () => {
   describe('--directory', () => {
     it('should create src in the specified directory', async () => {
       const plugin = uniq('vue3-vite');
-      ensureNxProject('@nx-vue3-vite/vue3-vite', 'dist/packages/vue3-vite');
+      ensureNxProject('@samatech/vue3-vite', 'dist/packages/vue3-vite');
       await runNxCommandAsync(
-        `generate @nx-vue3-vite/vue3-vite:vue3-vite ${plugin} --directory subdir`
+        `generate @samatech/vue3-vite:vue3-vite ${plugin} --directory subdir`
       );
       expect(() =>
         checkFilesExist(`apps/subdir/${plugin}/src/index.ts`)
@@ -33,9 +33,9 @@ describe('vue3-vite e2e', () => {
   describe('--tags', () => {
     it('should add tags to nx.json', async () => {
       const plugin = uniq('vue3-vite');
-      ensureNxProject('@nx-vue3-vite/vue3-vite', 'dist/packages/vue3-vite');
+      ensureNxProject('@samatech/vue3-vite', 'dist/packages/vue3-vite');
       await runNxCommandAsync(
-        `generate @nx-vue3-vite/vue3-vite:vue3-vite ${plugin} --tags e2etag,e2ePackage`
+        `generate @samatech/vue3-vite:vue3-vite ${plugin} --tags e2etag,e2ePackage`
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);

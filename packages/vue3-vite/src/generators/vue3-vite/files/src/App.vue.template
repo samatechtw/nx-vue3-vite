@@ -13,8 +13,8 @@ html,body {
   margin: 0;
   width: 100%;
   height: 100%;
-  color: $black;
-  background-color: $white;
+  color: $text-main;
+  background-color: white;
   * {
     box-sizing: border-box;
   }

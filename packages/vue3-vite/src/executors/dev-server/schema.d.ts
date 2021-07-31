@@ -1,1 +1,5 @@
-export interface DevServerExecutorSchema {} // eslint-disable-line
+export interface DevServerExecutorSchema {
+  host: string;
+  port: number;
+  https: boolean;
+}

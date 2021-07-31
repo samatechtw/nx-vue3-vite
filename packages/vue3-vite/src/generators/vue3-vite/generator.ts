@@ -1,5 +1,8 @@
 import {
   addProjectConfiguration,
+  addDependenciesToPackageJson,
+  removeDependenciesFromPackageJson,
+  readJson,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -9,6 +12,7 @@ import {
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
+import { DevDependencies, Dependencies } from '../../defaults';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -55,20 +59,33 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
+function updateDependencies(host: Tree) {
+  // Make sure we don't have dependency duplicates
+  const deps = Object.keys(Dependencies);
+  const devDeps = Object.keys(Dependencies);
+  removeDependenciesFromPackageJson(host, devDeps, deps);
+  console.log('ADD DEPS', Dependencies);
+  return addDependenciesToPackageJson(host, Dependencies, DevDependencies);
+}
+
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
-  console.log('ADD CONFIG', `${normalizedOptions.projectRoot}/src`);
+
   addProjectConfiguration(host, normalizedOptions.projectName, {
     root: normalizedOptions.projectRoot,
     projectType: 'application',
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {
-        executor: '@nx-vue3-vite/vue3-vite:build',
+        executor: '@samatech/vue3-vite:build-app',
+      },
+      serve: {
+        executor: '@samatech/vue3-vite:dev-server',
       },
     },
     tags: normalizedOptions.parsedTags,
   });
   addFiles(host, normalizedOptions);
   await formatFiles(host);
+  return updateDependencies(host);
 }

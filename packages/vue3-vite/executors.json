@@ -5,6 +5,11 @@
       "implementation": "./src/executors/build-app/executor",
       "schema": "./src/executors/build-app/schema.json",
       "description": "build executor"
+    },
+    "dev-server": {
+      "implementation": "./src/executors/dev-server/executor",
+      "schema": "./src/executors/dev-server/schema.json",
+      "description": "dev server executor"
     }
   }
 }

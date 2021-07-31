@@ -1,1 +1,3 @@
-export interface BuildAppExecutorSchema {} // eslint-disable-line
+export interface BuildAppExecutorSchema {
+  dist: string;
+}

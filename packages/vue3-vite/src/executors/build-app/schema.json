@@ -4,6 +4,11 @@
   "title": "App Builder",
   "description": "Build the app",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "dist": {
+      "type": "string",
+      "description": "Output directory for compiled app"
+    }
+  },
   "required": []
 }

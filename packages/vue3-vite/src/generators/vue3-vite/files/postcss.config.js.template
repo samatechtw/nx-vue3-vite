@@ -2,6 +2,5 @@
 module.exports = {
   plugins: [
     ...require('@samatech/postcss-basics')(),
-    require('@samatech/postcss-colors')
   ],
 };
