@@ -2,7 +2,6 @@ import {
   addProjectConfiguration,
   addDependenciesToPackageJson,
   removeDependenciesFromPackageJson,
-  readJson,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -10,6 +9,9 @@ import {
   offsetFromRoot,
   Tree,
 } from '@nrwl/devkit';
+import { addPackageWithInit, generateProjectLint, Linter } from '@nrwl/workspace';
+import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { jestProjectGenerator } from '@nrwl/jest';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
 import { DevDependencies, Dependencies } from '../../defaults';
@@ -44,6 +46,22 @@ function normalizeOptions(
   };
 }
 
+async function addJest(host: Tree, options: NormalizedSchema) {
+  /* TODO -- add option to disable test runner
+  if (options.unitTestRunner !== 'jest') {
+    return () => {};
+  }
+  */
+
+  return await jestProjectGenerator(host, {
+    project: options.projectName,
+    supportTsx: true,
+    skipSerializers: true,
+    setupFile: 'none',
+    babelJest: false,
+  });
+}
+
 function addFiles(host: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
@@ -69,11 +87,12 @@ function updateDependencies(host: Tree) {
 
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
+  const { projectRoot } = normalizedOptions;
 
   addProjectConfiguration(host, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
+    root: projectRoot,
     projectType: 'application',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
+    sourceRoot: `${projectRoot}/src`,
     targets: {
       build: {
         executor: 'nx-vue3-vite:build-app',
@@ -81,10 +100,42 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
       serve: {
         executor: 'nx-vue3-vite:dev-server',
       },
+      /*
+      test: {
+        executor: '@nrwl/jest:jest',
+      },
+      */
+      lint: {
+        executor: '@nrwl/linter:eslint',
+        ...generateProjectLint(
+          projectRoot,
+          `${projectRoot}/tsconfig.app.json`,
+          Linter.EsLint,
+          [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
+        ),
+      },
     },
     tags: normalizedOptions.parsedTags,
   });
+  const depsTask = updateDependencies(host);
+
   addFiles(host, normalizedOptions);
+
+  addPackageWithInit('@nrwl/jest');
+  const jestTask = await addJest(host, normalizedOptions);
+  /*
+  libraryGenerator('@nrwl/jest', 'jest-project', {
+    project: options.projectName,
+    setupFile: 'none',
+    skipSerializers: true,
+    supportTsx: true,
+    testEnvironment: 'jsdom',
+    babelJest: false,
+  }),
+  */
   await formatFiles(host);
-  return updateDependencies(host);
+  return runTasksInSerial(
+    depsTask,
+    jestTask,
+  );
 }

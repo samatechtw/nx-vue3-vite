@@ -13,6 +13,8 @@ export const eslintI18nVersion = '^0.11.1';
 export const eslintImportVersion = '^2.23.4';
 export const eslintVueVersion = '^7.15.0';
 export const vuePluginVersion = '^1.3.0';
+export const vueTestUtilsVersion = '^2.0.0-rc.12';
+export const vue3JestVersion = '^27.0.0-alpha.2';
 export const postcssVersion = '^8.3.6';
 export const postcssBasicsVersion = '^0.2.0';
 export const compilerSfcVersion = vueVersion;
@@ -39,6 +41,8 @@ export const DevDependencies = {
   '@vue/compiler-sfc': compilerSfcVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
+  '@vue/test-utils': vueTestUtilsVersion,
+  'vue3-jest': vue3JestVersion,
   '@samatech/postcss-basics': postcssBasicsVersion,
   stylelint: stylelintVersion,
   'stylelint-config-standard': stylelintConfigVersion,
