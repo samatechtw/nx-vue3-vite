@@ -6,7 +6,7 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 describe('vue3-vite e2e', () => {
-  it('should create vue3-vite', async () => {
+  it('should create vue3-vite app', async () => {
     const plugin = uniq('vue3-vite');
     ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
     await runNxCommandAsync(
