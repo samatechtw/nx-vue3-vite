@@ -39,3 +39,4 @@ testem.log
 Thumbs.db
 
 package-lock.json
+pnpm-lock.yaml

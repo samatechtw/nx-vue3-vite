@@ -7,7 +7,7 @@ const router = createRouter({
     if(to.hash) {
       return new Promise((resolve, _reject) => {
         setTimeout(() => {
-          resolve({ selector: to.hash });
+          resolve({ el: to.hash });
         }, 500);
       });
     }

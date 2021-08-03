@@ -1,5 +1,6 @@
 {
   "name": "nx-vue3-vite",
+  "description": "NX Plugin for generating opinionated Vue3+Vite+PostCSS applications",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
