@@ -1,0 +1,9 @@
+import { shallowMount } from '@vue/test-utils';
+import Logo from '../src/components/widgets/Logo.vue';
+
+describe('Logo', () => {
+  it('renders logo url', () => {
+    const wrapper = shallowMount(Logo);
+    expect(wrapper.attributes('src')).toContain('vue-logo');
+  })
+});
