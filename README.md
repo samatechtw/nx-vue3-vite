@@ -18,7 +18,29 @@ This project was generated using [Nx](https://nx.dev):
 npx create-nx-plugin <org> --pluginName <plugin>
 ```
 
-## Vue3 Plugin Usage
+## Table of contents
+- [Plugin Usage](#plugin-usage)
+  - [Install](#install)
+  - [Generate App](#generate-app)
+  - [Serve](#serve)
+- [Vue3 Generators](#vue3-generators)
+  - [Application](#application)
+  - [Component](#component)
+  - [Library](#library)
+- [Vue3 Executors](#vue3-executors)
+  - [Dev Server](#dev-server)
+  - [Build](#build)
+  - [Lint](#lint)
+  - [Unit Testing](#unit-testing)
+  - [E2E Testing](#e2e-testing)
+- [dep-graph hack](#dep-graph-hack)
+- [Development/Contributing](#developmentcontributing)
+  - [Project Structure](#project-structure)
+  - [Build](#build)
+  - [Unit Tests](#unit-tests)
+  - [E2E Tests](#e2e-tests)
+
+## Plugin Usage
 
 ### Install
 **npm**
@@ -36,7 +58,8 @@ nx g nx-vue3-vite:app <app-name>
 nx serve <app-name>
 ```
 
-## Vue3 Generators ([NX Docs](https://nx.dev/latest/angular/executors/using-builders))
+## Vue3 Generators
+([NX Docs](https://nx.dev/latest/angular/executors/using-builders))
 
 ### Application
 ```
@@ -60,7 +83,8 @@ TBD
 
 TBD
 
-## Vue3 Executors ([NX Docs](https://nx.dev/latest/angular/generators/using-schematics))
+## Vue3 Executors
+([NX Docs](https://nx.dev/latest/angular/generators/using-schematics))
 
 ### Dev Server
 ```
@@ -171,9 +195,3 @@ Run e2e tests for all plugins:
 ```
 nx run-many --target e2e --all
 ```
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
