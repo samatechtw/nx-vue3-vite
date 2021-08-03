@@ -76,10 +76,10 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {
-        executor: '@samatech/vue3-vite:build-app',
+        executor: 'nx-vue3-vite:build-app',
       },
       serve: {
-        executor: '@samatech/vue3-vite:dev-server',
+        executor: 'nx-vue3-vite:dev-server',
       },
     },
     tags: normalizedOptions.parsedTags,

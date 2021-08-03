@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@samatech/nx-vue3-vite": ["packages/vue3-vite/src/index.ts"]
+      "nx-vue3-vite": ["packages/vue3-vite/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
