@@ -1,12 +1,13 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "name": "vue3-vite",
-  "version": "0.0.1",
+  "name": "nx-vue3-vite",
+  "version": "0.1.0",
   "generators": {
     "vue3-vite": {
       "factory": "./src/generators/vue3-vite/generator",
       "schema": "./src/generators/vue3-vite/schema.json",
-      "description": "vue3-vite generator"
+      "description": "vue3-vite generator",
+      "aliases": ["app"]
     }
   }
 }

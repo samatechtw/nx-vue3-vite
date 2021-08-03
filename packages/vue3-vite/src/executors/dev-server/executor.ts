@@ -3,7 +3,7 @@ import { DevServerExecutorSchema } from './schema';
 import { createServer } from 'vite';
 import { getProjectRoot } from '../../utils';
 
-export default async function* runExecutor(
+export default async function runExecutor(
   options: DevServerExecutorSchema,
   context: ExecutorContext,
 ) {
@@ -19,13 +19,12 @@ export default async function* runExecutor(
     },
   });
   server = await server.listen();
-  yield {
-    success: true,
-    baseUrl: `${protocol}://${host}:${port}`,
-  };
-  return new Promise<{ success: boolean }>((res) => {
+  return new Promise<{ success: boolean, baseUrl: string }>((res) => {
     server.httpServer.on('close', () => {
-      res({ success: true });
+      res({
+        success: true ,
+        baseUrl: `${protocol}://${host}:${port}`,
+      });
     });
   });
 }
