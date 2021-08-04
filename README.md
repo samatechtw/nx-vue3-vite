@@ -33,7 +33,10 @@ npx create-nx-plugin <org> --pluginName <plugin>
   - [Lint](#lint)
   - [Unit Testing](#unit-testing)
   - [E2E Testing](#e2e-testing)
-- [dep-graph hack](#dep-graph-hack)
+- [Workarounds](#workarounds)
+  - [dep-graph hack](#dep-graph-hack)
+  - [vue3-jest](#vue3-jest)
+  - [vite-jest](#vite-jest)
 - [Development/Contributing](#developmentcontributing)
   - [Project Structure](#project-structure)
   - [Build](#build)
@@ -122,6 +125,8 @@ nx lint <app-name> [options]
 See [options](https://nx.dev/latest/angular/linter/eslint) for `@nrwl/linter`
 
 ### Unit Testing
+Note: see [vite-jest](#vite-jest) section for progress on testing code that relies on Vite transforms.
+
 ```
 nx test <app-name> [options]
 ```
@@ -135,7 +140,10 @@ nx e2e <app-name> [options]
 
 See [options](https://nx.dev/latest/angular/cypress/overview) for `@nrwl/cypress`
 
-## dep-graph hack
+## Workarounds
+Documentation for non-ideal setup that should be removed or replaced when possible.
+
+### dep-graph hack
 In order to get `nx dep-graph` to work in a generated Vue app, the NX code responsible for parsing file extension must be patched.
 
 The `build` and `serve` executors in this plugin automatically check your workspace `node_modules` to see if the patch is already installed, and installs if not. See [`packages/vue3-vite/patch-nx-dep-graph.js`](packages/vue3-vite/patch-nx-dep-graph.js).
@@ -143,6 +151,15 @@ The `build` and `serve` executors in this plugin automatically check your worksp
 Patch details: https://github.com/ZachJW34/nx-plus/tree/master/libs/vue#nx-dependency-graph-support
 
 Related NX issue: https://github.com/nrwl/nx/issues/2960
+
+### vue3-jest
+
+Configuring the transformer in `vue3-jest` is difficult, and the library/docs are not quite production ready. The code itself works well when pulled in-tree, so it should be possible to resolve this soon.
+
+The transformer generated in `<app-name>/deps/vue3-jest/` comes directly from [this package](https://github.com/vuejs/vue-jest/tree/47244cddf4f47dd7912f1feb6e128f07cb2f9379/packages/vue3-jest/lib).
+
+### vite-jest
+Currently, unit tests will throw warnings when mounting Vue components that rely on code transforms from Vite plugins. This is because Jest does not know about Vite, and relies directly on SFC compilation from `vue3-jest`. The [vite-jest] project will eventually solve this problem, or we may implement our own transformer. The main issue now is Vite requires async for dependency resolution and transforming code, but Jest support is rudimentary/alpha.
 
 ## Development/Contributing
 
