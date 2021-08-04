@@ -46,22 +46,6 @@ function normalizeOptions(
   };
 }
 
-async function addJest(host: Tree, options: NormalizedSchema) {
-  /* TODO -- add option to disable test runner
-  if (options.unitTestRunner !== 'jest') {
-    return () => {};
-  }
-  */
-
-  return await jestProjectGenerator(host, {
-    project: options.projectName,
-    supportTsx: true,
-    skipSerializers: true,
-    setupFile: 'none',
-    babelJest: false,
-  });
-}
-
 function addFiles(host: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
@@ -100,11 +84,14 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
       serve: {
         executor: 'nx-vue3-vite:dev-server',
       },
-      /*
       test: {
         executor: '@nrwl/jest:jest',
+        outputs: ['coverage/apps/web-vue3-vite'],
+        options: {
+          jestConfig: 'apps/web-vue3-vite/jest.config.js',
+          passWithNoTests: true
+        }
       },
-      */
       lint: {
         executor: '@nrwl/linter:eslint',
         ...generateProjectLint(
@@ -122,20 +109,8 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   addFiles(host, normalizedOptions);
 
   addPackageWithInit('@nrwl/jest');
-  const jestTask = await addJest(host, normalizedOptions);
-  /*
-  libraryGenerator('@nrwl/jest', 'jest-project', {
-    project: options.projectName,
-    setupFile: 'none',
-    skipSerializers: true,
-    supportTsx: true,
-    testEnvironment: 'jsdom',
-    babelJest: false,
-  }),
-  */
   await formatFiles(host);
   return runTasksInSerial(
     depsTask,
-    jestTask,
   );
 }

@@ -12,6 +12,11 @@ export const eslintVersion = '^7.32.0';
 export const eslintI18nVersion = '^0.11.1';
 export const eslintImportVersion = '^2.23.4';
 export const eslintVueVersion = '^7.15.0';
+export const babelCommonjsVersion = '^7.14.5';
+export const chalkVersion = '^4.1.2';
+export const convertSourceMapVersion = '^1.8.0';
+export const extractCSSVersion = '^0.4.4';
+export const sourceMapVersion = '^0.7.3';
 export const vuePluginVersion = '^1.3.0';
 export const vueTestUtilsVersion = '^2.0.0-rc.12';
 export const vue3JestVersion = '^27.0.0-alpha.2';
@@ -21,6 +26,7 @@ export const compilerSfcVersion = vueVersion;
 export const stylelintVersion = '^13.13.1';
 export const stylelintConfigVersion = '^22.0.0';
 export const tslibVersion = '^2.3.0';
+export const tsConfigVersion = '^7.0.0';
 export const viteComponentsVersion = '^0.13.2';
 export const viteImagesVersion = '^0.6.1';
 
@@ -35,6 +41,11 @@ export const Dependencies = {
 export const DevDependencies = {
   vite: viteVersion,
   eslint: eslintVersion,
+  '@babel/plugin-transform-modules-commonjs': babelCommonjsVersion,
+  chalk: chalkVersion,
+  'convert-source-map': convertSourceMapVersion,
+  'source-map': sourceMapVersion,
+  'extract-from-css': extractCSSVersion,
   '@intlify/eslint-plugin-vue-i18n': eslintI18nVersion,
   'eslint-plugin-import': eslintImportVersion,
   'eslint-plugin-vue': eslintVueVersion,
@@ -47,6 +58,7 @@ export const DevDependencies = {
   stylelint: stylelintVersion,
   'stylelint-config-standard': stylelintConfigVersion,
   tslib: tslibVersion,
+  tsconfig: tsConfigVersion,
   'vite-plugin-components': viteComponentsVersion,
   'vite-plugin-vue-images': viteImagesVersion,
 };
