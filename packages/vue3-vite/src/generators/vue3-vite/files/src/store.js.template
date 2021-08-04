@@ -35,6 +35,7 @@ const state = reactive(data);
 
 watch(state, saveState);
 
+// eslint-disable-next-line
 export const useStore = () => ({
   cookiesAccepted: computed(() => state.cookiesAccepted),
   setCookiesAccepted: (accepted) => {

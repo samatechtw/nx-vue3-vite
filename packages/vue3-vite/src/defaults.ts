@@ -9,7 +9,7 @@ export const fetchApiVersion = '^0.3.2';
 // devDependency versions
 export const viteVersion = '^2.4.4';
 export const eslintVersion = '^7.32.0';
-export const eslintI18nVersion = '^0.11.1';
+export const eslintI18nVersion = '^0.12.0';
 export const eslintImportVersion = '^2.23.4';
 export const eslintVueVersion = '^7.15.0';
 export const babelCommonjsVersion = '^7.14.5';
