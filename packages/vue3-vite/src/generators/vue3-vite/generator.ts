@@ -8,13 +8,18 @@ import {
   names,
   offsetFromRoot,
   Tree,
+  GeneratorCallback,
+  joinPathFragments,
+  updateJson,
 } from '@nrwl/devkit';
-import { addPackageWithInit, generateProjectLint, Linter } from '@nrwl/workspace';
+import { addPackageWithInit, generateProjectLint, addLintFiles } from '@nrwl/workspace';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { jestProjectGenerator } from '@nrwl/jest';
+import { Linter } from '@nrwl/linter/src/generators/utils/linter';
+import { lintProjectGenerator } from '@nrwl/linter';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
 import { DevDependencies, Dependencies } from '../../defaults';
+import { eslintDefault } from './eslint-default';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -69,6 +74,39 @@ function updateDependencies(host: Tree) {
   return addDependenciesToPackageJson(host, Dependencies, DevDependencies);
 }
 
+async function addLinting(host: Tree, options: NormalizedSchema) {
+  const tasks: GeneratorCallback[] = [];
+  const lintTask = await lintProjectGenerator(host, {
+    linter: Linter.EsLint,
+    project: options.projectName,
+    tsConfigPaths: [
+      joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
+    ],
+    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,tsx,js,jsx}`],
+    skipFormat: true,
+  });
+  tasks.push(lintTask);
+
+  const eslintJson = eslintDefault;
+
+  console.log('ESLINT', eslintJson);
+
+  updateJson(
+    host,
+    joinPathFragments(options.projectRoot, '.eslintrc.json'),
+    () => eslintJson
+  );
+
+  const installTask = await addDependenciesToPackageJson(
+    host,
+    {}, //extraEslintDependencies.dependencies,
+    {}, // extraEslintDependencies.devDependencies
+  );
+  tasks.push(installTask);
+
+  return runTasksInSerial(...tasks);
+}
+
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
   const { projectRoot } = normalizedOptions;
@@ -94,12 +132,9 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
       },
       lint: {
         executor: '@nrwl/linter:eslint',
-        ...generateProjectLint(
-          projectRoot,
-          `${projectRoot}/tsconfig.app.json`,
-          Linter.EsLint,
-          [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
-        ),
+        options: { // TODO -- remove
+          lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
+        },
       },
     },
     tags: normalizedOptions.parsedTags,
@@ -107,10 +142,12 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const depsTask = updateDependencies(host);
 
   addFiles(host, normalizedOptions);
+  const lintTask = await addLinting(host, normalizedOptions);
 
   addPackageWithInit('@nrwl/jest');
   await formatFiles(host);
   return runTasksInSerial(
     depsTask,
+    lintTask,
   );
 }
