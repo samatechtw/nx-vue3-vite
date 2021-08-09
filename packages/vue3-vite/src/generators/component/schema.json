@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "Component",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the component.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the component?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "alias": "p",
+      "$default": {
+        "$source": "projectName"
+      },
+      "x-prompt": "The name of the project this component will be generated in."
+    },
+    "directory": {
+      "type": "string",
+      "description": "Create the component under this directory (can be nested).",
+      "alias": "d",
+      "default": "components"
+    },
+    "scoped": {
+      "type": "boolean",
+      "description": "Whether the style section is scoped or not.",
+      "default": false
+    },
+    "style": {
+      "description": "The flavor of CSS for the single file component",
+      "type": "string",
+      "alias": "s",
+      "default": "postcss",
+      "x-prompt": {
+        "message": "Choose a CSS preprocessor.",
+        "type": "list",
+        "items": [
+          {
+            "value": "css",
+            "label": "CSS"
+          },
+          {
+            "value": "scss",
+            "label": "SCSS    [ https://sass-lang.com/documentation/syntax#scss ]"
+          },
+          {
+            "value": "stylus",
+            "label": "Stylus  [ https://stylus-lang.com                         ]"
+          },
+          {
+            "value": "less",
+            "label": "LESS    [ http://lesscss.org                              ]"
+          },
+          {
+            "value": "postcss",
+            "label": "PostCSS [ https://postcss.org/                            ]"
+          }
+        ]
+      }
+    },
+    "lang": {
+      "description": "The component's scripting language",
+      "type": "string",
+      "alias": "l",
+      "default": "ts",
+      "x-prompt": {
+        "message": "Choose a scripting language.",
+        "type": "list",
+        "items": [
+          {
+            "value": "ts",
+            "label": "Typescript"
+          },
+          {
+            "value": "js",
+            "label": "Javascript"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["name", "project"]
+}

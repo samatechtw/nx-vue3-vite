@@ -24,7 +24,6 @@ export const eslintDefault = {
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     'no-multiple-empty-lines': ['error', { max: 1 }],
-    semi: ['error', 'always', { omitLastInOneLineBlock: true }],
     'keyword-spacing': ['error', { after: true }],
     'max-len': ['error', { code: 100, ignorePattern: '^\\s*<path' }],
     'no-param-reassign': [2, { props: false }],
@@ -58,7 +57,8 @@ export const eslintDefault = {
         'setup',
       ],
     }],
-    'vue/html-indent': ['error', 2, { baseIndent: 0 }],
+    // TODO -- figure out how to get this to work with prettier
+    // 'vue/html-indent': ['error', 2, { baseIndent: 0 }],
     'vue/singleline-html-element-content-newline': ['error', {
       ignoreWhenNoAttributes: true,
       ignoreWhenEmpty: true,

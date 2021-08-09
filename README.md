@@ -79,8 +79,24 @@ Options     |    Default     | Description
 --directory | apps           | Workspace directory to place the Vue project
 
 ### Component
+```
+nx g nx-vue3-vite:component <c-name> [options]
 
-TBD
+# Alias
+nx g nx-vue3-vite:c <name> [options]
+```
+
+Arguments | Description
+--------- | ----------------
+<name>  |	The name of the component.
+
+Options      | Default | Description
+------------ | ------- | --------------
+--project    | -       | The name of the project.
+--directory  | -	     | Directory relative to `src` where the component will be generated
+--lang       | ts      | Script language: ['ts', 'js']
+--style	     | postcss | CSS Preprocessor: ['css', 'scss', 'less', 'stylus', 'postcss']
+--scoped     | false   | Whether the component's style block is scoped
 
 ### Library
 
