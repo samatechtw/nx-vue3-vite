@@ -6,7 +6,12 @@
     "allowJs": true,
     "jsx": "preserve",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["vue-i18n"],
+    "baseUrl": ".",
+    "paths": {
+      "/*":["./*"]
+    }
   },
   "references": [
     {

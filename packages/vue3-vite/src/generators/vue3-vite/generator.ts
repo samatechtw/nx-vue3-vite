@@ -12,7 +12,7 @@ import {
   joinPathFragments,
   updateJson,
 } from '@nrwl/devkit';
-import { addPackageWithInit, generateProjectLint, addLintFiles } from '@nrwl/workspace';
+import { addPackageWithInit } from '@nrwl/workspace';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { Linter } from '@nrwl/linter/src/generators/utils/linter';
 import { lintProjectGenerator } from '@nrwl/linter';
@@ -88,8 +88,6 @@ async function addLinting(host: Tree, options: NormalizedSchema) {
   tasks.push(lintTask);
 
   const eslintJson = eslintDefault;
-
-  console.log('ESLINT', eslintJson);
 
   updateJson(
     host,

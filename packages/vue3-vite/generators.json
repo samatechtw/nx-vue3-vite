@@ -7,7 +7,15 @@
       "factory": "./src/generators/vue3-vite/generator",
       "schema": "./src/generators/vue3-vite/schema.json",
       "description": "vue3-vite generator",
-      "aliases": ["app"]
+      "aliases": [
+        "app"
+      ]
+    },
+    "component": {
+      "factory": "./src/generators/component/generator",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator",
+      "aliases": ["c"]
     }
   }
 }

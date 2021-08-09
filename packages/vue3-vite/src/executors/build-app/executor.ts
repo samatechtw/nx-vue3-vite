@@ -10,7 +10,7 @@ export default async function runExecutor(
 ) {
   const root = getProjectRoot(context);
   console.log('Building', context.projectName || '<?>');
-  const dist = options.dist ?? './dist';
+  const dist = options.dist ?? '/dist';
   createDirectory(`${root}${dist}`);
   await build({
     root,

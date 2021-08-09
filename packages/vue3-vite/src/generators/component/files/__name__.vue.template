@@ -1,0 +1,32 @@
+<template>
+<div class="<%= propertyName %>">
+</div>
+</template>
+
+<% if (lang == 'ts') { %>
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {};
+  },
+});
+<% } else { %>
+<script>
+
+export default {
+  setup() {
+    return {};
+  },
+};
+<% } %>
+</script>
+
+
+<style<%= scoped ? ' scoped' : ''%><%- (style == 'css') ? '' : ` lang="${style}"` %>>
+
+.<%= propertyName %> {
+
+}
+</style>
