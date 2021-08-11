@@ -1,6 +1,6 @@
 
 // dependency versions
-export const vueVersion = '^3.1.5';
+export const vueVersion = '^3.2.1';
 export const vueI18nVersion = '^9.1.6';
 export const vueRouterVersion = '^4.0.10';
 export const dateFnsVersion = '^2.23.0';

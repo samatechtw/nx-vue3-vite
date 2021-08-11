@@ -1,29 +1,20 @@
 <template>
 <div class="home-wrap">
   <div class="home-title">
-    <%= projectName %>
+    {{ $t('name') }}
   </div>
   <Logo />
-  <div>
-    Project generated via <b>nx-vue3-vite</b>
-  </div>
+  <div v-html="$t('generated')" />
   <transition name="hide">
-    <Cookies v-if="showCookies" />
+    <Cookies v-if="!cookiesAccepted" />
   </transition>
 </div>
 </template>
 
-<script>
+<script lang="ts" setup>
 import { useStore } from '/src/store';
 
-export default {
-  setup() {
-    const store = useStore();
-    return {
-      showCookies: store.cookiesAccepted,
-    };
-  },
-};
+const { cookiesAccepted } = useStore();
 </script>
 
 <style lang="postcss">

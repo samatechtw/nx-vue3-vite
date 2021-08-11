@@ -1,0 +1,15 @@
+/** @type {import('vls').VeturConfig} */
+module.exports = {
+  settings: {
+    'vetur.useWorkspaceDependencies': true,
+    'vetur.experimental.templateInterpolationService': true,
+    'vetur.validation.templateProps': true,
+  },
+  projects: [
+    {
+      root: '<%= projectRoot %>web-vue3-vite',
+      package: '<%= offsetFromRoot %>package.json',
+      tsconfig: './tsconfig.app.json',
+    },
+  ],
+};
