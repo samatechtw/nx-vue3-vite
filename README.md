@@ -71,7 +71,7 @@ nx g nx-vue3-vite:app <app-name> [options]
 
 Arguments  |	Description
 ---------- | ------------------------
-<app-name> |	The name of the generated app
+app-name   |	The name of the generated app
 
 Options     |    Default     | Description
 ----------- | -------------- | ------------
@@ -88,7 +88,7 @@ nx g nx-vue3-vite:c <name> [options]
 
 Arguments | Description
 --------- | ----------------
-<name>  |	The name of the component.
+name      |	The name of the component.
 
 Options      | Default | Description
 ------------ | ------- | --------------
@@ -113,7 +113,7 @@ nx serve <app-name> [options]
 
 Arguments  |	Description
 ---------- | ------------------------
-<app-name> |	The name of your app
+app-name   |	The name of your app
 
 Options     |    Default     | Description
 ----------- | -------------- | ------------
@@ -128,7 +128,7 @@ nx build <app-name> [options]
 
 Arguments  |	Description
 ---------- | ------------------------
-<app-name> |	The name of your app
+app-name   |	The name of your app
 
 Options     |    Default     | Description
 ----------- | -------------- | ------------
