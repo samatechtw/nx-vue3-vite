@@ -80,7 +80,7 @@ Options     |    Default     | Description
 
 ### Component
 ```
-nx g nx-vue3-vite:component <c-name> [options]
+nx g nx-vue3-vite:component <name> [options]
 
 # Alias
 nx g nx-vue3-vite:c <name> [options]
@@ -95,6 +95,7 @@ Options      | Default | Description
 --project    | -       | The name of the project.
 --directory  | -	     | Directory relative to `src` where the component will be generated
 --lang       | ts      | Script language: ['ts', 'js']
+--setup      | true    | [Script setup](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) syntax sugar
 --style	     | postcss | CSS Preprocessor: ['css', 'scss', 'less', 'stylus', 'postcss']
 --scoped     | false   | Whether the component's style block is scoped
 

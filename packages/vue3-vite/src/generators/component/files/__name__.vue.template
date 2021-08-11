@@ -3,7 +3,10 @@
 </div>
 </template>
 
-<% if (lang == 'ts') { %>
+<% if (scriptSetup) { %>
+<script<%- (lang === 'ts') ? ' lang="ts"' : ''%> setup>
+
+<% } else if (lang == 'ts') { %>
 <script lang="ts">
 import { defineComponent } from 'vue'
 

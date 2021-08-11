@@ -7,6 +7,7 @@ export interface ComponentGeneratorSchema {
     project: string;
     directory?: string;
     scoped: boolean;
+    setup: boolean;
     style: Style;
     lang: Lang;
   }

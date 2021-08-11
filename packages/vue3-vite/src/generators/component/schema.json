@@ -34,6 +34,11 @@
       "description": "Whether the style section is scoped or not.",
       "default": false
     },
+    "setup": {
+      "type": "boolean",
+      "description": "Use script setup syntactic sugar",
+      "default": true
+    },
     "style": {
       "description": "The flavor of CSS for the single file component",
       "type": "string",
