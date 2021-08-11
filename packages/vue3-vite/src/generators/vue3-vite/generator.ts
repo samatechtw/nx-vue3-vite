@@ -115,8 +115,9 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   await formatFiles(host);
 
   // Move vetur.config.js to the workspace root: https://vuejs.github.io/vetur/guide/setup.html#advanced
-  const veturPath = joinPathFragments(projectRoot, 'vetur.config.js');
-  // host.rename(veturPath, offsetFromRoot(projectRoot));
+  const veturDest =  './vetur.config.js';
+  const veturSrc = joinPathFragments(projectRoot, veturDest);
+  host.rename(veturSrc, veturDest);
 
   return runTasksInSerial(
     depsTask,
