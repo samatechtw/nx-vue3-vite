@@ -18,6 +18,7 @@ import { DevDependencies, Dependencies } from '../../defaults';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
+  projectTitle: string;
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
@@ -32,6 +33,7 @@ function normalizeOptions(
     ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
+  const projectTitle = options.title || projectName;
   const projectRoot = joinPathFragments(
     getWorkspaceLayout(host).appsDir,
     projectDirectory,
@@ -43,6 +45,7 @@ function normalizeOptions(
   return {
     ...options,
     projectName,
+    projectTitle,
     projectRoot,
     projectDirectory,
     parsedTags,
@@ -94,7 +97,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
         executor: '@nrwl/jest:jest',
         outputs: ['coverage/apps/web-vue3-vite'],
         options: {
-          jestConfig: 'apps/web-vue3-vite/jest.config.js',
+          jestConfig: 'apps/web-vue3-vite/jest.config.ts',
           passWithNoTests: true
         }
       },
