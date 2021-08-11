@@ -89,6 +89,9 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     targets: {
       build: {
         executor: 'nx-vue3-vite:build-app',
+        options: {
+          dist: joinPathFragments('dist', projectRoot),
+        },
       },
       serve: {
         executor: 'nx-vue3-vite:dev-server',

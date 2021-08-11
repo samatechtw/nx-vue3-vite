@@ -1,22 +1,28 @@
-import { ExecutorContext } from '@nrwl/devkit';
-import { createDirectory } from '@nrwl/workspace';
+import { ExecutorContext, joinPathFragments, offsetFromRoot } from '@nrwl/devkit';
 import { build } from 'vite';
-import { getProjectRoot } from '../../utils';
+import { getProjectRoot, projectRelativePath } from '../../utils';
 import { BuildAppExecutorSchema } from './schema';
 
 export default async function runExecutor(
   options: BuildAppExecutorSchema,
   context: ExecutorContext,
 ) {
-  const root = getProjectRoot(context);
+  const projectRoot = getProjectRoot(context);
+  const projectRelative = projectRelativePath(context);
+  const workspaceRoot = offsetFromRoot(projectRelative);
+
   console.log('Building', context.projectName || '<?>');
-  const dist = options.dist ?? '/dist';
-  createDirectory(`${root}${dist}`);
+
+  const dist = options.dist ?? './dist';
+  const outDir = joinPathFragments(workspaceRoot, dist);
+
+  console.log('...output to', outDir);
+
   await build({
-    root,
+    root: projectRoot,
     build: {
-      // Build options
-    }
+      outDir,
+    },
   });
   return {
     success: true,

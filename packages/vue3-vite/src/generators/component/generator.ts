@@ -13,6 +13,7 @@ interface NormalizedSchema extends ComponentGeneratorSchema {
   name: string;
   componentPath: string;
   scoped: boolean;
+  scriptSetup: boolean;
   directory: string;
 }
 
@@ -25,6 +26,7 @@ function normalizeOptions(host: Tree, options: ComponentGeneratorSchema): Normal
     scoped: options.scoped,
     name: names(options.name).className,
     directory: options.directory,
+    scriptSetup: options.setup ?? true,
     componentPath,
   };
 }
