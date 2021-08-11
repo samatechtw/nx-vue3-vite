@@ -4,21 +4,13 @@
 </div>
 </template>
 
-<script>
+<script lang="ts" setup>
 import { useStore } from '/src/store';
 
-export default {
+const store = useStore();
 
-  setup() {
-    const store = useStore();
-
-    const hide = () => {
-      store.setCookiesAccepted(false);
-    };
-    return {
-      hide,
-    };
-  },
+const hide = () => {
+  store.setCookiesAccepted(false);
 };
 </script>
 

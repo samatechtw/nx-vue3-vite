@@ -7,15 +7,17 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["vue-i18n"],
     "baseUrl": ".",
     "paths": {
-      "/*":["./*"]
+      "/*": ["./*"]
     }
   },
   "references": [
     {
       "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
     }
   ]
 }

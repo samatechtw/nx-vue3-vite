@@ -8,18 +8,13 @@ import {
   names,
   offsetFromRoot,
   Tree,
-  GeneratorCallback,
   joinPathFragments,
-  updateJson,
 } from '@nrwl/devkit';
 import { addPackageWithInit } from '@nrwl/workspace';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { Linter } from '@nrwl/linter/src/generators/utils/linter';
-import { lintProjectGenerator } from '@nrwl/linter';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
 import { DevDependencies, Dependencies } from '../../defaults';
-import { eslintDefault } from './eslint-default';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -37,7 +32,10 @@ function normalizeOptions(
     ? `${names(options.directory).fileName}/${name}`
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(host).appsDir}/${projectDirectory}`;
+  const projectRoot = joinPathFragments(
+    getWorkspaceLayout(host).appsDir,
+    projectDirectory,
+  );
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
@@ -56,13 +54,16 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     ...options,
     ...names(options.name),
     offsetFromRoot: offsetFromRoot(options.projectRoot),
+    // Hack for copying dotfiles - use as a template in the filename
+    // e.g. "__dot__eslintrc.js" => ".eslintrc.js"
+    dot: '.',
     template: '',
   };
   generateFiles(
     host,
     path.join(__dirname, 'files'),
     options.projectRoot,
-    templateOptions
+    templateOptions,
   );
 }
 
@@ -72,37 +73,6 @@ function updateDependencies(host: Tree) {
   const devDeps = Object.keys(Dependencies);
   removeDependenciesFromPackageJson(host, devDeps, deps);
   return addDependenciesToPackageJson(host, Dependencies, DevDependencies);
-}
-
-async function addLinting(host: Tree, options: NormalizedSchema) {
-  const tasks: GeneratorCallback[] = [];
-  const lintTask = await lintProjectGenerator(host, {
-    linter: Linter.EsLint,
-    project: options.projectName,
-    tsConfigPaths: [
-      joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
-    ],
-    eslintFilePatterns: [`${options.projectRoot}/**/*.{ts,tsx,js,jsx}`],
-    skipFormat: true,
-  });
-  tasks.push(lintTask);
-
-  const eslintJson = eslintDefault;
-
-  updateJson(
-    host,
-    joinPathFragments(options.projectRoot, '.eslintrc.json'),
-    () => eslintJson
-  );
-
-  const installTask = await addDependenciesToPackageJson(
-    host,
-    {}, //extraEslintDependencies.dependencies,
-    {}, // extraEslintDependencies.devDependencies
-  );
-  tasks.push(installTask);
-
-  return runTasksInSerial(...tasks);
 }
 
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
@@ -130,7 +100,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
       },
       lint: {
         executor: '@nrwl/linter:eslint',
-        options: { // TODO -- remove
+        options: {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
@@ -140,12 +110,15 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const depsTask = updateDependencies(host);
 
   addFiles(host, normalizedOptions);
-  const lintTask = await addLinting(host, normalizedOptions);
 
   addPackageWithInit('@nrwl/jest');
   await formatFiles(host);
+
+  // Move vetur.config.js to the workspace root: https://vuejs.github.io/vetur/guide/setup.html#advanced
+  const veturPath = joinPathFragments(projectRoot, 'vetur.config.js');
+  // host.rename(veturPath, offsetFromRoot(projectRoot));
+
   return runTasksInSerial(
     depsTask,
-    lintTask,
   );
 }
