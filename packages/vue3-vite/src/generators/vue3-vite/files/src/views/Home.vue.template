@@ -1,6 +1,9 @@
 <template>
 <div class="home-wrap">
   <div class="home-title">
+    {{ $t('title') }}
+  </div>
+  <div class="home-name">
     {{ $t('name') }}
   </div>
   <Logo />
@@ -25,10 +28,14 @@ const { cookiesAccepted } = useStore();
   @mixin text 16px;
   @mixin flex-center-col;
   height: 100%;
+  color: $text-main;
 
   .home-title {
     @mixin title 40px;
-    color: $text-main;
+  }
+  .home-name {
+    @mixin text 24px;
+    font-weight: bold;
   }
   img {
     margin: 16px 0;

@@ -10,7 +10,7 @@ import { useStore } from '/src/store';
 const store = useStore();
 
 const hide = () => {
-  store.setCookiesAccepted(false);
+  store.setCookiesAccepted(true);
 };
 </script>
 
@@ -22,5 +22,7 @@ const hide = () => {
   color: $text-main;
   border: 2px solid black;
   margin-top: 16px;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 </style>

@@ -1,6 +1,4 @@
-# <%= projectName %> Frontend
-
- <%= projectName %> frontend project
+# <%= projectTitle %> Frontend
 
 ## Environment setup
 ```bash
