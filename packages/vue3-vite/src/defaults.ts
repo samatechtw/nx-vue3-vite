@@ -4,7 +4,7 @@ export const vueVersion = '^3.2.1';
 export const vueI18nVersion = '^9.2.0-beta.2';
 export const vueRouterVersion = '^4.0.11';
 export const dateFnsVersion = '^2.23.0';
-export const fetchApiVersion = '^0.4.0';
+export const fetchApiVersion = '^0.5.0';
 
 // devDependency versions
 export const viteVersion = '^2.4.4';
