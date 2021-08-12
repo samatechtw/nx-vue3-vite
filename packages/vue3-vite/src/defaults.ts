@@ -12,6 +12,7 @@ export const eslintVersion = '^7.32.0';
 export const eslintI18nVersion = '^0.12.0';
 export const eslintImportVersion = '^2.24.0';
 export const eslintVueVersion = '^7.16.0';
+export const eslintVueTypescript = '^7.0.0';
 export const babelCommonjsVersion = '^7.15.0';
 export const chalkVersion = '^4.1.2';
 export const convertSourceMapVersion = '^1.8.0';
@@ -51,6 +52,7 @@ export const DevDependencies = {
   '@intlify/eslint-plugin-vue-i18n': eslintI18nVersion,
   'eslint-plugin-import': eslintImportVersion,
   'eslint-plugin-vue': eslintVueVersion,
+  '@vue/eslint-config-typescript': eslintVueTypescript,
   '@vue/compiler-sfc': compilerSfcVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
