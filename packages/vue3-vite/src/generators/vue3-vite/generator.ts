@@ -85,7 +85,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   addProjectConfiguration(host, normalizedOptions.projectName, {
     root: projectRoot,
     projectType: 'application',
-    sourceRoot: `${projectRoot}/src`,
+    sourceRoot: joinPathFragments(projectRoot, 'src'),
     targets: {
       build: {
         executor: 'nx-vue3-vite:build-app',
@@ -98,9 +98,9 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
       },
       test: {
         executor: '@nrwl/jest:jest',
-        outputs: ['coverage/apps/web-vue3-vite'],
+        outputs: [joinPathFragments('coverage', projectRoot)],
         options: {
-          jestConfig: 'apps/web-vue3-vite/jest.config.ts',
+          jestConfig: joinPathFragments(projectRoot, 'jest.config.ts'),
           passWithNoTests: true
         }
       },
