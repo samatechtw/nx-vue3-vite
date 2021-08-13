@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '/src/views/Home.vue'
+import Home from '@app/views/Home.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {

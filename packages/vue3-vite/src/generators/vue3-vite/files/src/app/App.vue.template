@@ -5,8 +5,8 @@
 </template>
 
 <style lang="postcss">
-@import '/src/assets/css/font.css';
-@import '/src/assets/css/global.css';
+@import '@assets/css/font.css';
+@import '@assets/css/global.css';
 
 html,body {
   padding: 0;

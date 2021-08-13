@@ -1,6 +1,6 @@
 
 // dependency versions
-export const vueVersion = '^3.2.1';
+export const vueVersion = '^3.2.2';
 export const vueI18nVersion = '^9.2.0-beta.2';
 export const vueRouterVersion = '^4.0.11';
 export const dateFnsVersion = '^2.23.0';
@@ -24,7 +24,7 @@ export const vueTestUtilsVersion = '^2.0.0-rc.12';
 // https://github.com/samatechtw/nx-vue3-vite/issues/14
 // export const vue3JestVersion = '^27.0.0-alpha.2';
 export const postcssVersion = '^8.3.6';
-export const postcssBasicsVersion = '^0.2.0';
+export const postcssBasicsVersion = '^0.3.1';
 export const compilerSfcVersion = vueVersion;
 export const stylelintVersion = '^13.13.1';
 export const stylelintConfigVersion = '^22.0.0';

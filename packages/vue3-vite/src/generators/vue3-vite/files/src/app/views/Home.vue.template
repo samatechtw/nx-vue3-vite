@@ -15,13 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '/src/store';
+import { useStore } from '@app/store'
 
 const { cookiesAccepted } = useStore();
 </script>
 
 <style lang="postcss">
-@import '/src/assets/css/global.css';
+@import '@assets/css/global.css';
 
 .home-wrap {
   background-color: white;
