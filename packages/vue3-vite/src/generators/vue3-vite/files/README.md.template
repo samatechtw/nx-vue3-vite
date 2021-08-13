@@ -1,33 +1,3 @@
 # <%= projectTitle %> Frontend
 
-## Environment setup
-```bash
-# Install npm/pnpm/node first if necessary
-
-pnpm i
-```
-
-### Compile and hot-reload for development
-```bash
-npm run serve
-```
-
-### Compile and minify for production
-```bash
-npm run build
-```
-
-### Lint
-```bash
-# Lint javascript/typescript
-npm run lint
-
-# Lint style
-npm run lint:style
-```
-
-## Configuration
-
-### Environment
-
-See `.env.dist`
+Generated with [nx-vue3-vite](https://github.com/samatechtw/nx-vue3-vite)

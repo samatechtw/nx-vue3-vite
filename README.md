@@ -19,6 +19,7 @@ npx create-nx-plugin <org> --pluginName <plugin>
 ```
 
 ## Table of contents
+- [Philosophy](#philosophy)
 - [Plugin Usage](#plugin-usage)
   - [Install](#install)
   - [Generate App](#generate-app)
@@ -42,6 +43,15 @@ npx create-nx-plugin <org> --pluginName <plugin>
   - [Build](#build)
   - [Unit Tests](#unit-tests)
   - [E2E Tests](#e2e-tests)
+
+## Philosophy
+
+The intent of this plugin is to help generate a Vue3 related projects and components for Nx. The recommended configuration and folder structures are used where possible in order to integrate smoothly. Some path aliases are provided for convenience:
+- `@app`    => `<root>/src/app`
+- `@assets` => `<root>/src/assets`
+- `@public` => `<root>/src/public`
+
+One compromise made is keeping `index.html` in the root folder. Vite strongly suggests this, since it treats `index.html` as the entry point and requires some configuration to change that.
 
 ## Plugin Usage
 

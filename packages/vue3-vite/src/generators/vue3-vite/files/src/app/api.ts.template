@@ -1,5 +1,5 @@
 import { FetchApi, FetchApiOptions } from '@sampullman/vue3-fetch-api';
-import { apiBaseUrl } from '/src/utils/config';
+import { API_URL } from '@app/utils/config';
 
 class NftApi extends FetchApi {
 
@@ -9,7 +9,7 @@ class NftApi extends FetchApi {
 }
 
 export const api = new NftApi({
-  baseUrl: apiBaseUrl,
+  baseUrl: API_URL,
   responseInterceptors: [async (res: any) => {
     if(!res) {
       throw new Error('NETWORK_FAILURE');

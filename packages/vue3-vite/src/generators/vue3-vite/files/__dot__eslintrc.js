@@ -76,7 +76,7 @@ module.exports = {
   },
   settings: {
     'vue-i18n': {
-      localeDir: './src/translations/*.json',
+      localeDir: './src/app/translations/*.json',
     },
     'import/resolver': {
       node: {

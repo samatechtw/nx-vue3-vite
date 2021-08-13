@@ -4,7 +4,7 @@ import en from './translations/en.json';
 
 type MessageSchema = typeof en;
 
-export default createI18n<[MessageSchema], 'en' | 'ja-JP'>({
+export default createI18n<[MessageSchema], 'en'>({
   legacy: false,
   globalInjection: true,
   locale: 'en',
