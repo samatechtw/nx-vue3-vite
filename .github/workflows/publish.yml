@@ -19,9 +19,9 @@ jobs:
           version: latest
           run_install: true
       - run: pnpm run nx -- run vue3-vite:build
-      - run: npm publish ./dist/packages/vue3-vite --access public
+      - run: pnpm publish ./dist/packages/vue3-vite --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: npx conventional-github-releaser -p angular
+      - run: pnpx conventional-github-releaser -p angular
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
