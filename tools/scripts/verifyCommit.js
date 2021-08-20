@@ -1,5 +1,5 @@
 const chalk = require('chalk')
-const msgPath = process.env.GIT_PARAMS
+const msgPath = process.env.MSG_PATH
 const msg = require('fs').readFileSync(msgPath, 'utf-8').trim()
 
 const releaseRE = /^v\d/
@@ -7,7 +7,6 @@ const commitRE =
 /^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|build|ci|chore|wip|release)(\(.+\))?: .{1,50}(#\d+)?/
 
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
-  console.log()
   console.error(
     `  ${chalk.bgRed.white(' ERROR ')} ${chalk.red(
       `invalid commit message format.`
