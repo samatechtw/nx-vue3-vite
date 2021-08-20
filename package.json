@@ -23,7 +23,8 @@
     "format:check": "nx format:check",
     "update": "nx migrate latest",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "commitmsg": "node tools/scripts/verifyCommit.js"
   },
   "private": true,
   "devDependencies": {
@@ -41,9 +42,11 @@
     "@typescript-eslint/eslint-plugin": "~4.29.1",
     "@typescript-eslint/parser": "~4.29.1",
     "@vitejs/plugin-vue": "1.4.0",
+    "chalk": "^4.1.2",
     "dotenv": "10.0.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
+    "husky": "^7.0.1",
     "jest": "27.0.6",
     "prettier": "^2.3.2",
     "ts-jest": "27.0.4",
