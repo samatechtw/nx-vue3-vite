@@ -24,7 +24,11 @@
     "update": "nx migrate latest",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "commitmsg": "node tools/scripts/verifyCommit.js"
+    "pre-commit": "node tools/scripts/verifyCommit.js",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "pre-commit": "npm run pre-commit"
   },
   "private": true,
   "devDependencies": {
