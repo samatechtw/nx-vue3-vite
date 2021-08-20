@@ -67,6 +67,14 @@ nx g nx-vue3-vite:app <app-name>
 nx serve <app-name>
 ```
 
+### Recommended VSCode extensions
+
+This plugin adds a few recommended extensions to VSCode. To install them, open VSCode and:
+
+- Open the command palette `[CMD] + [Shift] + [p]` and type "Show Recommended Extensions"
+
+- Review and install extensions under "WORKSPACE RECOMMENDATIONS"
+
 ## Vue3 Generators
 ([NX Docs](https://nx.dev/latest/angular/executors/using-builders))
 

@@ -9,12 +9,13 @@ import {
   offsetFromRoot,
   Tree,
   joinPathFragments,
+  updateJson,
 } from '@nrwl/devkit';
 import { addPackageWithInit } from '@nrwl/workspace';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
-import { DevDependencies, Dependencies } from '../../defaults';
+import { DevDependencies, Dependencies, VSCodeExtensionsFilePath, recommendedExtensions } from '../../defaults';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -78,6 +79,21 @@ function updateDependencies(host: Tree) {
   return addDependenciesToPackageJson(host, Dependencies, DevDependencies);
 }
 
+function updateExtensionRecommendations(host: Tree) {
+  if (!host.exists(VSCodeExtensionsFilePath)) {
+    host.write(VSCodeExtensionsFilePath, '{ "recommendations": [] }')
+  }
+
+  updateJson(host, VSCodeExtensionsFilePath, (json) => {
+    json.recommendations ??= [];
+    for (const extension of recommendedExtensions) {
+      if (Array.isArray(json.recommendations) && !json.recommendations.includes(extension))
+        json.recommendations.push(extension);
+    }
+    return json;
+  });
+}
+
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
   const { projectRoot } = normalizedOptions;
@@ -116,6 +132,8 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const depsTask = updateDependencies(host);
 
   addFiles(host, normalizedOptions);
+
+  updateExtensionRecommendations(host);
 
   addPackageWithInit('@nrwl/jest');
   await formatFiles(host);

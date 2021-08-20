@@ -1,4 +1,11 @@
 
+export const VSCodeExtensionsFilePath = '.vscode/extensions.json';
+
+export const recommendedExtensions = [
+  'johnsoncodehk.volar',
+  'samatech.postcss-vue',
+];
+
 // dependency versions
 export const vueVersion = '^3.2.4';
 export const vueI18nVersion = '^9.2.0-beta.2';
