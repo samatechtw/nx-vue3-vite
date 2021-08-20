@@ -39,10 +39,6 @@ npx create-nx-plugin <org> --pluginName <plugin>
   - [vue3-jest](#vue3-jest)
   - [vite-jest](#vite-jest)
 - [Development/Contributing](#developmentcontributing)
-  - [Project Structure](#project-structure)
-  - [Build](#build)
-  - [Unit Tests](#unit-tests)
-  - [E2E Tests](#e2e-tests)
 
 ## Philosophy
 
@@ -190,52 +186,4 @@ Currently, unit tests will throw warnings when mounting Vue components that rely
 
 ## Development/Contributing
 
-### Project Structure
-Source code and documentation are included in the top-level folders listed below:
-
-Folder   | Description
--------- | -----------
-packages | Plugin source code
-e2e      | e2e tests associated with plugins
-tools    | Miscellaneous scripts and utilities
-
-### Build
-
-Build the main `vue3-vite` app plugin:
-```
-nx run vue3-vite:build
-```
-
-Build all app plugins:
-```
-nx run-many --target build --all
-```
-
-### Unit Tests
-
-Run unit tests for the `vue3-vite` plugin:
-```
-nx test vue3-vite
-```
-
-Prepend `affected` to only execute unit tests affected by a change:
-```
-nx affected:test vue3-vite
-```
-
-Run unit tests for all plugins:
-```
-nx run-many --target test --all
-```
-
-### E2E Tests
-
-Run e2e tests for the `vue3-vite` plugin:
-```
-nx e2e vue3-vite
-```
-
-Run e2e tests for all plugins:
-```
-nx run-many --target e2e --all
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
