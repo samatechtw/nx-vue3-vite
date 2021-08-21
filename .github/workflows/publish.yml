@@ -14,15 +14,11 @@ jobs:
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: latest
-          run_install: true
-      - run: pnpm run nx -- run vue3-vite:build
-      - run: git status
-      - run: pnpm publish ./dist/packages/vue3-vite --access public
+      - run: npm i
+      - run: npx nx run vue3-vite:build
+      - run: npm publish ./dist/packages/vue3-vite --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: pnpx conventional-github-releaser -p angular
+      - run: npx conventional-github-releaser -p angular
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "name": "nx-vue3-vite",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "generators": {
     "vue3-vite": {
       "factory": "./src/generators/vue3-vite/generator",
