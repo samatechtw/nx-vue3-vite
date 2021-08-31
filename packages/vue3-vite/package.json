@@ -1,11 +1,21 @@
 {
   "name": "nx-vue3-vite",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
     "vite": "2.5.0",
     "@vitejs/plugin-vue": "1.4.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samatechtw/nx-vue3-vite.git"
+  },
+  "keywords": [
+    "nx",
+    "vue3",
+    "vite",
+    "generator"
+  ]
 }
