@@ -17,7 +17,10 @@ interface NormalizedSchema extends ComponentGeneratorSchema {
   directory: string;
 }
 
-function normalizeOptions(host: Tree, options: ComponentGeneratorSchema): NormalizedSchema {
+function normalizeOptions(
+  host: Tree,
+  options: ComponentGeneratorSchema
+): NormalizedSchema {
   const { sourceRoot } = readProjectConfiguration(host, options.project);
   const relPath = names(options.directory ?? '').fileName;
   const componentPath = joinPathFragments(sourceRoot, relPath);
@@ -36,7 +39,12 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     ...options,
     ...names(options.name),
   };
-  generateFiles(host, path.join(__dirname, 'files'), options.componentPath, templateOptions);
+  generateFiles(
+    host,
+    path.join(__dirname, 'files'),
+    options.componentPath,
+    templateOptions
+  );
 }
 
 export default async function (host: Tree, options: ComponentGeneratorSchema) {

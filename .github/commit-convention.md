@@ -7,7 +7,7 @@
 Messages must be matched by the following regex:
 
 ```js
-/^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|build|ci|chore|wip|release)(\(.+\))?: .{1,50}(#\d+)?/
+/^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|build|ci|chore|wip|release)(\(.+\))?: .{1,50}(#\d+)?/;
 ```
 
 #### Examples
@@ -27,6 +27,7 @@ close #28
 ```
 
 or
+
 ```
 fix(dev): fix dev error #28
 ```

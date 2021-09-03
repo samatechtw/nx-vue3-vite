@@ -24,15 +24,17 @@ Hi! We're glad that you're interested in contributing!. Before submitting a pull
 - No need to worry about code style as long as you have installed the dev dependencies - modified files are automatically formatted with Prettier on commit (by invoking [Git Hooks](https://git-scm.com/docs/githooks) via [husky](https://github.com/typicode/husky)).
 
 ## Project Structure
+
 Source code and documentation are included in the top-level folders listed below:
 
-Folder   | Description
--------- | -----------
-packages | Plugin source code
-e2e      | e2e tests associated with plugins
-tools    | Miscellaneous scripts and utilities
+| Folder   | Description                         |
+| -------- | ----------------------------------- |
+| packages | Plugin source code                  |
+| e2e      | e2e tests associated with plugins   |
+| tools    | Miscellaneous scripts and utilities |
 
 ## Repo Setup
+
 This is a monorepo generated with Nx. We use [PNPM](https://pnpm.io/) for internal development and highly recommend it, but you are free to use `NPM` or `Yarn` if preferred.
 
 Detailed instructions are below, but you can get started quickly:
@@ -42,6 +44,7 @@ Detailed instructions are below, but you can get started quickly:
 3. Test: `pnx test vue3-vite`
 
 The `pnx` command above is an alias which can be added to your bash profile, or replaced with `npx` if you're using `NPM`.
+
 ```bash
 alias pnx="pnpm run nx --"
 ```
@@ -49,11 +52,13 @@ alias pnx="pnpm run nx --"
 ### Build
 
 Build the main `vue3-vite` app plugin:
+
 ```
 pnx run vue3-vite:build
 ```
 
 Build all app plugins:
+
 ```
 pnx run-many --target build --all
 ```
@@ -61,16 +66,19 @@ pnx run-many --target build --all
 ### Unit Tests
 
 Run unit tests for the `vue3-vite` plugin:
+
 ```
 pnx test vue3-vite
 ```
 
 Prepend `affected` to only execute unit tests affected by a change:
+
 ```
 pnx affected:test vue3-vite
 ```
 
 Run unit tests for all plugins:
+
 ```
 pnx run-many --target test --all
 ```
@@ -78,11 +86,13 @@ pnx run-many --target test --all
 ### E2E Tests
 
 Run e2e tests for the `vue3-vite` plugin:
+
 ```
 pnx e2e vue3-vite
 ```
 
 Run e2e tests for all plugins:
+
 ```
 pnx run-many --target e2e --all
 ```

@@ -1,4 +1,4 @@
-const { SourceNode, SourceMapConsumer } = require('source-map')
+const { SourceNode, SourceMapConsumer } = require('source-map');
 
 function addToSourceMap(node, result) {
   if (result && result.code) {
@@ -8,9 +8,9 @@ function addToSourceMap(node, result) {
           result.code,
           new SourceMapConsumer(result.map)
         )
-      )
+      );
     } else {
-      node.add(result.code)
+      node.add(result.code);
     }
   }
 }
@@ -22,12 +22,12 @@ module.exports = function generateCode(
   filename,
   stylesResult
 ) {
-  var node = new SourceNode(null, null, null)
-  addToSourceMap(node, scriptResult)
-  addToSourceMap(node, scriptSetupResult)
-  addToSourceMap(node, templateResult)
+  var node = new SourceNode(null, null, null);
+  addToSourceMap(node, scriptResult);
+  addToSourceMap(node, scriptSetupResult);
+  addToSourceMap(node, templateResult);
 
-  var tempOutput = node.toString()
+  var tempOutput = node.toString();
 
   if (
     // vue-property-decorator also exports Vue, which can be used to create a class component.
@@ -39,29 +39,29 @@ module.exports = function generateCode(
       ;exports.default = {
       ...exports.default.__vccBase,
       ...exports.default.__vccOpts
-    };`)
+    };`);
   }
 
   if (tempOutput.includes('exports.render = render;')) {
-    node.add(';exports.default = {...exports.default, render};')
+    node.add(';exports.default = {...exports.default, render};');
   } else {
     // node.add(';exports.default = {...exports.default};')
   }
   if (Array.isArray(stylesResult)) {
-    const mergedStyle = {}
-    stylesResult.forEach(styleObj => {
-      const { code, moduleName } = styleObj
+    const mergedStyle = {};
+    stylesResult.forEach((styleObj) => {
+      const { code, moduleName } = styleObj;
       mergedStyle[moduleName] = {
         ...(mergedStyle[moduleName] || {}),
-        ...(JSON.parse(code) || {})
-      }
-    })
+        ...(JSON.parse(code) || {}),
+      };
+    });
     node.add(
       `;exports.default = {...exports.default, __cssModules: ${JSON.stringify(
         mergedStyle
       )}}`
-    )
+    );
   }
 
-  return node.toStringWithSourceMap({ file: filename })
-}
+  return node.toStringWithSourceMap({ file: filename });
+};

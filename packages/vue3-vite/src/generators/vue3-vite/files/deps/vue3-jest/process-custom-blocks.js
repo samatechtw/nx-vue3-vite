@@ -1,5 +1,5 @@
-const { getVueJestConfig, getCustomTransformer } = require('./utils')
-const vueOptionsNamespace = require('./constants').vueOptionsNamespace
+const { getVueJestConfig, getCustomTransformer } = require('./utils');
+const vueOptionsNamespace = require('./constants').vueOptionsNamespace;
 
 function applyTransformer(
   transformer,
@@ -8,23 +8,23 @@ function applyTransformer(
   filename,
   config
 ) {
-  return transformer.process({ blocks, vueOptionsNamespace, filename, config })
+  return transformer.process({ blocks, vueOptionsNamespace, filename, config });
 }
 
 function groupByType(acc, block) {
-  acc[block.type] = acc[block.type] || []
-  acc[block.type].push(block)
-  return acc
+  acc[block.type] = acc[block.type] || [];
+  acc[block.type].push(block);
+  return acc;
 }
 
-module.exports = function(allBlocks, filename, config) {
-  const blocksByType = allBlocks.reduce(groupByType, {})
-  const code = []
+module.exports = function (allBlocks, filename, config) {
+  const blocksByType = allBlocks.reduce(groupByType, {});
+  const code = [];
   for (const [type, blocks] of Object.entries(blocksByType)) {
     const transformer = getCustomTransformer(
       getVueJestConfig(config).transform,
       type
-    )
+    );
     if (transformer) {
       const codeStr = applyTransformer(
         transformer,
@@ -32,10 +32,10 @@ module.exports = function(allBlocks, filename, config) {
         vueOptionsNamespace,
         filename,
         config
-      )
-      code.push(codeStr)
+      );
+      code.push(codeStr);
     }
   }
 
-  return code.length ? code.join('\n') : ''
-}
+  return code.length ? code.join('\n') : '';
+};

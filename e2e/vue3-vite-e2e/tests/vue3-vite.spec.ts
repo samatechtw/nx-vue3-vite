@@ -9,9 +9,7 @@ describe('vue3-vite e2e', () => {
   it('should create vue3-vite app', async () => {
     const plugin = uniq('vue3-vite');
     ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
-    await runNxCommandAsync(
-      `generate nx-vue3-vite:vue3-vite ${plugin}`
-    );
+    await runNxCommandAsync(`generate nx-vue3-vite:vue3-vite ${plugin}`);
 
     const result = await runNxCommandAsync(`build ${plugin}`);
     expect(result.stdout).toContain('Executor ran');

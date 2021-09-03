@@ -11,6 +11,7 @@
 <br>
 
 This project was generated using [Nx](https://nx.dev):
+
 ```
 npx create-nx-plugin <org> --pluginName <plugin>
 ```
@@ -18,7 +19,6 @@ npx create-nx-plugin <org> --pluginName <plugin>
 ## Plugin Usage
 
 Instructions for using the plugin in an Nx workspace are [here](./packages/vue3-vite)
-
 
 ## Plugin Development
 

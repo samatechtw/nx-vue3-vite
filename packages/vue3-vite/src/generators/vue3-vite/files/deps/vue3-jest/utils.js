@@ -1,33 +1,33 @@
-const constants = require('./constants')
-const loadPartialConfig = require('@babel/core').loadPartialConfig
-const { resolveSync: resolveTsConfigSync } = require('tsconfig')
-const chalk = require('chalk')
-const path = require('path')
-const fs = require('fs')
+const constants = require('./constants');
+const loadPartialConfig = require('@babel/core').loadPartialConfig;
+const { resolveSync: resolveTsConfigSync } = require('tsconfig');
+const chalk = require('chalk');
+const path = require('path');
+const fs = require('fs');
 
 const fetchTransformer = function fetchTransformer(key, obj) {
   for (const exp in obj) {
-    const matchKey = new RegExp(exp)
+    const matchKey = new RegExp(exp);
     if (matchKey.test(key)) {
-      return obj[exp]
+      return obj[exp];
     }
   }
-  return null
-}
+  return null;
+};
 
 const resolvePath = function resolvePath(pathToResolve) {
   return /^(\.\.\/|\.\/|\/)/.test(pathToResolve)
     ? path.resolve(process.cwd(), pathToResolve)
-    : pathToResolve
-}
+    : pathToResolve;
+};
 
 const info = function info(msg) {
-  console.info(chalk.blue('\n[vue-jest]: ' + msg + '\n'))
-}
+  console.info(chalk.blue('\n[vue-jest]: ' + msg + '\n'));
+};
 
 const warn = function warn(msg) {
-  console.warn(chalk.red('\n[vue-jest]: ' + msg + '\n'))
-}
+  console.warn(chalk.red('\n[vue-jest]: ' + msg + '\n'));
+};
 
 const transformContent = function transformContent(
   content,
@@ -37,15 +37,15 @@ const transformContent = function transformContent(
   attrs
 ) {
   if (!transformer) {
-    return content
+    return content;
   }
   try {
-    return transformer(content, filePath, config, attrs)
+    return transformer(content, filePath, config, attrs);
   } catch (err) {
-    warn(`There was an error while compiling ${filePath} ${err}`)
+    warn(`There was an error while compiling ${filePath} ${err}`);
   }
-  return content
-}
+  return content;
+};
 
 const getVueJestConfig = function getVueJestConfig(jestConfig) {
   return (
@@ -54,109 +54,109 @@ const getVueJestConfig = function getVueJestConfig(jestConfig) {
       jestConfig.config.globals &&
       jestConfig.config.globals['vue-jest']) ||
     {}
-  )
-}
+  );
+};
 const getBabelOptions = function loadBabelOptions(filename, options = {}) {
   const opts = Object.assign(options, {
     caller: {
       name: 'vue-jest',
-      supportsStaticESM: false
+      supportsStaticESM: false,
     },
     filename,
-    sourceMaps: 'both'
-  })
-  return loadPartialConfig(opts).options
-}
+    sourceMaps: 'both',
+  });
+  return loadPartialConfig(opts).options;
+};
 
 const getTsJestConfig = function getTsJestConfig(config) {
   const tsConfigPath = path.resolve(
     process.cwd(),
     getVueJestConfig(config).tsConfig || ''
-  )
-  const isUsingTs = resolveTsConfigSync(tsConfigPath)
+  );
+  const isUsingTs = resolveTsConfigSync(tsConfigPath);
   if (!isUsingTs) {
-    return null
+    return null;
   }
 
-  const { ConfigSet } = require('ts-jest/dist/config/config-set')
-  const configSet = new ConfigSet(config.config)
-  const tsConfig = configSet.typescript || configSet.parsedTsConfig
+  const { ConfigSet } = require('ts-jest/dist/config/config-set');
+  const configSet = new ConfigSet(config.config);
+  const tsConfig = configSet.typescript || configSet.parsedTsConfig;
   // Force es5 to prevent const vue_1 = require('vue') from conflicting
   return {
-    compilerOptions: { ...tsConfig.options, target: 'es5', module: 'commonjs' }
-  }
-}
+    compilerOptions: { ...tsConfig.options, target: 'es5', module: 'commonjs' },
+  };
+};
 
 function isValidTransformer(transformer) {
   return (
     isFunction(transformer.process) ||
     isFunction(transformer.postprocess) ||
     isFunction(transformer.preprocess)
-  )
+  );
 }
 
-const isFunction = fn => typeof fn === 'function'
+const isFunction = (fn) => typeof fn === 'function';
 
 const getCustomTransformer = function getCustomTransformer(
   transform = {},
   lang
 ) {
-  transform = { ...constants.defaultVueJestConfig.transform, ...transform }
+  transform = { ...constants.defaultVueJestConfig.transform, ...transform };
 
-  const transformerPath = fetchTransformer(lang, transform)
+  const transformerPath = fetchTransformer(lang, transform);
 
   if (!transformerPath) {
-    return null
+    return null;
   }
 
-  let transformer
+  let transformer;
   if (
     typeof transformerPath === 'string' &&
     require(resolvePath(transformerPath))
   ) {
-    transformer = require(resolvePath(transformerPath))
+    transformer = require(resolvePath(transformerPath));
   } else if (typeof transformerPath === 'object') {
-    transformer = transformerPath
+    transformer = transformerPath;
   }
 
   if (!isValidTransformer(transformer)) {
     throwError(
       `transformer must contain at least one process, preprocess, or ` +
         `postprocess method`
-    )
+    );
   }
 
-  return transformer
-}
+  return transformer;
+};
 
 const throwError = function error(msg) {
-  throw new Error('\n[vue-jest] Error: ' + msg + '\n')
-}
+  throw new Error('\n[vue-jest] Error: ' + msg + '\n');
+};
 
-const stripInlineSourceMap = function(str) {
-  return str.slice(0, str.indexOf('//# sourceMappingURL'))
-}
+const stripInlineSourceMap = function (str) {
+  return str.slice(0, str.indexOf('//# sourceMappingURL'));
+};
 
-const logResultErrors = result => {
+const logResultErrors = (result) => {
   if (result.errors.length) {
-    result.errors.forEach(function(msg) {
-      console.error('\n' + chalk.red(msg) + '\n')
-    })
-    throwError('Vue template compilation failed')
+    result.errors.forEach(function (msg) {
+      console.error('\n' + chalk.red(msg) + '\n');
+    });
+    throwError('Vue template compilation failed');
   }
-}
+};
 
 const loadSrc = (src, filePath) => {
-  var dir = path.dirname(filePath)
-  var srcPath = path.resolve(dir, src)
+  var dir = path.dirname(filePath);
+  var srcPath = path.resolve(dir, src);
   try {
-    return fs.readFileSync(srcPath, 'utf-8')
+    return fs.readFileSync(srcPath, 'utf-8');
   } catch (e) {
     throwError(
       'Failed to load src: "' + src + '" from file: "' + filePath + '"'
-    )
+    );
   }
-}
+};
 
 module.exports = {
   stripInlineSourceMap,
@@ -171,5 +171,5 @@ module.exports = {
   warn,
   resolvePath,
   fetchTransformer,
-  loadSrc
-}
+  loadSrc,
+};
