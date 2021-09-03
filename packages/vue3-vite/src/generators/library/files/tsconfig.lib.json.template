@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "<%= offsetFromRoot %>dist/out-tsc",
+    "types": ["vue-i18n", "node"],
+    "composite": true
+  },
+  "exclude": ["**/*.spec.js", "**/*.spec.jsx", "**/*.spec.ts", "**/*.spec.tsx"],
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.vue", "**/*.json"]
+}

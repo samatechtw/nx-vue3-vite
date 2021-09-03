@@ -1,0 +1,24 @@
+{
+  "extends": "<%= offsetFromRoot %>tsconfig.base.json",
+  "compilerOptions": {
+    // Enables stricter inference for data properties on `this`
+    "strict": true,
+    "allowJs": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["./src/assets/*"],
+      "@lib/*": ["./src/lib/*"]
+    }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

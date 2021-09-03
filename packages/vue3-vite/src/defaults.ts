@@ -1,4 +1,3 @@
-
 export const VSCodeExtensionsFilePath = '.vscode/extensions.json';
 
 export const recommendedExtensions = [
@@ -12,6 +11,7 @@ export const vueI18nVersion = '^9.2.0-beta.2';
 export const vueRouterVersion = '^4.0.11';
 export const dateFnsVersion = '^2.23.0';
 export const fetchApiVersion = '^0.5.0';
+export const classTransformerVersion = '^0.4.0';
 
 // devDependency versions
 export const viteVersion = '^2.5.0';
@@ -42,10 +42,10 @@ export const stylelintVersion = '^13.13.1';
 export const stylelintConfigVersion = '^22.0.0';
 export const tslibVersion = '^2.3.1';
 export const tsConfigVersion = '^7.0.0';
-export const viteComponentsVersion = '^0.13.2';
+export const unpluginVueComponentsVersion = '^0.14.11';
 export const viteImagesVersion = '^0.6.1';
 
-export const Dependencies = {
+export const ProjectDependencies = {
   vue: vueVersion,
   'vue-i18n': vueI18nVersion,
   'vue-router': vueRouterVersion,
@@ -53,10 +53,11 @@ export const Dependencies = {
   '@sampullman/vue3-fetch-api': fetchApiVersion,
 };
 
-export const DevDependencies = {
+export const ProjectDevDependencies = {
   vite: viteVersion,
   eslint: eslintVersion,
   chalk: chalkVersion,
+  'class-transformer': classTransformerVersion,
   'convert-source-map': convertSourceMapVersion,
   'source-map': sourceMapVersion,
   'extract-from-css': extractCSSVersion,
@@ -79,6 +80,27 @@ export const DevDependencies = {
   'stylelint-config-standard': stylelintConfigVersion,
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
-  'vite-plugin-components': viteComponentsVersion,
+  'unplugin-vue-components': unpluginVueComponentsVersion,
+  'vite-plugin-vue-images': viteImagesVersion,
+};
+
+export const LibraryDependencies = {
+  vue: vueVersion,
+  'vue-i18n': vueI18nVersion,
+  'vue-router': vueRouterVersion,
+};
+
+export const LibraryDevDependencies = {
+  vite: viteVersion,
+  eslint: eslintVersion,
+  '@vue/compiler-sfc': compilerSfcVersion,
+  postcss: postcssVersion,
+  '@vitejs/plugin-vue': vuePluginVersion,
+  '@samatech/postcss-basics': postcssBasicsVersion,
+  stylelint: stylelintVersion,
+  'stylelint-config-standard': stylelintConfigVersion,
+  tslib: tslibVersion,
+  tsconfig: tsConfigVersion,
+  'unplugin-vue-components': unpluginVueComponentsVersion,
   'vite-plugin-vue-images': viteImagesVersion,
 };

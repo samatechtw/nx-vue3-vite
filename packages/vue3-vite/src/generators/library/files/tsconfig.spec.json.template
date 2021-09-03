@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "<%= offsetFromRoot %>dist/out-tsc",
+    "module": "commonjs",
+    "types": ["vue-i18n", "jest", "node"],
+    "composite": true
+  },
+  "include": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.d.ts"]
+}

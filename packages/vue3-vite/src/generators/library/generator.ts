@@ -16,17 +16,16 @@ import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-ser
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
 import {
-  ProjectDevDependencies,
-  ProjectDependencies,
+  LibraryDevDependencies,
+  LibraryDependencies,
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
-  projectName: string;
-  projectTitle: string;
-  projectRoot: string;
-  projectDirectory: string;
+  libraryName: string;
+  libraryRoot: string;
+  libraryDirectory: string;
   parsedTags: string[];
 }
 
@@ -34,15 +33,13 @@ function normalizeOptions(
   host: Tree,
   options: Vue3ViteGeneratorSchema
 ): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectTitle = options.title || projectName;
-  const projectRoot = joinPathFragments(
-    getWorkspaceLayout(host).appsDir,
-    projectDirectory
+  const { fileName, name } = names(options.name);
+  const libraryDirectory = options.directory
+    ? `${names(options.directory).fileName}/${fileName}`
+    : fileName;
+  const libraryRoot = joinPathFragments(
+    getWorkspaceLayout(host).libsDir,
+    libraryDirectory
   );
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
@@ -50,10 +47,9 @@ function normalizeOptions(
 
   return {
     ...options,
-    projectName,
-    projectTitle,
-    projectRoot,
-    projectDirectory,
+    libraryName: name,
+    libraryRoot,
+    libraryDirectory,
     parsedTags,
   };
 }
@@ -62,7 +58,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
     ...names(options.name),
-    offsetFromRoot: offsetFromRoot(options.projectRoot),
+    offsetFromRoot: offsetFromRoot(options.libraryRoot),
     // Hack for copying dotfiles - use as a template in the filename
     // e.g. "__dot__eslintrc.js" => ".eslintrc.js"
     dot: '.',
@@ -71,20 +67,20 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   generateFiles(
     host,
     path.join(__dirname, 'files'),
-    options.projectRoot,
+    options.libraryRoot,
     templateOptions
   );
 }
 
 function updateDependencies(host: Tree) {
   // Make sure we don't have dependency duplicates
-  const deps = Object.keys(ProjectDependencies);
-  const devDeps = Object.keys(ProjectDevDependencies);
+  const deps = Object.keys(LibraryDependencies);
+  const devDeps = Object.keys(LibraryDevDependencies);
   removeDependenciesFromPackageJson(host, deps, devDeps);
   return addDependenciesToPackageJson(
     host,
-    ProjectDependencies,
-    ProjectDevDependencies
+    LibraryDependencies,
+    LibraryDevDependencies
   );
 }
 
@@ -108,34 +104,31 @@ function updateExtensionRecommendations(host: Tree) {
 
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
-  const { projectRoot } = normalizedOptions;
+  const { libraryRoot } = normalizedOptions;
 
-  addProjectConfiguration(host, normalizedOptions.projectName, {
-    root: projectRoot,
-    projectType: 'application',
-    sourceRoot: joinPathFragments(projectRoot, 'src'),
+  addProjectConfiguration(host, normalizedOptions.libraryName, {
+    root: libraryRoot,
+    projectType: 'library',
+    sourceRoot: joinPathFragments(libraryRoot, 'src'),
     targets: {
       build: {
         executor: 'nx-vue3-vite:build-app',
         options: {
-          dist: joinPathFragments('dist', projectRoot),
+          dist: joinPathFragments('dist', libraryRoot),
         },
-      },
-      serve: {
-        executor: 'nx-vue3-vite:dev-server',
       },
       test: {
         executor: '@nrwl/jest:jest',
-        outputs: [joinPathFragments('coverage', projectRoot)],
+        outputs: [joinPathFragments('coverage', libraryRoot)],
         options: {
-          jestConfig: joinPathFragments(projectRoot, 'jest.config.ts'),
+          jestConfig: joinPathFragments(libraryRoot, 'jest.config.ts'),
           passWithNoTests: true,
         },
       },
       lint: {
         executor: '@nrwl/linter:eslint',
         options: {
-          lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
+          lintFilePatterns: [`${libraryRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
     },
