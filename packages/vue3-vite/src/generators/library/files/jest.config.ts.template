@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: '<%= projectName %>',
+  displayName: '<%= libraryName %>',
   preset: '<%= offsetFromRoot %>jest.preset.js',
   transform: {
     '^.+\\.vue$': './deps/vue3-jest',
