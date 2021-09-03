@@ -1,5 +1,5 @@
-const crypto = require('crypto')
-const babelJest = require('babel-jest').default
+const crypto = require('crypto');
+const babelJest = require('babel-jest').default;
 module.exports = {
   process: require('./process'),
   getCacheKey: function getCacheKey(
@@ -14,10 +14,10 @@ module.exports = {
           config,
           configString,
           instrument,
-          rootDir
+          rootDir,
         }),
         'hex'
       )
-      .digest('hex')
-  }
-}
+      .digest('hex');
+  },
+};

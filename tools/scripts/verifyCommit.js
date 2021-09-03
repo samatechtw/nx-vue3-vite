@@ -1,10 +1,10 @@
-const chalk = require('chalk')
-const msgPath = process.env.MSG_PATH
-const msg = require('fs').readFileSync(msgPath, 'utf-8').trim()
+const chalk = require('chalk');
+const msgPath = process.env.MSG_PATH;
+const msg = require('fs').readFileSync(msgPath, 'utf-8').trim();
 
-const releaseRE = /^v\d/
+const releaseRE = /^v\d/;
 const commitRE =
-/^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|build|ci|chore|wip|release)(\(.+\))?: .{1,50}(#\d+)?/
+  /^(revert: )?(feat|fix|docs|refactor|perf|test|workflow|build|ci|chore|wip|release)(\(.+\))?: .{1,50}(#\d+)?/;
 
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
   console.error(
@@ -17,6 +17,6 @@ if (!releaseRE.test(msg) && !commitRE.test(msg)) {
       `    ${chalk.green(`feat: add 'comments' option`)}\n` +
       `    ${chalk.green(`fix: handle events on blur (close #28)`)}\n\n` +
       chalk.red(`  See .github/commit-convention.md for more details.\n`)
-  )
-  process.exit(1)
+  );
+  process.exit(1);
 }

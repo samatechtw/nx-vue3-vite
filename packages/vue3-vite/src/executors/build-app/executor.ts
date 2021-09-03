@@ -1,11 +1,15 @@
-import { ExecutorContext, joinPathFragments, offsetFromRoot } from '@nrwl/devkit';
+import {
+  ExecutorContext,
+  joinPathFragments,
+  offsetFromRoot,
+} from '@nrwl/devkit';
 import { build } from 'vite';
 import { getProjectRoot, projectRelativePath } from '../../utils';
 import { BuildAppExecutorSchema } from './schema';
 
 export default async function runExecutor(
   options: BuildAppExecutorSchema,
-  context: ExecutorContext,
+  context: ExecutorContext
 ) {
   const projectRoot = getProjectRoot(context);
   const projectRelative = projectRelativePath(context);
