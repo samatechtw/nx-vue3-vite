@@ -1,7 +1,7 @@
 import path from 'path'
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
-import ViteComponents from 'vite-plugin-components';
+import Components from 'unplugin-vue-components/vite'
 import ViteImages from 'vite-plugin-vue-images';
 
 export default defineConfig({
@@ -15,7 +15,7 @@ export default defineConfig({
   },
   plugins: [
     Vue(),
-    ViteComponents({
+    Components({
       dirs: ['src/app/components'],
     }),
     ViteImages(),

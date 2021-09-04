@@ -1,7 +1,7 @@
 import path from 'path'
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
-import ViteComponents from 'vite-plugin-components';
+import Components from 'unplugin-vue-components/vite'
 import ViteImages from 'vite-plugin-vue-images';
 
 module.exports = defineConfig({
@@ -14,14 +14,14 @@ module.exports = defineConfig({
   },
   plugins: [
     Vue(),
-    ViteComponents({
+    Components({
       dirs: ['src/lib'],
     }),
     ViteImages(),
   ],
   build: {
     lib: {
-      entry: path.resolve(__dirname, './src/lib/index.ts'),
+      entry: path.resolve(__dirname, './src/index.ts'),
       name: '<%= libraryName %>',
       fileName: (format) => `<%= libraryName %>.${format}.js`
     },
