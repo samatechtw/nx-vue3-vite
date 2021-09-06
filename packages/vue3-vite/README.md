@@ -19,6 +19,7 @@
   - [Application](#application)
   - [Component](#component)
   - [Library](#library)
+  - [Vitepress Docs](#vitepress-docs)
 - [Vue3 Executors](#vue3-executors)
   - [Dev Server](#dev-server)
   - [Build](#build)
@@ -29,6 +30,13 @@
   - [dep-graph hack](#dep-graph-hack)
   - [vue3-jest](#vue3-jest)
   - [vite-jest](#vite-jest)
+
+## Features
+
+- Vue3+Vite+Postcss project generation
+- Vue3+Vite+Postcss library generation
+- Component generation for projects/libraries
+- [Vitepress](https://github.com/vuejs/vitepress) docs project generation
 
 ## Philosophy
 
@@ -86,6 +94,7 @@ nx g nx-vue3-vite:app <app-name> [options]
 
 | Options     | Default | Description                                  |
 | ----------- | ------- | -------------------------------------------- |
+| --title     | -       | Project title, defaults to <app-name>        |
 | --tags      | -       | Comma delimited tags for linting             |
 | --directory | apps    | Workspace directory to place the Vue project |
 
@@ -113,13 +122,42 @@ nx g nx-vue3-vite:c <name> [options]
 
 ### Library
 
-TBD
+```
+nx g nx-vue3-vite:library <lib-name> [options]
+```
+
+| Arguments | Description                       |
+| --------- | --------------------------------- |
+| lib-name  | The name of the generated library |
+
+| Options     | Default | Description                                  |
+| ----------- | ------- | -------------------------------------------- |
+| --tags      | -       | Comma delimited tags for linting             |
+| --directory | apps    | Workspace directory to place the Vue library |
+
+### Vitepress Docs
+
+```
+nx g nx-vue3-vite:docs <app-name> [options]
+```
+
+| Arguments | Description                        |
+| --------- | ---------------------------------- |
+| app-name  | The name of the generated docs app |
+
+| Options     | Default | Description                                     |
+| ----------- | ------- | ----------------------------------------------- |
+| --title     | -       | Docs title, defaults to <app-name>              |
+| --tags      | -       | Comma delimited tags for linting                |
+| --directory | apps    | Workspace directory to place the Vitepress docs |
 
 ## Vue3 Executors
 
 ([NX Docs](https://nx.dev/latest/angular/generators/using-schematics))
 
 ### Dev Server
+
+Works for generated Vue3 projects, and Vitepress docs.
 
 ```
 nx serve <app-name> [options]
@@ -136,6 +174,8 @@ nx serve <app-name> [options]
 | --https | false     | [Run in HTTPS/SSL mode](https://vitejs.dev/config/#server-https) |
 
 ### Build
+
+Works for generated Vue3 projects, libraries, and Vitepress docs.
 
 ```
 nx build <app-name> [options]
