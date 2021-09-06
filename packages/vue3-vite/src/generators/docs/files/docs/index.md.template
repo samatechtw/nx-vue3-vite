@@ -1,0 +1,16 @@
+---
+home: true
+heroImage: /favicon.png
+actionText: Get Started
+actionLink: /guide/
+
+altActionText: Learn More
+altActionLink: https://github.com/samatechtw/nx-vue3-vite
+
+features:
+  - title: 🚀 Developer docs
+    details: Scaffolding for your developer documentation
+  - title: 🤝 Customized theme
+    details: Example of how to customize the theme
+footer: GPLv3 Licensed | Copyright © 2021-present <% projectTitle %>
+---

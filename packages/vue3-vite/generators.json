@@ -20,6 +20,11 @@
       "schema": "./src/generators/component/schema.json",
       "description": "component generator",
       "aliases": ["c"]
+    },
+    "docs": {
+      "factory": "./src/generators/docs/generator",
+      "schema": "./src/generators/docs/schema.json",
+      "description": "vitepress docs generator"
     }
   }
 }

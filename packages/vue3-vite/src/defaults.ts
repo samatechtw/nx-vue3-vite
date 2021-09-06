@@ -6,7 +6,7 @@ export const recommendedExtensions = [
 ];
 
 // dependency versions
-export const vueVersion = '^3.2.4';
+export const vueVersion = '^3.2.9';
 export const vueI18nVersion = '^9.2.0-beta.2';
 export const vueRouterVersion = '^4.0.11';
 export const dateFnsVersion = '^2.23.0';
@@ -25,7 +25,7 @@ export const chalkVersion = '^4.1.2';
 export const convertSourceMapVersion = '^1.8.0';
 export const extractCSSVersion = '^0.4.4';
 export const sourceMapVersion = '^0.7.3';
-export const vuePluginVersion = '^1.4.0';
+export const vuePluginVersion = '^1.6.0';
 export const vueTestUtilsVersion = '^2.0.0-rc.12';
 // TODO -- add or remove once it's out of alpha or vite-jest is used
 // Note -- babel stuff shouldn't be needed with vite-jest
@@ -104,3 +104,7 @@ export const LibraryDevDependencies = {
   'unplugin-vue-components': unpluginVueComponentsVersion,
   'vite-plugin-vue-images': viteImagesVersion,
 };
+
+export const DocsDependencies = {};
+
+export const DocsDevDependencies = { vitepress: '^0.17.0' };

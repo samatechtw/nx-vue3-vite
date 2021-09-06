@@ -1,0 +1,17 @@
+# <% projectTitle %> Documentation
+
+<% projectTitle %> developer documentation.
+
+Generated with [nx-vue3-vite](https://github.com/samatechtw/nx-vue3-vite)
+
+## Setup
+
+Run a local development server:
+```
+npx nx vue3-vite:docs-dev docs
+```
+
+Build for production:
+```
+npx nx vue3-vite:docs-build docs
+```

@@ -1,6 +1,10 @@
-import { ExecutorContext, offsetFromRoot } from '@nrwl/devkit';
+import {
+  ExecutorContext,
+  joinPathFragments,
+  offsetFromRoot,
+} from '@nrwl/devkit';
 import { DevServerExecutorSchema } from './schema';
-import { createServer } from 'vite';
+import { createServer } from 'vitepress';
 import { getProjectRoot } from '../../utils';
 
 export default async function runExecutor(
@@ -8,17 +12,15 @@ export default async function runExecutor(
   context: ExecutorContext
 ) {
   console.log('Executor ran for DevServer', options);
-  const root = getProjectRoot(context);
+  const projectRoot = getProjectRoot(context);
+  const docsRoot = joinPathFragments(projectRoot, options.root);
   const { host, port, https } = options;
   const protocol = https ? 'https' : 'http';
-  let server = await createServer({
-    root,
-    server: {
-      port,
-      host,
-      fs: {
-        allow: [offsetFromRoot(root)],
-      },
+  let server = await createServer(docsRoot, {
+    port,
+    host,
+    fs: {
+      allow: [offsetFromRoot(projectRoot)],
     },
   });
   server = await server.listen();

@@ -1,7 +1,5 @@
 import {
   addProjectConfiguration,
-  addDependenciesToPackageJson,
-  removeDependenciesFromPackageJson,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -21,6 +19,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
+import { updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   libraryName: string;
@@ -35,7 +34,7 @@ function normalizeOptions(
 ): NormalizedSchema {
   const { fileName, name } = names(options.name);
   const libraryDirectory = options.directory
-    ? `${names(options.directory).fileName}/${fileName}`
+    ? names(options.directory).fileName
     : fileName;
   const libraryRoot = joinPathFragments(
     getWorkspaceLayout(host).libsDir,
@@ -69,18 +68,6 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     path.join(__dirname, 'files'),
     options.libraryRoot,
     templateOptions
-  );
-}
-
-function updateDependencies(host: Tree) {
-  // Make sure we don't have dependency duplicates
-  const deps = Object.keys(LibraryDependencies);
-  const devDeps = Object.keys(LibraryDevDependencies);
-  removeDependenciesFromPackageJson(host, deps, devDeps);
-  return addDependenciesToPackageJson(
-    host,
-    LibraryDependencies,
-    LibraryDevDependencies
   );
 }
 
@@ -134,7 +121,11 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     },
     tags: normalizedOptions.parsedTags,
   });
-  const depsTask = updateDependencies(host);
+  const depsTask = updateDependencies(
+    host,
+    LibraryDependencies,
+    LibraryDevDependencies
+  );
 
   addFiles(host, normalizedOptions);
 
