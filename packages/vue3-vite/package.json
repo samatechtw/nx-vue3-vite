@@ -6,7 +6,8 @@
   "executors": "./executors.json",
   "peerDependencies": {
     "vite": "2.5.3",
-    "@vitejs/plugin-vue": "1.6.0"
+    "@vitejs/plugin-vue": "1.6.0",
+    "@angular-devkit/schematics": "^12.2.4"
   },
   "repository": {
     "type": "git",
