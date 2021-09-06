@@ -12,16 +12,16 @@ import {
 import { addPackageWithInit } from '@nrwl/workspace';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
-import { Vue3ViteGeneratorSchema } from './schema';
+import { DocsGeneratorSchema } from './schema';
 import {
-  ProjectDevDependencies,
-  ProjectDependencies,
+  DocsDevDependencies,
+  DocsDependencies,
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
 import { updateDependencies } from '../../utils';
 
-interface NormalizedSchema extends Vue3ViteGeneratorSchema {
+interface NormalizedSchema extends DocsGeneratorSchema {
   projectName: string;
   projectTitle: string;
   projectRoot: string;
@@ -31,13 +31,14 @@ interface NormalizedSchema extends Vue3ViteGeneratorSchema {
 
 function normalizeOptions(
   host: Tree,
-  options: Vue3ViteGeneratorSchema
+  options: DocsGeneratorSchema
 ): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? names(options.directory).fileName
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
+  console.log(projectDirectory, projectName);
   const projectTitle = options.title || projectName;
   const projectRoot = joinPathFragments(
     getWorkspaceLayout(host).appsDir,
@@ -93,7 +94,7 @@ function updateExtensionRecommendations(host: Tree) {
   });
 }
 
-export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
+export default async function (host: Tree, options: DocsGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
   const { projectRoot } = normalizedOptions;
 
@@ -103,21 +104,13 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     sourceRoot: joinPathFragments(projectRoot, 'src'),
     targets: {
       build: {
-        executor: 'nx-vue3-vite:build-app',
+        executor: 'nx-vue3-vite:build-docs',
         options: {
           dist: joinPathFragments('dist', projectRoot),
         },
       },
       serve: {
-        executor: 'nx-vue3-vite:dev-server',
-      },
-      test: {
-        executor: '@nrwl/jest:jest',
-        outputs: [joinPathFragments('coverage', projectRoot)],
-        options: {
-          jestConfig: joinPathFragments(projectRoot, 'jest.config.ts'),
-          passWithNoTests: true,
-        },
+        executor: 'nx-vue3-vite:docs-dev-server',
       },
       lint: {
         executor: '@nrwl/linter:eslint',
@@ -130,8 +123,8 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   });
   const depsTask = updateDependencies(
     host,
-    ProjectDependencies,
-    ProjectDevDependencies
+    DocsDependencies,
+    DocsDevDependencies
   );
 
   addFiles(host, normalizedOptions);

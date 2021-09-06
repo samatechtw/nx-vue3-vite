@@ -1,4 +1,10 @@
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import {
+  ExecutorContext,
+  joinPathFragments,
+  addDependenciesToPackageJson,
+  removeDependenciesFromPackageJson,
+  Tree,
+} from '@nrwl/devkit';
 
 export function getProjectRoot(context: ExecutorContext): string {
   if (context.projectName) {
@@ -9,4 +15,16 @@ export function getProjectRoot(context: ExecutorContext): string {
 
 export function projectRelativePath(context: ExecutorContext): string {
   return context.workspace.projects[context.projectName].root;
+}
+
+export function updateDependencies(
+  host: Tree,
+  deps: Record<string, string>,
+  devDeps: Record<string, string>
+) {
+  // Make sure we don't have dependency duplicates
+  const depKeys = Object.keys(deps);
+  const devDepKeys = Object.keys(devDeps);
+  removeDependenciesFromPackageJson(host, depKeys, devDepKeys);
+  return addDependenciesToPackageJson(host, deps, devDeps);
 }

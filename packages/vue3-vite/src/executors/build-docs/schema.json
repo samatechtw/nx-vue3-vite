@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Docs Builder",
+  "description": "Build the docs",
+  "type": "object",
+  "properties": {
+    "root": {
+      "type": "string",
+      "description": "Root of the docs source, relative to the project directory",
+      "default": "docs"
+    },
+    "dist": {
+      "type": "string",
+      "description": "Output directory for compiled docs"
+    }
+  },
+  "required": []
+}
