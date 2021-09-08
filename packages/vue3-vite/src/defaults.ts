@@ -107,4 +107,4 @@ export const LibraryDevDependencies = {
 
 export const DocsDependencies = {};
 
-export const DocsDevDependencies = { vitepress: '^0.17.0' };
+export const DocsDevDependencies = { vitepress: '^0.17.1' };
