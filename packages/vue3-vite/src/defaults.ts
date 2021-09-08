@@ -7,25 +7,25 @@ export const recommendedExtensions = [
 
 // dependency versions
 export const vueVersion = '^3.2.9';
-export const vueI18nVersion = '^9.2.0-beta.2';
+export const vueI18nVersion = '^9.2.0-beta.3';
 export const vueRouterVersion = '^4.0.11';
 export const dateFnsVersion = '^2.23.0';
 export const fetchApiVersion = '^0.5.0';
 export const classTransformerVersion = '^0.4.0';
 
 // devDependency versions
-export const viteVersion = '^2.5.0';
+export const viteVersion = '^2.5.5';
 export const eslintVersion = '^7.32.0';
 export const eslintI18nVersion = '^0.12.0';
 export const eslintImportVersion = '^2.24.0';
 export const eslintVueVersion = '^7.16.0';
 export const eslintVueTypescript = '^7.0.0';
-export const vueEslintParser = '^7.10.0';
+export const vueEslintParser = '^7.11.0';
 export const chalkVersion = '^4.1.2';
 export const convertSourceMapVersion = '^1.8.0';
 export const extractCSSVersion = '^0.4.4';
 export const sourceMapVersion = '^0.7.3';
-export const vuePluginVersion = '^1.6.0';
+export const vuePluginVersion = '^1.6.1';
 export const vueTestUtilsVersion = '^2.0.0-rc.12';
 // TODO -- add or remove once it's out of alpha or vite-jest is used
 // Note -- babel stuff shouldn't be needed with vite-jest
@@ -42,7 +42,7 @@ export const stylelintVersion = '^13.13.1';
 export const stylelintConfigVersion = '^22.0.0';
 export const tslibVersion = '^2.3.1';
 export const tsConfigVersion = '^7.0.0';
-export const unpluginVueComponentsVersion = '^0.14.11';
+export const unpluginVueComponentsVersion = '^0.15.0';
 export const viteImagesVersion = '^0.6.1';
 
 export const ProjectDependencies = {
