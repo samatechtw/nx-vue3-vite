@@ -17,6 +17,10 @@ export function projectRelativePath(context: ExecutorContext): string {
   return context.workspace.projects[context.projectName].root;
 }
 
+export function getWorkspaceRoot(context: ExecutorContext): string {
+  return context.root;
+}
+
 export function updateDependencies(
   host: Tree,
   deps: Record<string, string>,

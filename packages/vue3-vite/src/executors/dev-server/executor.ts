@@ -1,23 +1,25 @@
-import { ExecutorContext, offsetFromRoot } from '@nrwl/devkit';
+import { ExecutorContext } from '@nrwl/devkit';
 import { DevServerExecutorSchema } from './schema';
 import { createServer } from 'vite';
-import { getProjectRoot } from '../../utils';
+import { getProjectRoot, getWorkspaceRoot } from '../../utils';
 
 export default async function runExecutor(
   options: DevServerExecutorSchema,
   context: ExecutorContext
 ) {
   console.log('Executor ran for DevServer', options);
-  const root = getProjectRoot(context);
+  const workspaceRoot = getWorkspaceRoot(context);
+
+  const projectRoot = getProjectRoot(context);
   const { host, port, https } = options;
   const protocol = https ? 'https' : 'http';
   let server = await createServer({
-    root,
+    root: projectRoot,
     server: {
       port,
       host,
       fs: {
-        allow: [offsetFromRoot(root)],
+        allow: [workspaceRoot],
       },
     },
   });
