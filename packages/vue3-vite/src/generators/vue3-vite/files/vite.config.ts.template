@@ -13,6 +13,7 @@ export default defineConfig({
       '@public/': `${path.resolve(__dirname, './src/public')}/`,
     },
   },
+  publicDir: path.resolve(__dirname, './src/public'),
   plugins: [
     Vue(),
     Components({
