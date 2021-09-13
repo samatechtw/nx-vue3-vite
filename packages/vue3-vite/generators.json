@@ -25,6 +25,11 @@
       "factory": "./src/generators/docs/generator",
       "schema": "./src/generators/docs/schema.json",
       "description": "vitepress docs generator"
+    },
+    "cypress": {
+      "factory": "./src/generators/cypress/generator",
+      "schema": "./src/generators/cypress/schema.json",
+      "description": "vue3-vite cypress generator"
     }
   }
 }
