@@ -20,12 +20,13 @@
   - [Component](#component)
   - [Library](#library)
   - [Vitepress Docs](#vitepress-docs)
+  - [Cypress](#cypress)
 - [Vue3 Executors](#vue3-executors)
   - [Dev Server](#dev-server)
   - [Build](#build)
   - [Lint](#lint)
   - [Unit Testing](#unit-testing)
-  - [E2E Testing](#e2e-testing)
+  - [Cypress E2E](#cypress-e2e)
 - [Workarounds](#workarounds)
   - [dep-graph hack](#dep-graph-hack)
   - [vue3-jest](#vue3-jest)
@@ -150,6 +151,26 @@ nx g nx-vue3-vite:docs <app-name> [options]
 | --title     | -       | Docs title, defaults to <app-name>              |
 | --tags      | -       | Comma delimited tags for linting                |
 | --directory | apps    | Workspace directory to place the Vitepress docs |
+
+### Cypress
+
+Generate a Cypress e2e app targeting an application generated with `nx-vue3-vite:app`
+
+```
+nx g nx-vue3-vite:cypress <app-name> --project <target-project> [options]
+```
+
+| Arguments | Description                                                                                                                |
+| --------- | -------------------------------------------------------------------------------------------------------------------------- |
+| app-name  | Optional name for the e2e app. You can provide the `project` option instead, which results in an app named `<project>-e2e` |
+
+Many Cypress options are available, which you can check [here](src/generators/cypress/schema.json)
+
+| Options     | Default | Description                                       |
+| ----------- | ------- | ------------------------------------------------- |
+| --project   | -       | Existing project name to generate e2e testing for |
+| --tags      | -       | Comma delimited tags for linting                  |
+| --directory | apps    | Workspace directory to place the app              |
 
 ## Vue3 Executors
 

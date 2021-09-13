@@ -20,6 +20,11 @@
       "implementation": "./src/executors/docs-dev-server/executor",
       "schema": "./src/executors/docs-dev-server/schema.json",
       "description": "docs dev server executor"
+    },
+    "cypress": {
+      "implementation": "./src/executors/cypress/executor",
+      "schema": "./src/executors/cypress/schema.json",
+      "description": "cypress executor"
     }
   }
 }

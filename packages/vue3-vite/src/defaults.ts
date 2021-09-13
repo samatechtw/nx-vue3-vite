@@ -108,3 +108,11 @@ export const LibraryDevDependencies = {
 export const DocsDependencies = {};
 
 export const DocsDevDependencies = { vitepress: '^0.17.1' };
+
+export const CypressDevDependencies = {
+  cypress: '^8.3.1',
+  '@cypress/vue': '^3.0.3',
+  '@cypress/vite-dev-server': '^2.1.0',
+  'eslint-plugin-cypress': '^2.11.3',
+  '@nrwl/cypress': '*',
+};
