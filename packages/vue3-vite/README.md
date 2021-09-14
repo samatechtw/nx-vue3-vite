@@ -166,11 +166,13 @@ nx g nx-vue3-vite:cypress <app-name> --project <target-project> [options]
 
 Many Cypress options are available, which you can check [here](src/generators/cypress/schema.json)
 
-| Options     | Default | Description                                       |
-| ----------- | ------- | ------------------------------------------------- |
-| --project   | -       | Existing project name to generate e2e testing for |
-| --tags      | -       | Comma delimited tags for linting                  |
-| --directory | apps    | Workspace directory to place the app              |
+| Options       | Default | Description                                                                                  |
+| ------------- | ------- | -------------------------------------------------------------------------------------------- |
+| --project     | -       | Existing project name to generate e2e testing for                                            |
+| --tags        | -       | Comma delimited tags for linting                                                             |
+| --directory   | apps    | Workspace directory to place the app                                                         |
+| headlessWatch | false   | Only valid in headless mode. If true, Cypress will watch for code changes instead of exiting |
+| headlessCI    | true    | If env var CI=true, set `headless=true` and `headlessWatch=false`                            |
 
 ## Vue3 Executors
 

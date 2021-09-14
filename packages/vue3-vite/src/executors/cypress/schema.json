@@ -22,6 +22,16 @@
       "description": "Whether or not to open the Cypress application to run the tests. If set to 'true', will run in headless mode",
       "default": false
     },
+    "headlessWatch": {
+      "type": "boolean",
+      "description": "Only valid in headless mode. If true, Cypress will watch for code changes instead of exiting",
+      "default": false
+    },
+    "headlessCI": {
+      "type": "boolean",
+      "description": "If env var CI=true, set headless=true and headlessWatch=false",
+      "default": true
+    },
     "exit": {
       "type": "boolean",
       "description": "Whether or not the Cypress Test Runner will stay open after running tests in a spec file",

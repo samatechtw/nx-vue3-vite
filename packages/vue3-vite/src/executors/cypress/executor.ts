@@ -19,12 +19,17 @@ export default async function cypressExecutor(
   options = normalizeOptions(options, context);
 
   let success: boolean;
+  const exitOnFirstRun = options.headless && !options.headlessWatch;
+
   for await (const baseUrl of startDevServer(options, context)) {
     try {
       success = await runCypress(baseUrl, options);
     } catch (e) {
       logger.error(e.message);
       success = false;
+    }
+    if (exitOnFirstRun) {
+      return { success };
     }
   }
 
@@ -40,6 +45,10 @@ function normalizeOptions(
     const tsConfigPath = join(context.root, options.tsConfig);
     options.env.tsConfig = tsConfigPath;
     process.env.TS_NODE_PROJECT = tsConfigPath;
+  }
+  if (process.env.CI && options.headlessCI) {
+    options.headless = true;
+    options.headlessWatch = false;
   }
   checkSupportedBrowser(options);
   return options;

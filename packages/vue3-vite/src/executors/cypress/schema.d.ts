@@ -3,6 +3,8 @@ export interface CypressExecutorOptions {
   cypressConfig: string;
   devServerTarget: string;
   headless: boolean;
+  headlessWatch: boolean;
+  headlessCI: boolean;
   exit: boolean;
   parallel: boolean;
   record: boolean;
