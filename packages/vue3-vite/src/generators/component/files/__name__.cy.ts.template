@@ -1,0 +1,13 @@
+import { mount } from '@cypress/vue'
+import i18n from '@app/i18n'
+
+import <%= name %> from './<%= name %>.vue'
+
+const t = i18n.global.t
+
+it('Mounts <%= name %>', () => {
+  const titleKey = 'name'
+  mount(<%= name %>, { props: { titleKey }, global: { plugins: [i18n] } })
+    .get('.<%= propertyName %>')
+    .should('exist')
+})

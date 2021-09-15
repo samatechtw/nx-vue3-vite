@@ -45,6 +45,22 @@ export const tsConfigVersion = '^7.0.0';
 export const unpluginVueComponentsVersion = '^0.15.0';
 export const viteImagesVersion = '^0.6.1';
 
+// Testing dependencies
+export const cypressVersion = '^8.3.1';
+export const cypressVueVersion = '^3.0.3';
+export const cypressCodeCoverageVersion = '^3.9.11';
+export const cypressViteVersion = '^2.1.0';
+export const eslintCypressVersion = '^2.11.3';
+
+export const CypressDevDependencies = {
+  cypress: cypressVersion,
+  '@cypress/vue': cypressVueVersion,
+  '@cypress/vite-dev-server': cypressViteVersion,
+  '@cypress/code-coverage': cypressCodeCoverageVersion,
+  'eslint-plugin-cypress': eslintCypressVersion,
+  '@nrwl/cypress': '*',
+};
+
 export const ProjectDependencies = {
   vue: vueVersion,
   'vue-i18n': vueI18nVersion,
@@ -82,6 +98,7 @@ export const ProjectDevDependencies = {
   tsconfig: tsConfigVersion,
   'unplugin-vue-components': unpluginVueComponentsVersion,
   'vite-plugin-vue-images': viteImagesVersion,
+  ...CypressDevDependencies,
 };
 
 export const LibraryDependencies = {
@@ -103,16 +120,9 @@ export const LibraryDevDependencies = {
   tsconfig: tsConfigVersion,
   'unplugin-vue-components': unpluginVueComponentsVersion,
   'vite-plugin-vue-images': viteImagesVersion,
+  ...CypressDevDependencies,
 };
 
 export const DocsDependencies = {};
 
 export const DocsDevDependencies = { vitepress: '^0.17.1' };
-
-export const CypressDevDependencies = {
-  cypress: '^8.3.1',
-  '@cypress/vue': '^3.0.3',
-  '@cypress/vite-dev-server': '^2.1.0',
-  'eslint-plugin-cypress': '^2.11.3',
-  '@nrwl/cypress': '*',
-};

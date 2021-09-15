@@ -1,0 +1,4 @@
+{
+  "testFiles": "**/*.cy.{js,ts}",
+  "componentFolder": "src/app"
+}
