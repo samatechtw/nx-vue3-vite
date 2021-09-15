@@ -119,6 +119,13 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
           passWithNoTests: true,
         },
       },
+      e2e: {
+        executor: 'nx-vue3-vite:cypress',
+        options: {
+          cypressConfig: joinPathFragments(projectRoot, 'cypress.json'),
+          testingType: 'component',
+        },
+      },
       lint: {
         executor: '@nrwl/linter:eslint',
         options: {
