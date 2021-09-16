@@ -6,15 +6,15 @@ export const recommendedExtensions = [
 ];
 
 // dependency versions
-export const vueVersion = '^3.2.9';
-export const vueI18nVersion = '^9.2.0-beta.3';
+export const vueVersion = '^3.2.11';
+export const vueI18nVersion = '^9.1.6';
 export const vueRouterVersion = '^4.0.11';
 export const dateFnsVersion = '^2.23.0';
 export const fetchApiVersion = '^0.5.0';
 export const classTransformerVersion = '^0.4.0';
 
 // devDependency versions
-export const viteVersion = '^2.5.5';
+export const viteVersion = '^2.5.7';
 export const eslintVersion = '^7.32.0';
 export const eslintI18nVersion = '^0.12.0';
 export const eslintImportVersion = '^2.24.0';
@@ -25,8 +25,7 @@ export const chalkVersion = '^4.1.2';
 export const convertSourceMapVersion = '^1.8.0';
 export const extractCSSVersion = '^0.4.4';
 export const sourceMapVersion = '^0.7.3';
-export const vuePluginVersion = '^1.6.1';
-export const vueTestUtilsVersion = '^2.0.0-rc.12';
+export const vuePluginVersion = '^1.6.2';
 // TODO -- add or remove once it's out of alpha or vite-jest is used
 // Note -- babel stuff shouldn't be needed with vite-jest
 // https://github.com/samatechtw/nx-vue3-vite/issues/14
@@ -42,11 +41,11 @@ export const stylelintVersion = '^13.13.1';
 export const stylelintConfigVersion = '^22.0.0';
 export const tslibVersion = '^2.3.1';
 export const tsConfigVersion = '^7.0.0';
-export const unpluginVueComponentsVersion = '^0.15.0';
+export const unpluginVueComponentsVersion = '^0.15.1';
 export const viteImagesVersion = '^0.6.1';
 
 // Testing dependencies
-export const cypressVersion = '^8.3.1';
+export const cypressVersion = '^8.4.0';
 export const cypressVueVersion = '^3.0.3';
 export const cypressCodeCoverageVersion = '^3.9.11';
 export const cypressViteVersion = '^2.1.0';
@@ -74,9 +73,6 @@ export const ProjectDevDependencies = {
   eslint: eslintVersion,
   chalk: chalkVersion,
   'class-transformer': classTransformerVersion,
-  'convert-source-map': convertSourceMapVersion,
-  'source-map': sourceMapVersion,
-  'extract-from-css': extractCSSVersion,
   '@intlify/eslint-plugin-vue-i18n': eslintI18nVersion,
   'eslint-plugin-import': eslintImportVersion,
   'eslint-plugin-vue': eslintVueVersion,
@@ -85,7 +81,6 @@ export const ProjectDevDependencies = {
   '@vue/compiler-sfc': compilerSfcVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
-  '@vue/test-utils': vueTestUtilsVersion,
   // 'vue3-jest': vue3JestVersion,
   'babel-jest': babelJestVersion,
   '@babel/plugin-transform-modules-commonjs': babelCommonjsVersion,
