@@ -23,7 +23,9 @@
   - [Cypress](#cypress)
 - [Vue3 Executors](#vue3-executors)
   - [Dev Server](#dev-server)
+  - [Docs Dev Server](#docs-dev-server)
   - [Build](#build)
+  - [Docs Build](#docs-build)
   - [Lint](#lint)
   - [Unit Testing](#unit-testing)
   - [Cypress E2E](#cypress-e2e)
@@ -180,7 +182,7 @@ Many Cypress options are available, which you can check [here](src/generators/cy
 
 ### Dev Server
 
-Works for generated Vue3 projects, and Vitepress docs.
+Development server executor for generated Vue3 projects.
 
 ```
 nx serve <app-name> [options]
@@ -196,9 +198,28 @@ nx serve <app-name> [options]
 | --port  | 3000      | [Server port](https://vitejs.dev/config/#server-port)            |
 | --https | false     | [Run in HTTPS/SSL mode](https://vitejs.dev/config/#server-https) |
 
+### Docs Dev Server
+
+Development server executor for generated Vitepress docs projects.
+
+```
+nx serve <app-name> [options]
+```
+
+| Arguments | Description                   |
+| --------- | ----------------------------- |
+| app-name  | The name of the Vitepress app |
+
+| Options | Default   | Description                                                      |
+| ------- | --------- | ---------------------------------------------------------------- |
+| --root  | docs      | Vitepress docs root, relative to the app root                    |
+| --host  | localhost | [Server host location](https://vitejs.dev/config/#server-host)   |
+| --port  | 3000      | [Server port](https://vitejs.dev/config/#server-port)            |
+| --https | false     | [Run in HTTPS/SSL mode](https://vitejs.dev/config/#server-https) |
+
 ### Build
 
-Works for generated Vue3 projects, libraries, and Vitepress docs.
+Build executor for generated Vue3 projects and libraries
 
 ```
 nx build <app-name> [options]
@@ -210,6 +231,23 @@ nx build <app-name> [options]
 
 | Options | Default   | Description                                                 |
 | ------- | --------- | ----------------------------------------------------------- |
+| --dist  | localhost | [Output directory](https://vitejs.dev/config/#build-outdir) |
+
+### Docs Build
+
+Build executor for generated Vitepress docs.
+
+```
+nx build <app-name> [options]
+```
+
+| Arguments | Description                   |
+| --------- | ----------------------------- |
+| app-name  | The name of the Vitepress app |
+
+| Options | Default   | Description                                                 |
+| ------- | --------- | ----------------------------------------------------------- |
+| --root  | docs      | Vitepress docs root, relative to the app root               |
 | --dist  | localhost | [Output directory](https://vitejs.dev/config/#build-outdir) |
 
 ### Lint
