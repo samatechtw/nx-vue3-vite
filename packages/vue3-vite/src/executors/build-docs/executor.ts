@@ -11,7 +11,7 @@ export default async function runExecutor(
   options: BuildDocsExecutorSchema,
   context: ExecutorContext
 ) {
-  const projectRoot = joinPathFragments(getProjectRoot(context), options.docs);
+  const projectRoot = joinPathFragments(getProjectRoot(context), options.root);
   const projectRelative = projectRelativePath(context);
   const workspaceRoot = offsetFromRoot(projectRelative);
 
