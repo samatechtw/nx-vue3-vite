@@ -21,9 +21,10 @@ export default async function runExecutor(
   await build(projectRoot);
 
   // Hack to work around Vitepress build not respecting outDir
-  if (!fs.existsSync(dist)) {
-    fs.mkdirSync(dist, { recursive: true });
+  if (fs.existsSync(dist)) {
+    fs.rmSync(dist, { recursive: true, force: true });
   }
+  fs.mkdirSync(dist, { recursive: true });
   fs.renameSync(defaultOutDir, dist);
 
   return {
