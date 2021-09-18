@@ -1,8 +1,5 @@
-import {
-  ExecutorContext,
-  joinPathFragments,
-  offsetFromRoot,
-} from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import fs from 'fs';
 import { build } from 'vitepress';
 import { getProjectRoot, projectRelativePath } from '../../utils';
 import { BuildDocsExecutorSchema } from './schema';
@@ -13,17 +10,22 @@ export default async function runExecutor(
 ) {
   const projectRoot = joinPathFragments(getProjectRoot(context), options.root);
   const projectRelative = projectRelativePath(context);
-  const workspaceRoot = offsetFromRoot(projectRelative);
 
   console.log('Building', context.projectName || '<?>');
 
-  const dist = options.dist ?? './dist';
-  const outDir = joinPathFragments(workspaceRoot, dist);
+  const dist = options.dist ?? joinPathFragments('dist', projectRelative);
 
-  console.log('...output to', outDir);
-  await build(projectRoot, {
-    outDir,
-  });
+  const defaultOutDir = joinPathFragments(projectRoot, '.vitepress', 'dist');
+
+  console.log('...output to', dist);
+  await build(projectRoot);
+
+  // Hack to work around Vitepress build not respecting outDir
+  if (!fs.existsSync(dist)) {
+    fs.mkdirSync(dist, { recursive: true });
+  }
+  fs.renameSync(defaultOutDir, dist);
+
   return {
     success: true,
   };
