@@ -19,6 +19,11 @@
       "type": "boolean",
       "description": "HTTS/SSL mode",
       "default": false
+    },
+    "mode": {
+      "type": "string",
+      "description": "Default environment mode",
+      "default": "development"
     }
   },
   "required": []
