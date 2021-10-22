@@ -11,10 +11,11 @@ export default async function* runExecutor(
   const workspaceRoot = getWorkspaceRoot(context);
 
   const projectRoot = getProjectRoot(context);
-  const { host, port, https } = options;
+  const { host, port, https, mode } = options;
   const protocol = https ? 'https' : 'http';
   let server = await createServer({
     root: projectRoot,
+    mode,
     server: {
       port,
       host,
