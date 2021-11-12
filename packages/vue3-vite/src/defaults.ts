@@ -22,7 +22,7 @@ export const eslintVueVersion = '^7.20.0';
 export const eslintVueTypescript = '^8.0.0';
 export const vueEslintParser = '^8.0.0';
 export const chalkVersion = '^4.1.2';
-export const vuePluginVersion = '^1.9.3';
+export const vuePluginVersion = '^1.9.4';
 // TODO -- add or remove once it's out of alpha or vite-jest is used
 // Note -- babel stuff shouldn't be needed with vite-jest
 // https://github.com/samatechtw/nx-vue3-vite/issues/14
@@ -42,8 +42,8 @@ export const unpluginVueComponentsVersion = '^0.16.0';
 export const viteImagesVersion = '^0.6.1';
 
 // Testing dependencies
-export const cypressVersion = '^8.4.0';
-export const cypressVueVersion = '^3.0.3';
+export const cypressVersion = '^9.0.0';
+export const cypressVueVersion = '^3.0.5';
 export const cypressCodeCoverageVersion = '^3.9.11';
 export const cypressViteVersion = '^2.2.0';
 export const eslintCypressVersion = '^2.12.1';
