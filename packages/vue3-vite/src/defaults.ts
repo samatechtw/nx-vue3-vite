@@ -14,7 +14,7 @@ export const fetchApiVersion = '^0.5.0';
 export const classTransformerVersion = '^0.4.0';
 
 // devDependency versions
-export const viteVersion = '^2.6.10';
+export const viteVersion = '^2.6.13';
 export const eslintVersion = '^7.32.0';
 export const eslintI18nVersion = '^0.15.0';
 export const eslintImportVersion = '^2.25.2';
