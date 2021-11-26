@@ -17,6 +17,11 @@
       "type": "string",
       "description": "Dev server target to run tests against."
     },
+    "devServerOptions": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": true
+    },
     "headless": {
       "type": "boolean",
       "description": "Whether or not to open the Cypress application to run the tests. If set to 'true', will run in headless mode",

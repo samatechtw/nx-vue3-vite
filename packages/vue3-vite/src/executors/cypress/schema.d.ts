@@ -2,6 +2,8 @@ export interface CypressExecutorOptions {
   baseUrl: string;
   cypressConfig: string;
   devServerTarget: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  devServerOptions: { [k: string]: any };
   headless: boolean;
   headlessWatch: boolean;
   headlessCI: boolean;

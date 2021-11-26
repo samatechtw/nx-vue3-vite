@@ -86,7 +86,7 @@ async function* startDevServer(
   for await (const output of await runExecutor<{
     success: boolean;
     baseUrl?: string;
-  }>(target, {}, context)) {
+  }>(target, opts.devServerOptions ?? {}, context)) {
     if (!output.success) {
       throw new Error('Could not compile application files');
     }
