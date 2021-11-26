@@ -6,7 +6,7 @@ export const recommendedExtensions = [
 ];
 
 // dependency versions
-export const vueVersion = '^3.2.20';
+export const vueVersion = '^3.2.22';
 export const vueI18nVersion = '^9.1.6';
 export const vueRouterVersion = '^4.0.12';
 export const dateFnsVersion = '^2.25.0';
@@ -14,7 +14,7 @@ export const fetchApiVersion = '^0.5.0';
 export const classTransformerVersion = '^0.4.0';
 
 // devDependency versions
-export const viteVersion = '^2.6.13';
+export const viteVersion = '^2.6.14';
 export const eslintVersion = '^7.32.0';
 export const eslintI18nVersion = '^0.15.0';
 export const eslintImportVersion = '^2.25.2';
@@ -42,10 +42,10 @@ export const unpluginVueComponentsVersion = '^0.16.0';
 export const viteImagesVersion = '^0.6.1';
 
 // Testing dependencies
-export const cypressVersion = '^9.0.0';
+export const cypressVersion = '^9.1.0';
 export const cypressVueVersion = '^3.0.5';
 export const cypressCodeCoverageVersion = '^3.9.11';
-export const cypressViteVersion = '^2.2.0';
+export const cypressViteVersion = '^2.2.1';
 export const eslintCypressVersion = '^2.12.1';
 
 export const CypressDevDependencies = {
@@ -117,4 +117,4 @@ export const LibraryDevDependencies = {
 
 export const DocsDependencies = {};
 
-export const DocsDevDependencies = { vitepress: '^0.17.1' };
+export const DocsDevDependencies = { vitepress: '^0.20.1' };
