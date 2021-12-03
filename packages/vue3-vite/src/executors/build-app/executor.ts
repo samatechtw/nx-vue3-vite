@@ -16,6 +16,13 @@ export default async function runExecutor(
   const dist = options.dist ?? './dist';
   const outDir = joinPathFragments(workspaceRoot, dist);
 
+  let minify: 'terser' | 'esbuild' | boolean;
+  if (options.minify === 'terser' || options.minify === 'esbuild') {
+    minify = options.minify;
+  } else {
+    minify = false;
+  }
+
   console.log('...output to', outDir);
 
   await build({
@@ -23,6 +30,7 @@ export default async function runExecutor(
     mode: options.mode,
     build: {
       outDir,
+      minify,
     },
   });
   return {

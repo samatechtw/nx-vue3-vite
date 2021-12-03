@@ -13,6 +13,11 @@
       "type": "string",
       "description": "Default environment mode",
       "default": "development"
+    },
+    "minify": {
+      "type": "string",
+      "description": "Minification type",
+      "default": "esbuild"
     }
   },
   "required": []
