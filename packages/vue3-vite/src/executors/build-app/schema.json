@@ -8,6 +8,11 @@
     "dist": {
       "type": "string",
       "description": "Output directory for compiled app"
+    },
+    "mode": {
+      "type": "string",
+      "description": "Default environment mode",
+      "default": "development"
     }
   },
   "required": []

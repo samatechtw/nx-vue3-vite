@@ -11,6 +11,7 @@ export default async function runExecutor(
   const workspaceRoot = getWorkspaceRoot(context);
 
   console.log('Building', context.projectName || '<?>');
+  console.log(`  mode = ${options.mode}`);
 
   const dist = options.dist ?? './dist';
   const outDir = joinPathFragments(workspaceRoot, dist);
@@ -19,6 +20,7 @@ export default async function runExecutor(
 
   await build({
     root: projectRoot,
+    mode: options.mode,
     build: {
       outDir,
     },
