@@ -2,11 +2,11 @@ import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
 import generator from './generator';
-import { Vue3ViteGeneratorSchema } from './schema';
+import { DocsGeneratorSchema } from './schema';
 
 describe('vue3-vite generator', () => {
   let appTree: Tree;
-  const options: Vue3ViteGeneratorSchema = { name: 'test' };
+  const options: DocsGeneratorSchema = { name: 'test' };
 
   beforeEach(() => {
     appTree = createTreeWithEmptyWorkspace();

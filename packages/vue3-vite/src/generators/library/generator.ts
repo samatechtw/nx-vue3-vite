@@ -12,7 +12,7 @@ import {
 import { addPackageWithInit } from '@nrwl/workspace';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
-import { Vue3ViteGeneratorSchema } from './schema';
+import { LibraryGeneratorSchema } from './schema';
 import {
   LibraryDevDependencies,
   LibraryDependencies,
@@ -21,7 +21,7 @@ import {
 } from '../../defaults';
 import { updateDependencies } from '../../utils';
 
-interface NormalizedSchema extends Vue3ViteGeneratorSchema {
+interface NormalizedSchema extends LibraryGeneratorSchema {
   libraryName: string;
   libraryRoot: string;
   libraryDirectory: string;
@@ -30,7 +30,7 @@ interface NormalizedSchema extends Vue3ViteGeneratorSchema {
 
 function normalizeOptions(
   host: Tree,
-  options: Vue3ViteGeneratorSchema
+  options: LibraryGeneratorSchema
 ): NormalizedSchema {
   const { fileName, name } = names(options.name);
   const libraryDirectory = options.directory
@@ -89,7 +89,7 @@ function updateExtensionRecommendations(host: Tree) {
   });
 }
 
-export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
+export default async function (host: Tree, options: LibraryGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
   const { libraryRoot } = normalizedOptions;
 

@@ -1,20 +1,31 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
 
+import appGenerator from '../vue3-vite/generator';
+
 import generator from './generator';
 import { ComponentGeneratorSchema } from './schema';
 
 describe('component generator', () => {
   let appTree: Tree;
-  const options: ComponentGeneratorSchema = { name: 'test' };
+  const projectName = 'test-project';
+  const options: ComponentGeneratorSchema = {
+    name: 'test',
+    project: projectName,
+    scoped: false,
+    setup: true,
+    style: 'postcss',
+    lang: 'ts',
+  };
 
-  beforeEach(() => {
+  beforeEach(async () => {
     appTree = createTreeWithEmptyWorkspace();
+    await appGenerator(appTree, { name: projectName });
   });
 
   it('should run successfully', async () => {
     await generator(appTree, options);
-    const config = readProjectConfiguration(appTree, 'test');
+    const config = readProjectConfiguration(appTree, projectName);
     expect(config).toBeDefined();
   });
 });
