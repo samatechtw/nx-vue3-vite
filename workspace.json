@@ -16,7 +16,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/packages/vue3-vite"],
           "options": {
-            "jestConfig": "packages/vue3-vite/jest.config.js",
+            "jestConfig": "packages/vue3-vite/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -69,7 +69,7 @@
           "executor": "@nrwl/nx-plugin:e2e",
           "options": {
             "target": "vue3-vite:build",
-            "jestConfig": "e2e/vue3-vite-e2e/jest.config.js"
+            "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts"
           }
         }
       }

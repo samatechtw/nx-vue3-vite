@@ -12,7 +12,7 @@ describe('vue3-vite generator', () => {
     appTree = createTreeWithEmptyWorkspace();
   });
 
-  it('should run successfully', async () => {
+  it('should generate files', async () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();

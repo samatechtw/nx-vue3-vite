@@ -1,4 +1,4 @@
-export interface Vue3ViteGeneratorSchema {
+export interface LibraryGeneratorSchema {
   name: string;
   tags?: string;
   directory?: string;

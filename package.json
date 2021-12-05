@@ -28,6 +28,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@angular-devkit/schematics": "^13.0.4",
     "@cypress/vite-dev-server": "^2.2.1",
     "@nrwl/cli": "12.10.0",
     "@nrwl/devkit": "12.10.0",
