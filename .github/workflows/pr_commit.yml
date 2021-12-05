@@ -1,0 +1,77 @@
+name: PR Commit
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  WORKSPACE_ROOT: ./
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up NodeJS (v14)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install npm modules
+        run: npm i
+      - name: Lint code
+        run: npx nx affected:lint --base=origin/main --parallel
+
+  build-apps:
+    name: Build Apps
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up NodeJS (v14)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install npm modules
+        run: npm i
+      - name: Build apps
+        run: npx nx affected:build --base=origin/main --parallel
+
+  check-format:
+    name: Check Format
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up NodeJS (v14)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install npm modules
+        run: npm i
+      - name: Check code format
+        run: npx nx format:check --base=origin/main
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up NodeJS (v14)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install npm modules
+        run: npm i
+      - name: Run unit tests
+        run: npx nx affected:test --base=origin/main --parallel
