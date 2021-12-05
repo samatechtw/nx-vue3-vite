@@ -1,0 +1,16 @@
+{
+  "root": "e2e/vue3-vite-e2e",
+  "projectType": "application",
+  "sourceRoot": "e2e/vue3-vite-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "vue3-vite:build",
+        "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["vue3-vite"]
+}
