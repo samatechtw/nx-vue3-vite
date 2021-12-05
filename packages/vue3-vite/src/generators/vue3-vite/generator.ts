@@ -8,9 +8,9 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
+  detectPackageManager,
+  installPackagesTask,
 } from '@nrwl/devkit';
-import { addPackageWithInit } from '@nrwl/workspace';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
 import {
@@ -19,7 +19,8 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { updateDependencies } from '../../utils';
+import { addJest, getWorkspaceRoot, updateDependencies } from '../../utils';
+import { jestInitGenerator } from '@nrwl/jest';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -95,9 +96,9 @@ function updateExtensionRecommendations(host: Tree) {
 
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
-  const { projectRoot } = normalizedOptions;
+  const { projectRoot, projectName } = normalizedOptions;
 
-  addProjectConfiguration(host, normalizedOptions.projectName, {
+  addProjectConfiguration(host, projectName, {
     root: projectRoot,
     projectType: 'application',
     sourceRoot: joinPathFragments(projectRoot, 'src'),
@@ -110,14 +111,6 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
       },
       serve: {
         executor: 'nx-vue3-vite:dev-server',
-      },
-      test: {
-        executor: '@nrwl/jest:jest',
-        outputs: [joinPathFragments('coverage', projectRoot)],
-        options: {
-          jestConfig: joinPathFragments(projectRoot, 'jest.config.ts'),
-          passWithNoTests: true,
-        },
       },
       e2e: {
         executor: 'nx-vue3-vite:cypress',
@@ -135,18 +128,26 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     },
     tags: normalizedOptions.parsedTags,
   });
-  const depsTask = updateDependencies(
+
+  addFiles(host, normalizedOptions);
+  // const jestInit = jestInitGenerator(host, {});
+
+  updateExtensionRecommendations(host);
+
+  await formatFiles(host);
+
+  await addJest(host, projectName);
+
+  const installTask = updateDependencies(
     host,
     ProjectDependencies,
     ProjectDevDependencies
   );
-
-  addFiles(host, normalizedOptions);
-
-  updateExtensionRecommendations(host);
-
-  addPackageWithInit('@nrwl/jest');
-  await formatFiles(host);
-
-  return runTasksInSerial(depsTask);
+  console.log(
+    'CHANGES',
+    host
+      .listChanges()
+      .find((f) => f.path === joinPathFragments('', 'package.json'))
+  );
+  await installTask();
 }

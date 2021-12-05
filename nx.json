@@ -26,17 +26,11 @@
       }
     ]
   },
-  "projects": {
-    "vue3-vite": {
-      "tags": []
-    },
-    "vue3-vite-e2e": {
-      "tags": [],
-      "implicitDependencies": ["vue3-vite"]
-    }
-  },
   "workspaceLayout": {
     "appsDir": "e2e",
     "libsDir": "packages"
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
   }
 }

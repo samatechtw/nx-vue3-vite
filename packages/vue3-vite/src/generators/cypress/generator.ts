@@ -7,13 +7,12 @@ import {
   offsetFromRoot,
   Tree,
   joinPathFragments,
+  installPackagesTask,
 } from '@nrwl/devkit';
-import { addPackageWithInit } from '@nrwl/workspace';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
 import { CypressGeneratorSchema } from './schema';
 import { CypressDevDependencies } from '../../defaults';
-import { updateDependencies } from '../../utils';
+import { addJest, updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends CypressGeneratorSchema {
   targetProject?: string;
@@ -88,7 +87,7 @@ export default async function (host: Tree, options: CypressGeneratorSchema) {
     };
   }
 
-  addProjectConfiguration(host, normalizedOptions.projectName, {
+  addProjectConfiguration(host, projectName, {
     root: projectRoot,
     projectType: 'application',
     sourceRoot: joinPathFragments(projectRoot, 'src'),
@@ -103,12 +102,13 @@ export default async function (host: Tree, options: CypressGeneratorSchema) {
     },
     tags: normalizedOptions.parsedTags,
   });
-  const depsTask = updateDependencies(host, {}, CypressDevDependencies);
 
   addFiles(host, normalizedOptions);
+  updateDependencies(host, {}, CypressDevDependencies);
 
-  addPackageWithInit('@nrwl/jest');
   await formatFiles(host);
 
-  return runTasksInSerial(depsTask);
+  const jestTask = await addJest(host, projectName);
+  installPackagesTask(host);
+  return jestTask;
 }

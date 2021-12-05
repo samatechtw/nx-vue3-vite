@@ -8,9 +8,8 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
+  installPackagesTask,
 } from '@nrwl/devkit';
-import { addPackageWithInit } from '@nrwl/workspace';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import * as path from 'path';
 import { DocsGeneratorSchema } from './schema';
 import {
@@ -19,7 +18,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { updateDependencies } from '../../utils';
+import { addJest, updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends DocsGeneratorSchema {
   projectName: string;
@@ -96,9 +95,9 @@ function updateExtensionRecommendations(host: Tree) {
 
 export default async function (host: Tree, options: DocsGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
-  const { projectRoot } = normalizedOptions;
+  const { projectRoot, projectName } = normalizedOptions;
 
-  addProjectConfiguration(host, normalizedOptions.projectName, {
+  addProjectConfiguration(host, projectName, {
     root: projectRoot,
     projectType: 'application',
     sourceRoot: joinPathFragments(projectRoot, 'src'),
@@ -121,18 +120,16 @@ export default async function (host: Tree, options: DocsGeneratorSchema) {
     },
     tags: normalizedOptions.parsedTags,
   });
-  const depsTask = updateDependencies(
-    host,
-    DocsDependencies,
-    DocsDevDependencies
-  );
 
   addFiles(host, normalizedOptions);
 
+  updateDependencies(host, DocsDependencies, DocsDevDependencies);
+
   updateExtensionRecommendations(host);
 
-  addPackageWithInit('@nrwl/jest');
   await formatFiles(host);
 
-  return runTasksInSerial(depsTask);
+  const jestTask = await addJest(host, projectName);
+  installPackagesTask(host);
+  return jestTask;
 }

@@ -1,0 +1,60 @@
+{
+  "root": "packages/vue3-vite",
+  "sourceRoot": "packages/vue3-vite/src",
+  "projectType": "application",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/vue3-vite/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/vue3-vite"],
+      "options": {
+        "jestConfig": "packages/vue3-vite/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/vue3-vite",
+        "tsConfig": "packages/vue3-vite/tsconfig.lib.json",
+        "packageJson": "packages/vue3-vite/package.json",
+        "main": "packages/vue3-vite/src/index.ts",
+        "assets": [
+          "packages/vue3-vite/*.md",
+          {
+            "input": "./packages/vue3-vite/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/vue3-vite/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./packages/vue3-vite",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/vue3-vite",
+            "glob": "executors.json",
+            "output": "."
+          },
+          {
+            "input": "./packages/vue3-vite",
+            "glob": "patch-nx-dep-graph.js",
+            "output": "."
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

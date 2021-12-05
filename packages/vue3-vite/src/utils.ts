@@ -5,6 +5,7 @@ import {
   removeDependenciesFromPackageJson,
   Tree,
 } from '@nrwl/devkit';
+import { jestProjectGenerator } from '@nrwl/jest';
 
 export function getProjectRoot(context: ExecutorContext): string {
   if (context.projectName) {
@@ -31,4 +32,16 @@ export function updateDependencies(
   const devDepKeys = Object.keys(devDeps);
   removeDependenciesFromPackageJson(host, depKeys, devDepKeys);
   return addDependenciesToPackageJson(host, deps, devDeps);
+}
+
+export async function addJest(host: Tree, projectName: string) {
+  const jestTask = await jestProjectGenerator(host, {
+    project: projectName,
+    supportTsx: false,
+    skipSerializers: true,
+    setupFile: 'none',
+    babelJest: true,
+  });
+
+  return jestTask;
 }
