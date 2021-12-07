@@ -8,13 +8,9 @@
 </a>
 </p>
 
+> :warning: Plugin version 0.13.0 requires Nx 13. The last version that supports Nx 12 is v0.12.4. Earlier Nx versions are not supported.
+
 <br>
-
-This project was generated using [Nx](https://nx.dev):
-
-```
-npx create-nx-plugin <org> --pluginName <plugin>
-```
 
 ## Plugin Usage
 
@@ -23,3 +19,9 @@ Instructions for using the plugin in an Nx workspace are [here](./packages/vue3-
 ## Plugin Development
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+This project was generated using [Nx](https://nx.dev):
+
+```
+npx create-nx-plugin <org> --pluginName <plugin>
+```

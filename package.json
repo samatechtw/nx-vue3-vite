@@ -28,6 +28,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@angular-devkit/schematics": "^13.0.4",
     "@cypress/vite-dev-server": "^2.2.1",
     "@nrwl/cli": "13.2.3",
     "@nrwl/devkit": "13.2.3",
@@ -37,6 +38,7 @@
     "@nrwl/node": "13.2.3",
     "@nrwl/nx-plugin": "^13.2.3",
     "@nrwl/tao": "13.2.3",
+    "@nrwl/workspace": "^13.2.3",
     "@types/jest": "27.0.2",
     "@types/node": "16.11.3",
     "@typescript-eslint/eslint-plugin": "~4.29.1",
