@@ -37,7 +37,7 @@ function normalizeOptions(
     ? names(options.directory).fileName
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  console.log(projectDirectory, projectName);
+
   const projectTitle = options.title || projectName;
   const projectRoot = joinPathFragments(
     getWorkspaceLayout(host).appsDir,

@@ -13,9 +13,16 @@ describe('vue3-vite generator', () => {
   });
 
   it('should generate files', async () => {
-    console.log('A', appTree.root);
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();
+
+    expect(Object.keys(config.targets)).toEqual([
+      'build',
+      'serve',
+      'e2e',
+      'lint',
+      'test',
+    ]);
   });
 });

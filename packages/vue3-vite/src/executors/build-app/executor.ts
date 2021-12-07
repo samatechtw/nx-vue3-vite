@@ -33,6 +33,7 @@ export default async function runExecutor(
       minify,
     },
   });
+  console.log('Build complete');
   return {
     success: true,
   };

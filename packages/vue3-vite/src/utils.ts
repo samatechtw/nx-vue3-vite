@@ -4,6 +4,7 @@ import {
   addDependenciesToPackageJson,
   removeDependenciesFromPackageJson,
   Tree,
+  GeneratorCallback,
 } from '@nrwl/devkit';
 import { jestProjectGenerator } from '@nrwl/jest';
 
@@ -44,4 +45,15 @@ export async function addJest(host: Tree, projectName: string) {
   });
 
   return jestTask;
+}
+
+// Borrowed from https://github.com/nrwl/nx/blob/a3c08a9153360371ee09771389299201b3407e00/packages/workspace/src/utilities/run-tasks-in-serial.ts
+export function runTasksInSerial(
+  ...tasks: GeneratorCallback[]
+): GeneratorCallback {
+  return async () => {
+    for (const task of tasks) {
+      await task();
+    }
+  };
 }

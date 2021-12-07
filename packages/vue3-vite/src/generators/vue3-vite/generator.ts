@@ -8,8 +8,6 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
-  detectPackageManager,
-  installPackagesTask,
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
@@ -19,7 +17,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { addJest, getWorkspaceRoot, updateDependencies } from '../../utils';
+import { addJest, updateDependencies, runTasksInSerial } from '../../utils';
 import { jestInitGenerator } from '@nrwl/jest';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
@@ -128,26 +126,19 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     },
     tags: normalizedOptions.parsedTags,
   });
-
-  addFiles(host, normalizedOptions);
-  // const jestInit = jestInitGenerator(host, {});
-
-  updateExtensionRecommendations(host);
-
-  await formatFiles(host);
-
-  await addJest(host, projectName);
-
-  const installTask = updateDependencies(
+  const depsTask = updateDependencies(
     host,
     ProjectDependencies,
     ProjectDevDependencies
   );
-  console.log(
-    'CHANGES',
-    host
-      .listChanges()
-      .find((f) => f.path === joinPathFragments('', 'package.json'))
-  );
-  await installTask();
+
+  addFiles(host, normalizedOptions);
+
+  updateExtensionRecommendations(host);
+
+  const jestInit = jestInitGenerator(host, {});
+  const jestTask = await addJest(host, projectName);
+  await formatFiles(host);
+
+  return runTasksInSerial(jestInit, jestTask, depsTask);
 }
