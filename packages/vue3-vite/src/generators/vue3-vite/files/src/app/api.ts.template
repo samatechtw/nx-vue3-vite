@@ -1,7 +1,11 @@
 import { FetchApi, FetchApiOptions } from '@sampullman/fetch-api';
 import { API_URL } from '@app/utils/config';
 
-class NftApi extends FetchApi {
+class ApiResponse extends Response {
+  data!: IJsonObject
+}
+
+class NftApi extends FetchApi<ApiResponse> {
 
   constructor(options: FetchApiOptions) {
     super(options);
@@ -10,7 +14,7 @@ class NftApi extends FetchApi {
 
 export const api = new NftApi({
   baseUrl: API_URL,
-  responseInterceptors: [async (res: any) => {
+  async (res: Response): Promise<ApiResponse> => {
     if(!res) {
       throw new Error('NETWORK_FAILURE');
     }
@@ -30,10 +34,11 @@ export const api = new NftApi({
        data = {};
     }
 
-    if(status === 400) {
+    if(status === 400 || status === 404) {
       throw data;
     }
-    res.data = data;
-    return res;
+    const apiRes = res as ApiResponse
+    apiRes.data = data
+    return apiRes
   }],
 });

@@ -8,7 +8,7 @@
 </a>
 </p>
 
-> :warning: Plugin version 0.13.0 requires Nx 13. The last version that supports Nx 12 is v0.12.4. Earlier Nx versions are not supported.
+> :warning: Plugin version ^0.13.0 requires Nx 13. The last version that supports Nx 12 is v0.12.4. Earlier Nx versions are not supported.
 
 <br>
 
