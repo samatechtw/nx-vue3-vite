@@ -16,5 +16,12 @@ describe('vue3-vite library generator', () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();
+
+    expect(Object.keys(config.targets)).toEqual([
+      'build',
+      'e2e',
+      'lint',
+      'test',
+    ]);
   });
 });
