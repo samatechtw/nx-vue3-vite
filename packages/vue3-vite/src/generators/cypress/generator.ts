@@ -12,7 +12,7 @@ import {
 import * as path from 'path';
 import { CypressGeneratorSchema } from './schema';
 import { CypressDevDependencies } from '../../defaults';
-import { addJest, updateDependencies } from '../../utils';
+import { addJest, runTasksInSerial, updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends CypressGeneratorSchema {
   targetProject?: string;
@@ -104,11 +104,9 @@ export default async function (host: Tree, options: CypressGeneratorSchema) {
   });
 
   addFiles(host, normalizedOptions);
-  updateDependencies(host, {}, CypressDevDependencies);
+  const depsTask = updateDependencies(host, {}, CypressDevDependencies);
 
   await formatFiles(host);
 
-  const jestTask = await addJest(host, projectName);
-  installPackagesTask(host);
-  return jestTask;
+  return runTasksInSerial(depsTask);
 }

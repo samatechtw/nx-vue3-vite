@@ -1,4 +1,4 @@
-import { FetchApi, FetchApiOptions } from '@sampullman/vue3-fetch-api';
+import { FetchApi, FetchApiOptions } from '@sampullman/fetch-api';
 import { API_URL } from '@app/utils/config';
 
 class NftApi extends FetchApi {

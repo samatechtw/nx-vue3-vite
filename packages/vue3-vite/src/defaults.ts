@@ -9,12 +9,10 @@ export const recommendedExtensions = [
 export const vueVersion = '^3.2.22';
 export const vueI18nVersion = '^9.1.6';
 export const vueRouterVersion = '^4.0.12';
-export const dateFnsVersion = '^2.25.0';
-export const fetchApiVersion = '^0.5.0';
 export const classTransformerVersion = '^0.4.0';
 
 // devDependency versions
-export const viteVersion = '^2.6.14';
+export const viteVersion = '^2.7.1';
 export const eslintVersion = '^7.32.0';
 export const eslintI18nVersion = '^0.15.0';
 export const eslintImportVersion = '^2.25.2';
@@ -22,7 +20,7 @@ export const eslintVueVersion = '^7.20.0';
 export const eslintVueTypescript = '^8.0.0';
 export const vueEslintParser = '^8.0.0';
 export const chalkVersion = '^4.1.2';
-export const vuePluginVersion = '^1.9.4';
+export const vuePluginVersion = '^1.10.2';
 // TODO -- add or remove once it's out of alpha or vite-jest is used
 // Note -- babel stuff shouldn't be needed with vite-jest
 // https://github.com/samatechtw/nx-vue3-vite/issues/14
@@ -38,22 +36,15 @@ export const stylelintVersion = '^14.0.0';
 export const stylelintConfigVersion = '^23.0.0';
 export const tslibVersion = '^2.3.1';
 export const tsConfigVersion = '^7.0.0';
-export const unpluginVueComponentsVersion = '^0.16.0';
+export const unpluginVueComponentsVersion = '^0.17.6';
 export const viteImagesVersion = '^0.6.1';
 
-// Testing dependencies
-export const cypressVersion = '^9.1.0';
-export const cypressVueVersion = '^3.0.5';
-export const cypressCodeCoverageVersion = '^3.9.11';
-export const cypressViteVersion = '^2.2.1';
-export const eslintCypressVersion = '^2.12.1';
-
 export const CypressDevDependencies = {
-  cypress: cypressVersion,
-  '@cypress/vue': cypressVueVersion,
-  '@cypress/vite-dev-server': cypressViteVersion,
-  '@cypress/code-coverage': cypressCodeCoverageVersion,
-  'eslint-plugin-cypress': eslintCypressVersion,
+  cypress: '^8.7.0',
+  '@cypress/vue': '^3.0.5',
+  '@cypress/vite-dev-server': '^2.2.1',
+  '@cypress/code-coverage': '^3.9.12',
+  'eslint-plugin-cypress': '^2.12.1',
   '@nrwl/cypress': '*',
 };
 
@@ -61,8 +52,8 @@ export const ProjectDependencies = {
   vue: vueVersion,
   'vue-i18n': vueI18nVersion,
   'vue-router': vueRouterVersion,
-  'date-fns': dateFnsVersion,
-  '@sampullman/vue3-fetch-api': fetchApiVersion,
+  'date-fns': '^2.27.0',
+  '@sampullman/fetch-api': '^0.6.0',
 };
 
 export const ProjectDevDependencies = {
@@ -117,4 +108,4 @@ export const LibraryDevDependencies = {
 
 export const DocsDependencies = {};
 
-export const DocsDevDependencies = { vitepress: '^0.20.1' };
+export const DocsDevDependencies = { vitepress: '^0.20.4' };

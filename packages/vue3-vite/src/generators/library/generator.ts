@@ -1,3 +1,4 @@
+import * as path from 'path';
 import {
   addProjectConfiguration,
   formatFiles,
@@ -8,9 +9,8 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
-  installPackagesTask,
 } from '@nrwl/devkit';
-import * as path from 'path';
+import { jestInitGenerator } from '@nrwl/jest';
 import { LibraryGeneratorSchema } from './schema';
 import {
   LibraryDevDependencies,
@@ -18,7 +18,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { addJest, updateDependencies } from '../../utils';
+import { addJest, runTasksInSerial, updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends LibraryGeneratorSchema {
   libraryName: string;
@@ -103,14 +103,6 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
           dist: joinPathFragments('dist', libraryRoot),
         },
       },
-      test: {
-        executor: '@nrwl/jest:jest',
-        outputs: [joinPathFragments('coverage', libraryRoot)],
-        options: {
-          jestConfig: joinPathFragments(libraryRoot, 'jest.config.ts'),
-          passWithNoTests: true,
-        },
-      },
       e2e: {
         executor: 'nx-vue3-vite:cypress',
         options: {
@@ -130,13 +122,17 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
 
   addFiles(host, normalizedOptions);
 
-  updateDependencies(host, LibraryDependencies, LibraryDevDependencies);
+  const depsTask = updateDependencies(
+    host,
+    LibraryDependencies,
+    LibraryDevDependencies
+  );
 
   updateExtensionRecommendations(host);
 
   await formatFiles(host);
 
+  const jestInit = jestInitGenerator(host, {});
   const jestTask = await addJest(host, libraryName);
-  installPackagesTask(host);
-  return jestTask;
+  return runTasksInSerial(jestInit, jestTask, depsTask);
 }

@@ -8,7 +8,6 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
-  installPackagesTask,
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { DocsGeneratorSchema } from './schema';
@@ -18,7 +17,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { addJest, updateDependencies } from '../../utils';
+import { runTasksInSerial, updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends DocsGeneratorSchema {
   projectName: string;
@@ -123,13 +122,15 @@ export default async function (host: Tree, options: DocsGeneratorSchema) {
 
   addFiles(host, normalizedOptions);
 
-  updateDependencies(host, DocsDependencies, DocsDevDependencies);
+  const depsTask = updateDependencies(
+    host,
+    DocsDependencies,
+    DocsDevDependencies
+  );
 
   updateExtensionRecommendations(host);
 
   await formatFiles(host);
 
-  const jestTask = await addJest(host, projectName);
-  installPackagesTask(host);
-  return jestTask;
+  return runTasksInSerial(depsTask);
 }
