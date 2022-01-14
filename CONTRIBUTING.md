@@ -96,3 +96,11 @@ Run e2e tests for all plugins:
 ```
 pnx run-many --target e2e --all
 ```
+
+## Release
+
+Currently, a custom release script is used to update the version and publish to NPM. This must be executed on the main branch, and `<version>` must not equal the current version on NPM.
+
+```bash
+node tools/scripts/release.js <version>
+```
