@@ -292,12 +292,6 @@ Patch details: https://github.com/ZachJW34/nx-plus/tree/master/libs/vue#nx-depen
 
 Related NX issue: https://github.com/nrwl/nx/issues/2960
 
-### vue3-jest
-
-Configuring the transformer in `vue3-jest` is difficult, and the library/docs are not quite production ready. The code itself works well when pulled in-tree, so it should be possible to resolve this soon.
-
-The transformer generated in `<app-name>/deps/vue3-jest/` comes directly from [this package](https://github.com/vuejs/vue-jest/tree/47244cddf4f47dd7912f1feb6e128f07cb2f9379/packages/vue3-jest/lib).
-
 ### vite-jest
 
 Currently, unit tests will throw warnings when mounting Vue components that rely on code transforms from Vite plugins. This is because Jest does not know about Vite, and relies directly on SFC compilation from `vue3-jest`. The [vite-jest] project will eventually solve this problem, or we may implement our own transformer. The main issue now is Vite requires async for dependency resolution and transforming code, but Jest support is rudimentary/alpha.
