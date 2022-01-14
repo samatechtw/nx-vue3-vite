@@ -15,7 +15,7 @@ const vue3ViteGeneratorsFile = path.resolve(
   rootDir,
   'packages',
   'vue3-vite',
-  'package.json'
+  'generators.json'
 );
 const pkg = require(pkgFile);
 const vue3VitePkg = require(vue3VitePkgFile);
