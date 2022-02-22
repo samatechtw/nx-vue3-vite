@@ -1,5 +1,5 @@
 import readline from 'readline';
-import chalk from 'chalk';
+import pc from 'picocolors';
 import { LogErrorOptions, Logger, LogLevel, LogType } from 'vite';
 
 export interface DevServerLogger extends Logger {
@@ -69,11 +69,11 @@ export function createLogger(level: LogLevel = 'info'): DevServerLogger {
         if (options.timestamp) {
           const tag =
             type === 'info'
-              ? chalk.cyan.bold(prefix)
+              ? pc.cyan(pc.bold(prefix))
               : type === 'warn'
-              ? chalk.yellow.bold(prefix)
-              : chalk.red.bold(prefix);
-          return `${chalk.dim(new Date().toLocaleTimeString())} ${tag} ${msg}`;
+              ? pc.yellow(pc.bold(prefix))
+              : pc.red(pc.bold(prefix));
+          return `${pc.dim(new Date().toLocaleTimeString())} ${tag} ${msg}`;
         } else {
           return msg;
         }
@@ -84,7 +84,7 @@ export function createLogger(level: LogLevel = 'info'): DevServerLogger {
       if (type === lastType && msg === lastMsg) {
         sameCount++;
         clear();
-        console[method](msg, chalk.yellow(`(x${sameCount + 1})`));
+        console[method](msg, pc.yellow(`(x${sameCount + 1})`));
       } else {
         sameCount = 0;
         lastMsg = msg;
