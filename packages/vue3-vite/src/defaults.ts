@@ -11,9 +11,9 @@ export const vueI18nVersion = '^9.1.6';
 export const vueRouterVersion = '^4.0.12';
 
 // devDependency versions
-export const viteVersion = '^2.8.4';
+export const viteVersion = '^2.9.1';
 export const eslintVersion = '^8.8.0';
-export const vuePluginVersion = '^2.1.0';
+export const vuePluginVersion = '^2.2.2';
 // TODO -- add or remove once it's out of alpha or vite-jest is used
 // Note -- babel stuff shouldn't be needed with vite-jest
 // https://github.com/samatechtw/nx-vue3-vite/issues/14
@@ -27,10 +27,9 @@ export const stylelintConfigVersion = '^25.0.0';
 export const tslibVersion = '^2.3.1';
 export const tsConfigVersion = '^7.0.0';
 export const unpluginVueComponentsVersion = '^0.17.19';
-export const viteImagesVersion = '^0.6.1';
 
 export const CypressDevDependencies = {
-  cypress: '^9.5.0',
+  cypress: '^9.5.3',
   '@cypress/vue': '^3.1.1',
   '@cypress/vite-dev-server': '^2.2.2',
   '@cypress/code-coverage': '^3.9.12',
@@ -49,7 +48,7 @@ export const ProjectDependencies = {
 export const ProjectDevDependencies = {
   vite: viteVersion,
   eslint: eslintVersion,
-  picolors: '1.0.0',
+  picocolors: '1.0.0',
   'class-transformer': '^0.5.1',
   '@intlify/eslint-plugin-vue-i18n': '^1.2.0',
   'eslint-plugin-import': '^2.25.4',
@@ -72,7 +71,6 @@ export const ProjectDevDependencies = {
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
   'unplugin-vue-components': unpluginVueComponentsVersion,
-  'vite-plugin-vue-images': viteImagesVersion,
   ...CypressDevDependencies,
 };
 
@@ -94,7 +92,6 @@ export const LibraryDevDependencies = {
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
   'unplugin-vue-components': unpluginVueComponentsVersion,
-  'vite-plugin-vue-images': viteImagesVersion,
   ...CypressDevDependencies,
 };
 

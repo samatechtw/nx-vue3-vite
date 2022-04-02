@@ -6,7 +6,7 @@
   <div class="home-name">
     {{ $t('name') }}
   </div>
-  <Logo />
+  <AppLogo />
   <div v-html="$t('generated')" />
   <transition name="hide">
     <Cookies v-if="!cookiesAccepted" />

@@ -17,7 +17,12 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { addJest, updateDependencies, runTasksInSerial } from '../../utils';
+import {
+  addJest,
+  updateDependencies,
+  runTasksInSerial,
+  updateScripts,
+} from '../../utils';
 import { jestInitGenerator } from '@nrwl/jest';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
@@ -131,6 +136,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     ProjectDependencies,
     ProjectDevDependencies
   );
+  updateScripts(host, { nx: 'nx' });
 
   addFiles(host, normalizedOptions);
 

@@ -85,16 +85,8 @@ pnx run-many --target test --all
 
 ### E2E Tests
 
-Run e2e tests for the `vue3-vite` plugin:
-
 ```
-pnx e2e vue3-vite
-```
-
-Run e2e tests for all plugins:
-
-```
-pnx run-many --target e2e --all
+pnx e2e vue3-vite-e2e
 ```
 
 ## Release

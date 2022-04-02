@@ -10,7 +10,7 @@
 
 ## Table of contents
 
-- [Philosophy](#philosophy)
+- [Overview](#overview)
 - [Plugin Usage](#plugin-usage)
   - [Install](#install)
   - [Generate App](#generate-app)
@@ -41,7 +41,7 @@
 - Component generation for projects/libraries
 - [Vitepress](https://github.com/vuejs/vitepress) docs project generation
 
-## Philosophy
+## Overview
 
 The intent of this plugin is to help generate a Vue3 related projects and components for Nx. The recommended configuration and folder structures are used where possible in order to integrate smoothly. Some path aliases are provided for convenience:
 
@@ -49,9 +49,13 @@ The intent of this plugin is to help generate a Vue3 related projects and compon
 - `@assets` => `<root>/src/assets`
 - `@public` => `<root>/src/public`
 
+> :warning: These project-local path aliases may be removed once this issue is resolved: https://github.com/samatechtw/nx-vue3-vite/issues/35
+
 One compromise made is keeping `index.html` in the root folder. Vite strongly suggests this, since it treats `index.html` as the entry point and requires some configuration to change it.
 
 ## Plugin Usage
+
+The following steps assume you are working within an existing Nx workspace. To create one, run `npx create-nx-workspace@latest` ([docs](https://nx.dev/getting-started/nx-setup))
 
 ### Install
 
