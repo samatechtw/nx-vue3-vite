@@ -5,8 +5,20 @@ import {
   removeDependenciesFromPackageJson,
   Tree,
   GeneratorCallback,
+  updateJson,
 } from '@nrwl/devkit';
 import { jestProjectGenerator } from '@nrwl/jest';
+
+function sortObjectByKeys(obj: unknown): unknown {
+  return Object.keys(obj)
+    .sort()
+    .reduce((result, key) => {
+      return {
+        ...result,
+        [key]: obj[key],
+      };
+    }, {});
+}
 
 export function getProjectRoot(context: ExecutorContext): string {
   if (context.projectName) {
@@ -33,6 +45,18 @@ export function updateDependencies(
   const devDepKeys = Object.keys(devDeps);
   removeDependenciesFromPackageJson(host, depKeys, devDepKeys);
   return addDependenciesToPackageJson(host, deps, devDeps);
+}
+
+export function updateScripts(host: Tree, scripts: Record<string, string>) {
+  updateJson(host, 'package.json', (json) => {
+    json.scripts = sortObjectByKeys({
+      ...json.scripts,
+      ...scripts,
+    });
+    console.log('SCRIPTS UPDATED', json.scripts);
+
+    return json;
+  });
 }
 
 export async function addJest(host: Tree, projectName: string) {
