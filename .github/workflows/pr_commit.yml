@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code into workspace directory
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v14)
-        uses: actions/setup-node@v2
+      - name: Set up NodeJS (v16)
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
       - name: Install npm modules
         run: npm i
       - name: Lint code
@@ -30,13 +30,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code into workspace directory
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v14)
-        uses: actions/setup-node@v2
+      - name: Set up NodeJS (v16)
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
       - name: Install npm modules
         run: npm i
       - name: Build apps
@@ -47,13 +47,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code into workspace directory
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v14)
-        uses: actions/setup-node@v2
+      - name: Set up NodeJS (v16)
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
       - name: Install npm modules
         run: npm i
       - name: Check code format
@@ -64,13 +64,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout code into workspace directory
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v14)
-        uses: actions/setup-node@v2
+      - name: Set up NodeJS (v16)
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
       - name: Install npm modules
         run: npm i
       - name: Run unit tests
