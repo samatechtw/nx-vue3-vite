@@ -8,7 +8,7 @@ const commitRE =
 
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
   console.error(
-    `  ${pc.bgRed.white(' ERROR ')} ${pc.red(
+    `  ${pc.bgRed(pc.white(' ERROR '))} ${pc.red(
       `invalid commit message format.`
     )}\n\n` +
       pc.red(
