@@ -17,7 +17,7 @@ const restartServer = async (
 ): Promise<PreviewExecutorResult> => {
   const workspaceRoot = getWorkspaceRoot(context);
   const projectRoot = getProjectRoot(context);
-  const { host, port, https, mode, buildOutDir } = options;
+  const { host, port, https, mode, dist } = options;
   const protocol = https ? 'https' : 'http';
 
   const server = await preview({
@@ -26,7 +26,7 @@ const restartServer = async (
       host,
     },
     build: {
-      outDir: buildOutDir,
+      outDir: dist,
       emptyOutDir: true,
     },
     root: projectRoot,
@@ -75,11 +75,11 @@ export default async function* runExecutor(
   const urlPort = options.port ? `:${options.port}` : '';
   const url = `${urlHttps}://${options.host}${urlPort}`;
 
-  if (!options.buildOutDir) {
+  if (!options.dist) {
     throw new Error('options.buildOutDir is required');
   }
 
-  console.log(`Previewing build output: ${options.buildOutDir} at ${url}`);
+  console.log(`Previewing build output directory: ${options.dist} at ${url}`);
   console.log(`  mode = ${options.mode}`);
 
   const customLogger = createLogger();

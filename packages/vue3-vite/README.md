@@ -24,6 +24,7 @@
 - [Vue3 Executors](#vue3-executors)
   - [Dev Server](#dev-server)
   - [Docs Dev Server](#docs-dev-server)
+  - [Preview Server](#preview-server)
   - [Build](#build)
   - [Docs Build](#docs-build)
   - [Lint](#lint)
@@ -220,6 +221,25 @@ nx serve <app-name> [options]
 | --host  | localhost | [Server host location](https://vitejs.dev/config/#server-host)   |
 | --port  | 3000      | [Server port](https://vitejs.dev/config/#server-port)            |
 | --https | false     | [Run in HTTPS/SSL mode](https://vitejs.dev/config/#server-https) |
+
+### Dev Server
+
+Development server executor for generated Vue3 projects.
+
+```
+nx preview <app-name> [options]
+```
+
+| Arguments | Description          |
+| --------- | -------------------- |
+| app-name  | The name of your app |
+
+| Options | Default   | Description                                                                      |
+| ------- | --------- | -------------------------------------------------------------------------------- |
+| --dist  |           | [The build output directory to preview](https://vitejs.dev/config/#build-outdir) |
+| --host  | localhost | [Preview Server host location](https://vitejs.dev/config/#preview-host)          |
+| --port  | 3000      | [Preview Server port](https://vitejs.dev/config/#preview-port)                   |
+| --https | false     | [Run in HTTPS/SSL mode](https://vitejs.dev/config/#preview-https)                |
 
 ### Build
 

@@ -5,9 +5,9 @@
   "description": "Preview the app build output for development",
   "type": "object",
   "properties": {
-    "buildOutDir": {
+    "dist": {
       "type": "string",
-      "description": "The output directory to preview"
+      "description": "The build output directory to preview"
     },
     "host": {
       "type": "string",

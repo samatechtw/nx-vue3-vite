@@ -1,5 +1,5 @@
 export interface PreviewServerExecutorSchema {
-  buildOutDir: string;
+  dist: string;
   host: string;
   port: number;
   https: boolean;
