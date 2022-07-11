@@ -76,7 +76,7 @@ export default async function* runExecutor(
   const url = `${urlHttps}://${options.host}${urlPort}`;
 
   if (!options.dist) {
-    throw new Error('options.buildOutDir is required');
+    throw new Error('options.dist is required');
   }
 
   console.log(`Previewing build output directory: ${options.dist} at ${url}`);
