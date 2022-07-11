@@ -222,9 +222,9 @@ nx serve <app-name> [options]
 | --port  | 3000      | [Server port](https://vitejs.dev/config/#server-port)            |
 | --https | false     | [Run in HTTPS/SSL mode](https://vitejs.dev/config/#server-https) |
 
-### Dev Server
+### Preview Server
 
-Development server executor for generated Vue3 projects.
+Preview server executor for generated Vue3 projects.
 
 ```
 nx preview <app-name> [options]
