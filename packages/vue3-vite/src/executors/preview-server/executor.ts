@@ -1,38 +1,44 @@
 import { ExecutorContext } from '@nrwl/devkit';
-import { createServer, ViteDevServer } from 'vite';
-import { DevServerExecutorSchema } from './schema';
+import { PreviewServer, preview } from 'vite';
 import { getProjectRoot, getWorkspaceRoot } from '../../utils';
+import { PreviewServerExecutorSchema } from './schema';
 import { DevServerLogger, createLogger } from '../../customLogger';
 
-interface DevExecutorResult {
-  server: ViteDevServer;
+interface PreviewExecutorResult {
+  server: PreviewServer;
   success: boolean;
   baseUrl?: string;
 }
 
 const restartServer = async (
-  options: DevServerExecutorSchema,
+  options: PreviewServerExecutorSchema,
   context: ExecutorContext,
   customLogger: DevServerLogger
-): Promise<DevExecutorResult> => {
+): Promise<PreviewExecutorResult> => {
   const workspaceRoot = getWorkspaceRoot(context);
   const projectRoot = getProjectRoot(context);
-  const { host, port, https, mode } = options;
+  const { host, port, https, mode, dist } = options;
   const protocol = https ? 'https' : 'http';
 
-  let server = await createServer({
+  const server = await preview({
+    preview: {
+      port,
+      host,
+    },
+    build: {
+      outDir: dist,
+      emptyOutDir: true,
+    },
     root: projectRoot,
     mode,
     customLogger,
     server: {
-      port,
-      host,
       fs: {
         allow: [workspaceRoot],
       },
     },
   });
-  server = await server.listen();
+
   return {
     server,
     success: true,
@@ -41,7 +47,7 @@ const restartServer = async (
 };
 
 const waitServerClose = async (
-  server: ViteDevServer,
+  server: PreviewServer,
   customLogger: DevServerLogger
 ): Promise<boolean> => {
   return new Promise<boolean>((res) => {
@@ -62,13 +68,18 @@ const waitServerClose = async (
 };
 
 export default async function* runExecutor(
-  options: DevServerExecutorSchema,
+  options: PreviewServerExecutorSchema,
   context: ExecutorContext
 ) {
   const urlHttps = options.https ? 'https' : 'http';
   const urlPort = options.port ? `:${options.port}` : '';
   const url = `${urlHttps}://${options.host}${urlPort}`;
-  console.log(`Running Vite Dev server: ${url}`);
+
+  if (!options.dist) {
+    throw new Error('options.dist is required');
+  }
+
+  console.log(`Previewing build output directory: ${options.dist} at ${url}`);
   console.log(`  mode = ${options.mode}`);
 
   const customLogger = createLogger();
