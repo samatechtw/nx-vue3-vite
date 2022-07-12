@@ -2,7 +2,7 @@ import { ExecutorContext } from '@nrwl/devkit';
 import { PreviewServer, preview } from 'vite';
 import { getProjectRoot, getWorkspaceRoot } from '../../utils';
 import { PreviewServerExecutorSchema } from './schema';
-import { DevServerLogger, createLogger } from './customLogger';
+import { DevServerLogger, createLogger } from '../../customLogger';
 
 interface PreviewExecutorResult {
   server: PreviewServer;

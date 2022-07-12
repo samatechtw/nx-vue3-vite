@@ -2,7 +2,7 @@ import { ExecutorContext } from '@nrwl/devkit';
 import { createServer, ViteDevServer } from 'vite';
 import { DevServerExecutorSchema } from './schema';
 import { getProjectRoot, getWorkspaceRoot } from '../../utils';
-import { createLogger, DevServerLogger } from './customLogger';
+import { DevServerLogger, createLogger } from '../../customLogger';
 
 interface DevExecutorResult {
   server: ViteDevServer;
