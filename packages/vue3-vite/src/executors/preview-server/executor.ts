@@ -1,8 +1,9 @@
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
 import { PreviewServer, preview } from 'vite';
 import { getProjectRoot, getWorkspaceRoot } from '../../utils';
 import { PreviewServerExecutorSchema } from './schema';
-import { DevServerLogger, createLogger } from '../../customLogger';
+import { DevServerLogger, createLogger } from '../../custom-logger';
+import { waitServerClose } from '../../server-utils';
 
 interface PreviewExecutorResult {
   server: PreviewServer;
@@ -20,13 +21,15 @@ const restartServer = async (
   const { host, port, https, mode, dist } = options;
   const protocol = https ? 'https' : 'http';
 
+  const outDir = joinPathFragments(workspaceRoot, dist);
+
   const server = await preview({
     preview: {
       port,
       host,
     },
     build: {
-      outDir: dist,
+      outDir,
       emptyOutDir: true,
     },
     root: projectRoot,
@@ -44,27 +47,6 @@ const restartServer = async (
     success: true,
     baseUrl: `${protocol}://${host}:${port}`,
   };
-};
-
-const waitServerClose = async (
-  server: PreviewServer,
-  customLogger: DevServerLogger
-): Promise<boolean> => {
-  return new Promise<boolean>((res) => {
-    server.httpServer.on('error', (err) => {
-      console.log('Vite error', err);
-    });
-    server.httpServer.on('close', async () => {
-      if (customLogger.serverRestarted) {
-        console.log('Vite full page reload');
-        customLogger.serverRestarted = true;
-        res(false);
-      } else {
-        console.log('Vite closed');
-        res(true);
-      }
-    });
-  });
 };
 
 export default async function* runExecutor(

@@ -2,7 +2,8 @@ import { ExecutorContext } from '@nrwl/devkit';
 import { createServer, ViteDevServer } from 'vite';
 import { DevServerExecutorSchema } from './schema';
 import { getProjectRoot, getWorkspaceRoot } from '../../utils';
-import { DevServerLogger, createLogger } from '../../customLogger';
+import { waitServerClose } from '../../server-utils';
+import { DevServerLogger, createLogger } from '../../custom-logger';
 
 interface DevExecutorResult {
   server: ViteDevServer;
@@ -38,27 +39,6 @@ const restartServer = async (
     success: true,
     baseUrl: `${protocol}://${host}:${port}`,
   };
-};
-
-const waitServerClose = async (
-  server: ViteDevServer,
-  customLogger: DevServerLogger
-): Promise<boolean> => {
-  return new Promise<boolean>((res) => {
-    server.httpServer.on('error', (err) => {
-      console.log('Vite error', err);
-    });
-    server.httpServer.on('close', async () => {
-      if (customLogger.serverRestarted) {
-        console.log('Vite full page reload');
-        customLogger.serverRestarted = true;
-        res(false);
-      } else {
-        console.log('Vite closed');
-        res(true);
-      }
-    });
-  });
 };
 
 export default async function* runExecutor(
