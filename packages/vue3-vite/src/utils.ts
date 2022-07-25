@@ -53,7 +53,6 @@ export function updateScripts(host: Tree, scripts: Record<string, string>) {
       ...json.scripts,
       ...scripts,
     });
-    console.log('SCRIPTS UPDATED', json.scripts);
 
     return json;
   });
