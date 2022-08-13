@@ -5,11 +5,11 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
-    "vite": "^2.9.1",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "@nrwl/devkit": "^14.3.6",
-    "cypress": "^10.2.0",
-    "@cypress/vite-dev-server": "^3.0.0"
+    "vite": "^2.9.15 | ^3.0.7",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "@nrwl/devkit": "^14.5.5",
+    "cypress": "^10.4.0",
+    "@cypress/vite-dev-server": "^3.1.0"
   },
   "repository": {
     "type": "git",

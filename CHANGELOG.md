@@ -2,7 +2,19 @@
 
 TODO -- automate changelog generation
 
+### v0.18.0 - 220813
+
+- Update Vite to 3.0.7
+- Update Nx to 14.5.5
+- Package updates
+
+### v0.17.0 - 220725
+
+- Add preview server executor
+- Package updates
+
 ### v0.16.0 - 220623
+
 - Update to Nx 14.3.6
 - Update Cypress to 10.2.0
 - Minor version package updates
