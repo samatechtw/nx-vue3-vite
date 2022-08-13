@@ -7,31 +7,31 @@ export const recommendedExtensions = [
 
 // dependency versions
 export const vueVersion = '^3.2.37';
-export const vueI18nVersion = '^9.1.6';
-export const vueRouterVersion = '^4.0.16';
+export const vueI18nVersion = '^9.2.2';
+export const vueRouterVersion = '^4.1.3';
 
 // devDependency versions
-export const viteVersion = '^2.9.12';
-export const eslintVersion = '^8.18.0';
-export const vuePluginVersion = '^2.3.3';
+export const viteVersion = '^3.0.7';
+export const eslintVersion = '^8.21.0';
+export const vuePluginVersion = '^3.0.3';
 // TODO -- add or remove once it's out of alpha or vite-jest is used
 // Note -- babel stuff shouldn't be needed with vite-jest
 // https://github.com/samatechtw/nx-vue3-vite/issues/14
 // export const vue3JestVersion = '^27.0.0-alpha.2';
-export const babelJestVersion = '^28.1.1';
-export const babelCommonjsVersion = '^7.18.2';
-export const postcssVersion = '^8.4.14';
-export const postcssBasicsVersion = '^0.4.2';
-export const stylelintVersion = '^14.9.1';
-export const stylelintConfigVersion = '^26.0.0';
+export const babelJestVersion = '^28.1.3';
+export const babelCommonjsVersion = '^7.18.6';
+export const postcssVersion = '^8.4.16';
+export const postcssBasicsVersion = '^0.5.0';
+export const stylelintVersion = '^14.10.0';
+export const stylelintConfigVersion = '^27.0.0';
 export const tslibVersion = '^2.4.0';
 export const tsConfigVersion = '^7.0.0';
-export const unpluginVueComponentsVersion = '^0.19.6';
+export const unpluginVueComponentsVersion = '^0.22.4';
 
 export const CypressDevDependencies = {
-  cypress: '^10.2.0',
-  '@cypress/vue': '^4.0.0',
-  '@cypress/vite-dev-server': '^3.0.0',
+  cypress: '^10.4.0',
+  '@cypress/vue': '^4.1.0',
+  '@cypress/vite-dev-server': '^3.1.0',
   '@cypress/code-coverage': '^3.10.0',
   'eslint-plugin-cypress': '^2.12.1',
   '@nrwl/cypress': '*',
@@ -41,7 +41,7 @@ export const ProjectDependencies = {
   vue: vueVersion,
   'vue-i18n': vueI18nVersion,
   'vue-router': vueRouterVersion,
-  'date-fns': '^2.28.0',
+  'date-fns': '^2.29.1',
   '@sampullman/fetch-api': '^0.7.0',
 };
 
@@ -52,19 +52,19 @@ export const ProjectDevDependencies = {
   'class-transformer': '^0.5.1',
   '@intlify/eslint-plugin-vue-i18n': '^2.0.0',
   'eslint-plugin-import': '^2.26.0',
-  'eslint-plugin-vue': '^9.1.1',
-  'vue-eslint-parser': '^9.0.2',
+  'eslint-plugin-vue': '^9.3.0',
+  'vue-eslint-parser': '^9.0.3',
   '@vue/eslint-config-typescript': '^11.0.0',
   '@vue/compiler-sfc': vueVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
-  '@typescript-eslint/eslint-plugin': '5.24.0',
-  '@typescript-eslint/parser': '5.24.0',
+  '@typescript-eslint/eslint-plugin': '5.33.0',
+  '@typescript-eslint/parser': '5.33.0',
   'eslint-config-prettier': '^8.5.0',
   'babel-jest': babelJestVersion,
   '@babel/plugin-transform-modules-commonjs': babelCommonjsVersion,
-  '@babel/core': '^7.18.5',
-  '@babel/preset-env': '^7.18.2',
+  '@babel/core': '^7.18.10',
+  '@babel/preset-env': '^7.18.10',
   '@samatech/postcss-basics': postcssBasicsVersion,
   stylelint: stylelintVersion,
   'stylelint-config-standard': stylelintConfigVersion,
