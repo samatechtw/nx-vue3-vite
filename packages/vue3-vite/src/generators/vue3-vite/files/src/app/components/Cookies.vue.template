@@ -1,12 +1,14 @@
 <template>
-<div class="cookies" @click="hide">
-  {{ $t('cookies') }}
-</div>
+  <div class="cookies" @click="hide">
+    {{ t('cookies') }}
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '@app/store'
+import { useI18n } from 'vue-i18n';
+import { useStore } from '@app/store';
 
+const { t } = useI18n();
 const store = useStore();
 
 const hide = () => {

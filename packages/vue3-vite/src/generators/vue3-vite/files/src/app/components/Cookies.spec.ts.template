@@ -1,0 +1,29 @@
+import { createApp, h } from 'vue';
+import { expect } from '@jest/globals';
+
+jest.mock('vue-i18n', () => ({
+  useI18n: () => ({
+    t: () => 'Cookies',
+  }),
+}));
+
+import Cookies from './Cookies.vue';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mount(Component: any) {
+  document.getElementsByTagName('html')[0].innerHTML = '';
+  const el = document.createElement('div');
+  el.id = 'app';
+  document.body.appendChild(el);
+  const Parent = {
+    render() {
+      return h(Component);
+    },
+  };
+  createApp(Parent).mount(el);
+}
+
+test('shows cookie text', () => {
+  mount(Cookies);
+  expect(document.body.outerHTML).toContain('Cookies');
+});

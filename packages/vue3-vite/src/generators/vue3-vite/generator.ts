@@ -17,13 +17,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import {
-  addJest,
-  updateDependencies,
-  runTasksInSerial,
-  updateScripts,
-} from '../../utils';
-import { jestInitGenerator } from '@nrwl/jest';
+import { updateDependencies, updateScripts } from '../../utils';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -66,6 +60,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     ...options,
     ...names(options.name),
     offsetFromRoot: offsetFromRoot(options.projectRoot),
+    projectRoot: options.projectRoot,
     // Hack for copying dotfiles - use as a template in the filename
     // e.g. "__dot__eslintrc.js" => ".eslintrc.js"
     dot: '.',
@@ -128,6 +123,14 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
+      test: {
+        executor: '@nrwl/jest:jest',
+        outputs: ['coverage/libs/e2e/apps'],
+        options: {
+          jestConfig: `${projectRoot}/jest.config.ts`,
+          passWithNoTests: true,
+        },
+      },
     },
     tags: normalizedOptions.parsedTags,
   });
@@ -142,9 +145,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
 
   updateExtensionRecommendations(host);
 
-  const jestInit = jestInitGenerator(host, {});
-  const jestTask = await addJest(host, projectName);
   await formatFiles(host);
 
-  return runTasksInSerial(jestInit, jestTask, depsTask);
+  return depsTask;
 }

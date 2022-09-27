@@ -1,14 +1,19 @@
 module.exports = {
   displayName: '<%= libraryName %>',
   preset: '<%= offsetFromRoot %>jest.preset.js',
+  globals: {
+    'vue-jest': {
+      tsConfig: './<%= libraryRoot %>/tsconfig.spec.json',
+    },
+  },
   transform: {
-    '^.+\\.vue$': './deps/vue3-jest',
+    '^.+\\.vue$': '@vue/vue3-jest',
     '^.+\\.[jt]sx?$': 'ts-jest',
   },
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'vue'],
   testTimeout: 10000,
 };
