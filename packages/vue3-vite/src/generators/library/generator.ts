@@ -10,7 +10,6 @@ import {
   joinPathFragments,
   updateJson,
 } from '@nrwl/devkit';
-import { jestInitGenerator } from '@nrwl/jest';
 import { LibraryGeneratorSchema } from './schema';
 import {
   LibraryDevDependencies,
@@ -18,7 +17,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { addJest, runTasksInSerial, updateDependencies } from '../../utils';
+import { updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends LibraryGeneratorSchema {
   libraryName: string;
@@ -57,6 +56,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     ...options,
     ...names(options.name),
     offsetFromRoot: offsetFromRoot(options.libraryRoot),
+    libraryRoot: options.libraryRoot,
     // Hack for copying dotfiles - use as a template in the filename
     // e.g. "__dot__eslintrc.js" => ".eslintrc.js"
     dot: '.',
@@ -116,6 +116,14 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
           lintFilePatterns: [`${libraryRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
+      test: {
+        executor: '@nrwl/jest:jest',
+        outputs: ['coverage/libs/e2e/libs'],
+        options: {
+          jestConfig: `${libraryRoot}/jest.config.ts`,
+          passWithNoTests: true,
+        },
+      },
     },
     tags: normalizedOptions.parsedTags,
   });
@@ -132,7 +140,5 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
 
   await formatFiles(host);
 
-  const jestInit = jestInitGenerator(host, {});
-  const jestTask = await addJest(host, libraryName);
-  return runTasksInSerial(jestInit, jestTask, depsTask);
+  return depsTask;
 }

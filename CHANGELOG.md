@@ -2,6 +2,12 @@
 
 TODO -- automate changelog generation
 
+### v0.19.0 - 220928
+
+- Package updates
+- Fix generator vue3-jest setup
+- Simplify app/lib generator
+
 ### v0.18.0 - 220813
 
 - Update Vite to 3.0.7

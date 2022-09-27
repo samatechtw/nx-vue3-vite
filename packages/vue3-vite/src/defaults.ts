@@ -14,11 +14,9 @@ export const vueRouterVersion = '^4.1.5';
 export const viteVersion = '^3.1.3';
 export const eslintVersion = '^8.24.0';
 export const vuePluginVersion = '^3.1.0';
-// TODO -- add or remove once it's out of alpha or vite-jest is used
-// Note -- babel stuff shouldn't be needed with vite-jest
-// https://github.com/samatechtw/nx-vue3-vite/issues/14
-// export const vue3JestVersion = '^27.0.0-alpha.2';
 export const babelJestVersion = '^29.0.3';
+export const jestGlobalsVersion = '^29.0.3';
+export const vue3JestVersion = '^29.1.1';
 export const babelCommonjsVersion = '^7.18.6';
 export const postcssVersion = '^8.4.16';
 export const postcssBasicsVersion = '^0.5.0';
@@ -56,12 +54,14 @@ export const ProjectDevDependencies = {
   'vue-eslint-parser': '^9.1.0',
   '@vue/eslint-config-typescript': '^11.0.2',
   '@vue/compiler-sfc': vueVersion,
+  '@vue/vue3-jest': vue3JestVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
   '@typescript-eslint/eslint-plugin': '5.38.0',
   '@typescript-eslint/parser': '5.38.0',
   'eslint-config-prettier': '^8.5.0',
   'babel-jest': babelJestVersion,
+  '@jest/globals': jestGlobalsVersion,
   '@babel/plugin-transform-modules-commonjs': babelCommonjsVersion,
   '@babel/core': '^7.19.1',
   '@babel/preset-env': '^7.19.1',

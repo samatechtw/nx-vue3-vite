@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "target": "ESNext",
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@lib/*": ["./src/lib/*"]
