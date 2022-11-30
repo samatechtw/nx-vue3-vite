@@ -6,30 +6,30 @@ export const recommendedExtensions = [
 ];
 
 // dependency versions
-export const vueVersion = '^3.2.39';
+export const vueVersion = '^3.2.45';
 export const vueI18nVersion = '^9.2.2';
-export const vueRouterVersion = '^4.1.5';
+export const vueRouterVersion = '^4.1.6';
 
 // devDependency versions
-export const viteVersion = '^3.1.3';
-export const eslintVersion = '^8.24.0';
-export const vuePluginVersion = '^3.1.0';
-export const babelJestVersion = '^29.0.3';
-export const jestGlobalsVersion = '^29.0.3';
-export const vue3JestVersion = '^29.1.1';
-export const babelCommonjsVersion = '^7.18.6';
-export const postcssVersion = '^8.4.16';
+export const viteVersion = '^3.2.4';
+export const eslintVersion = '^8.28.0';
+export const vuePluginVersion = '^3.2.0';
+export const babelJestVersion = '^29.3.1';
+export const jestGlobalsVersion = '^29.3.1';
+export const vue3JestVersion = '^29.2.1';
+export const babelCommonjsVersion = '^7.19.6';
+export const postcssVersion = '^8.4.19';
 export const postcssBasicsVersion = '^0.5.0';
-export const stylelintVersion = '^14.12.1';
-export const stylelintConfigVersion = '^28.0.0';
-export const tslibVersion = '^2.4.0';
+export const stylelintVersion = '^14.15.0';
+export const stylelintConfigVersion = '^29.0.0';
+export const tslibVersion = '^2.4.1';
 export const tsConfigVersion = '^7.0.0';
-export const unpluginVueComponentsVersion = '^0.22.7';
+export const unpluginVueComponentsVersion = '^0.22.11';
 
 export const CypressDevDependencies = {
-  cypress: '^10.8.0',
-  '@cypress/vue': '^4.2.0',
-  '@cypress/vite-dev-server': '^3.1.1',
+  cypress: '^11.2.0',
+  '@cypress/vue': '^5.0.2',
+  '@cypress/vite-dev-server': '^4.0.1',
   '@cypress/code-coverage': '^3.10.0',
   'eslint-plugin-cypress': '^2.12.1',
   '@nrwl/cypress': '*',
@@ -50,21 +50,21 @@ export const ProjectDevDependencies = {
   'class-transformer': '^0.5.1',
   '@intlify/eslint-plugin-vue-i18n': '^2.0.0',
   'eslint-plugin-import': '^2.26.0',
-  'eslint-plugin-vue': '^9.5.1',
+  'eslint-plugin-vue': '^9.8.0',
   'vue-eslint-parser': '^9.1.0',
   '@vue/eslint-config-typescript': '^11.0.2',
   '@vue/compiler-sfc': vueVersion,
   '@vue/vue3-jest': vue3JestVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
-  '@typescript-eslint/eslint-plugin': '5.38.0',
-  '@typescript-eslint/parser': '5.38.0',
+  '@typescript-eslint/eslint-plugin': '5.45.0',
+  '@typescript-eslint/parser': '5.45.0',
   'eslint-config-prettier': '^8.5.0',
   'babel-jest': babelJestVersion,
   '@jest/globals': jestGlobalsVersion,
   '@babel/plugin-transform-modules-commonjs': babelCommonjsVersion,
-  '@babel/core': '^7.19.1',
-  '@babel/preset-env': '^7.19.1',
+  '@babel/core': '^7.20.5',
+  '@babel/preset-env': '^7.20.2',
   '@samatech/postcss-basics': postcssBasicsVersion,
   stylelint: stylelintVersion,
   'stylelint-config-standard': stylelintConfigVersion,
