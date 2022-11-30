@@ -7,12 +7,11 @@ import {
   offsetFromRoot,
   Tree,
   joinPathFragments,
-  installPackagesTask,
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { CypressGeneratorSchema } from './schema';
 import { CypressDevDependencies } from '../../defaults';
-import { addJest, runTasksInSerial, updateDependencies } from '../../utils';
+import { runTasksInSerial, updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends CypressGeneratorSchema {
   targetProject?: string;
