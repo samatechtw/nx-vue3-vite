@@ -2,6 +2,10 @@
 
 TODO -- automate changelog generation
 
+### v0.20.0 - 221202
+
+- Package updates
+
 ### v0.19.0 - 220928
 
 - Package updates
