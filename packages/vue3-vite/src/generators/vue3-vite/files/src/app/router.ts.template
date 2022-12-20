@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@app/views/Home.vue'
+import HomePage from '@app/views/HomePage.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -29,7 +29,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: HomePage,
       meta: { title: '<%= projectTitle %>' },
     },
   ],

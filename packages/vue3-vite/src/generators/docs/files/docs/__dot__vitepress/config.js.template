@@ -1,8 +1,8 @@
 const base = '/docs/';
 
 module.exports = {
-  title: '<% projectTitle %>',
-  description: '<% projectTitle %> Documentation',
+  title: '<%= projectTitle %>',
+  description: '<%= projectTitle %> Documentation',
   repo: '',
   base,
   head: [

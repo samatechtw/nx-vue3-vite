@@ -1,6 +1,6 @@
 # Getting Started
 
-This site contains documentation and links pertaining to <% projectName %>. Choose a link on the left to get started with
+This site contains documentation and links pertaining to <%= projectName %>. Choose a link on the left to get started with
 project documentation, or check out helpful links below:
 
 ## Repositories

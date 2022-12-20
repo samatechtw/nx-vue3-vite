@@ -1,6 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
-
 import generator from './generator';
 import { CypressGeneratorSchema } from './schema';
 
@@ -16,5 +15,6 @@ describe('cypress generator', () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();
+    expect(Object.keys(config.targets)).toEqual(['e2e', 'lint']);
   });
 });
