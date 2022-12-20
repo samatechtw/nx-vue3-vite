@@ -5,8 +5,10 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 
+jest.setTimeout(60000);
+
 describe('docs e2e', () => {
-  it('should create and build vitepress app', async () => {
+  it.skip('should create and build vitepress app', async () => {
     // Create app
     const docs = uniq('docs');
     await runNxCommandAsync(`generate nx-vue3-vite:docs ${docs}`);
