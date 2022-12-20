@@ -5,6 +5,8 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 
+jest.setTimeout(60000);
+
 describe('component e2e', () => {
   it('should create component', async () => {
     // Create app

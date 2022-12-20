@@ -11,25 +11,25 @@ export const vueI18nVersion = '^9.2.2';
 export const vueRouterVersion = '^4.1.6';
 
 // devDependency versions
-export const viteVersion = '^3.2.4';
-export const eslintVersion = '^8.28.0';
-export const vuePluginVersion = '^3.2.0';
+export const viteVersion = '^4.0.2';
+export const eslintVersion = '^8.30.0';
+export const vuePluginVersion = '^4.0.0';
 export const babelJestVersion = '^29.3.1';
 export const jestGlobalsVersion = '^29.3.1';
-export const vue3JestVersion = '^29.2.1';
+export const vue3JestVersion = '^29.2.2';
 export const babelCommonjsVersion = '^7.19.6';
-export const postcssVersion = '^8.4.19';
+export const postcssVersion = '^8.4.20';
 export const postcssBasicsVersion = '^0.5.0';
-export const stylelintVersion = '^14.15.0';
+export const stylelintVersion = '^14.16.0';
 export const stylelintConfigVersion = '^29.0.0';
 export const tslibVersion = '^2.4.1';
 export const tsConfigVersion = '^7.0.0';
-export const unpluginVueComponentsVersion = '^0.22.11';
+export const unpluginVueComponentsVersion = '^0.22.12';
 
 export const CypressDevDependencies = {
-  cypress: '^11.2.0',
+  cypress: '^12.1.0',
   '@cypress/vue': '^5.0.2',
-  '@cypress/vite-dev-server': '^4.0.1',
+  '@cypress/vite-dev-server': '^5.0.2',
   '@cypress/code-coverage': '^3.10.0',
   'eslint-plugin-cypress': '^2.12.1',
   '@nrwl/cypress': '*',
@@ -57,8 +57,8 @@ export const ProjectDevDependencies = {
   '@vue/vue3-jest': vue3JestVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
-  '@typescript-eslint/eslint-plugin': '5.45.0',
-  '@typescript-eslint/parser': '5.45.0',
+  '@typescript-eslint/eslint-plugin': '5.47.0',
+  '@typescript-eslint/parser': '5.47.0',
   'eslint-config-prettier': '^8.5.0',
   'babel-jest': babelJestVersion,
   '@jest/globals': jestGlobalsVersion,

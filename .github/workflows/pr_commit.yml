@@ -75,3 +75,20 @@ jobs:
         run: npm i
       - name: Run unit tests
         run: npx nx affected:test --base=origin/main --parallel
+
+  e2e:
+    name: E2E Tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up NodeJS (v16)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install npm modules
+        run: npm i
+      - name: Run e2e tests
+        run: npx nx affected:e2e --base=origin/main

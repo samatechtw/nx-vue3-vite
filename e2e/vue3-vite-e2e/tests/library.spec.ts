@@ -1,10 +1,10 @@
 import {
   checkFilesExist,
-  listFiles,
-  readJson,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
+
+jest.setTimeout(60000);
 
 describe('library e2e', () => {
   it('should create library', async () => {

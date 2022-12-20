@@ -6,14 +6,14 @@ Hi! We're glad that you're interested in contributing!. Before submitting a pull
 
 - Checkout a topic branch from a base branch, e.g. `main`, and merge back against that branch.
 
-- If adding a new feature:
+- Adding a new feature:
 
   - Add accompanying test case.
-  - Provide a convincing reason to add this feature. Open a suggestion issue first and have it approved before working on it.
+  - Provide a reason to add the feature. Open an issue first and have it approved before working on it.
 
-- If fixing a bug:
+- Fixing a bug:
 
-  - When resolving a specific issue, add `(fix #xxxx[,#xxxx])` (#xxxx is the issue id) in your PR title for a better release log, e.g. `fix: update entities encoding/decoding (fix #3899)`.
+  - When resolving a specific issue, add `(fix: #xxxx[,#xxxx])` (#xxxx is the issue id) in your PR title for a better release log, e.g. `fix: update entities encoding/decoding (fix #3899)`.
   - Provide a detailed description of the bug in the PR. Live demo preferred.
   - Add appropriate test coverage if applicable.
 
@@ -65,27 +65,27 @@ pnx run-many --target build --all
 
 ### Unit Tests
 
-Run unit tests for the `vue3-vite` plugin:
+Unit tests call functions in a single module and verify the result. Everything outside the tested module should be mocked, where possible. Unit tests live alongside the file they're testing, for example `lib/generator.spec.ts` contains tests for `lib/generator.ts`.
 
-```
+Running unit tests:
+
+```bash
+# Execute all tests for the vue3-vite plugin
 pnx test vue3-vite
-```
 
-Prepend `affected` to only execute unit tests affected by a change:
-
-```
+# Only execute tests affected by a change
 pnx affected:test vue3-vite
-```
 
-Run unit tests for all plugins:
-
-```
+# Run unit tests for all plugins
 pnx run-many --target test --all
 ```
 
 ### E2E Tests
 
-```
+E2E tests try to run the project how users would, i.e. via the command line
+
+```bash
+# Execute all e2e tests
 pnx e2e vue3-vite-e2e
 ```
 

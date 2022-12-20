@@ -4,6 +4,8 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 
+jest.setTimeout(60000);
+
 describe('cypress e2e', () => {
   it('should create a cypress app', async () => {
     // Create app
