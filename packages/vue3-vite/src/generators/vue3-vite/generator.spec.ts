@@ -1,6 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
 import { Tree, readProjectConfiguration } from '@nrwl/devkit';
-
 import generator from './generator';
 import { Vue3ViteGeneratorSchema } from './schema';
 
@@ -12,7 +11,7 @@ describe('vue3-vite generator', () => {
     appTree = createTreeWithEmptyWorkspace();
   });
 
-  it('should generate files', async () => {
+  it('should run successfully', async () => {
     await generator(appTree, options);
     const config = readProjectConfiguration(appTree, 'test');
     expect(config).toBeDefined();

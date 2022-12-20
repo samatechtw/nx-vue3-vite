@@ -12,5 +12,5 @@ features:
     details: Scaffolding for your developer documentation
   - title: 🤝 Customized theme
     details: Example of how to customize the theme
-footer: GPLv3 Licensed | Copyright © 2021-present <% projectTitle %>
+footer: GPLv3 Licensed | Copyright © 2021-present <%= projectTitle %>
 ---
