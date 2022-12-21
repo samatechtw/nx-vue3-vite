@@ -2,6 +2,15 @@
 
 TODO -- automate changelog generation
 
+### v0.21.0 - 221222
+
+- Upgrade Vite to 4.0.X
+- Upgrade Cypress to 12.2.0
+- Fix app generator issue in package based monorepo
+- Improve component generator
+- Improve unit and integration tests
+- Package updates
+
 ### v0.20.0 - 221202
 
 - Package updates
