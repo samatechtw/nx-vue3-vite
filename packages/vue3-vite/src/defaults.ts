@@ -11,7 +11,7 @@ export const vueI18nVersion = '^9.2.2';
 export const vueRouterVersion = '^4.1.6';
 
 // devDependency versions
-export const viteVersion = '^4.0.2';
+export const viteVersion = '^4.0.3';
 export const eslintVersion = '^8.30.0';
 export const vuePluginVersion = '^4.0.0';
 export const babelJestVersion = '^29.3.1';
