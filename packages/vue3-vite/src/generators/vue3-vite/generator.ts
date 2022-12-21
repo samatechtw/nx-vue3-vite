@@ -74,19 +74,10 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-function addPacakgeBasedFiles(host: Tree) {
-  const templateOptions = {
-    // Hack for copying dotfiles - use as a template in the filename
-    // e.g. "__dot__eslintrc.js" => ".eslintrc.js"
-    dot: '.',
-    template: '',
-  };
-  generateFiles(
-    host,
-    path.join(__dirname, 'package-based-files'),
-    '',
-    templateOptions
-  );
+function ensureRootFiles(host: Tree) {
+  if (!host.exists('tsconfig.base.json')) {
+    generateFiles(host, path.join(__dirname, 'root-files'), '', {});
+  }
 }
 
 function updateExtensionRecommendations(host: Tree) {
@@ -156,11 +147,8 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   );
   updateScripts(host, { nx: 'nx' });
 
+  ensureRootFiles(host);
   addFiles(host, normalizedOptions);
-
-  if (!host.exists('tsconfig.base.json')) {
-    addPacakgeBasedFiles(host);
-  }
 
   updateExtensionRecommendations(host);
 

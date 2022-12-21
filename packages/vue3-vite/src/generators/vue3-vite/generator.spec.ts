@@ -44,6 +44,7 @@ describe('vue3-vite generator', () => {
         emitDecoratorMetadata: true,
         experimentalDecorators: true,
         importHelpers: true,
+        resolveJsonModule: true,
         target: 'es2015',
         module: 'esnext',
         lib: ['es2017', 'dom'],

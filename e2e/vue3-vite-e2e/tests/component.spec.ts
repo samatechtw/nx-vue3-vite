@@ -1,6 +1,7 @@
 import { names } from '@nrwl/devkit';
 import {
   checkFilesExist,
+  ensureNxProject,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
@@ -10,7 +11,8 @@ jest.setTimeout(60000);
 describe('component e2e', () => {
   it('should create component', async () => {
     // Create app
-    const app = uniq('vue3-vite');
+    const app = uniq('vue3-vite-cmp');
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
     await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
 
     // Create component
@@ -20,17 +22,18 @@ describe('component e2e', () => {
     );
 
     // Check file exists
+    const componentName = names(component).className;
     checkFilesExist(
-      `apps/${app}/src/components/${component}.cy.ts`,
-      `apps/${app}/src/components/${component}.vue`
+      `apps/${app}/src/components/${componentName}.cy.ts`,
+      `apps/${app}/src/components/${componentName}.vue`
     );
   });
 
   describe('--project', () => {
     it('should create component in the specified project', async () => {
       // Create apps
-      const firstApp = uniq('first-vue3-vite');
-      const secondApp = uniq('second-vue3-vite');
+      const firstApp = uniq('first-vue3-vite-cmp');
+      const secondApp = uniq('second-vue3-vite-cmp');
       await runNxCommandAsync(`generate nx-vue3-vite:app ${firstApp}`);
       await runNxCommandAsync(`generate nx-vue3-vite:app ${secondApp}`);
 
@@ -69,7 +72,7 @@ describe('component e2e', () => {
   describe('--directory', () => {
     it('should create component in the specified directory', async () => {
       // Create app
-      const app = uniq('vue3-vite');
+      const app = uniq('vue3-vite-cmp');
       await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
 
       // Create component
@@ -85,9 +88,10 @@ describe('component e2e', () => {
       );
 
       // Check file exists
+      const componentName = names(component).className;
       checkFilesExist(
-        `apps/${app}/src/mydirectory/${component}.cy.ts`,
-        `apps/${app}/src/mydirectory/${component}.vue`
+        `apps/${app}/src/mydirectory/${componentName}.cy.ts`,
+        `apps/${app}/src/mydirectory/${componentName}.vue`
       );
     });
   });
