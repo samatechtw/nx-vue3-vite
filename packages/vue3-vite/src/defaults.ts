@@ -25,6 +25,8 @@ export const stylelintConfigVersion = '^29.0.0';
 export const tslibVersion = '^2.4.1';
 export const tsConfigVersion = '^7.0.0';
 export const unpluginVueComponentsVersion = '^0.22.12';
+export const nrwlJestVersion = '^15.3.3';
+export const typescriptVersion = '~4.8.2';
 
 export const CypressDevDependencies = {
   cypress: '^12.1.0',
@@ -71,6 +73,7 @@ export const ProjectDevDependencies = {
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
   'unplugin-vue-components': unpluginVueComponentsVersion,
+  '@nrwl/jest': nrwlJestVersion,
   ...CypressDevDependencies,
 };
 
@@ -92,6 +95,7 @@ export const LibraryDevDependencies = {
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
   'unplugin-vue-components': unpluginVueComponentsVersion,
+  typescript: typescriptVersion,
   ...CypressDevDependencies,
 };
 

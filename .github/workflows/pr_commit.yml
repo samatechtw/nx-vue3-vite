@@ -90,5 +90,7 @@ jobs:
           node-version: '16'
       - name: Install npm modules
         run: npm i
+      - name: Build plugins
+        run: npm run build
       - name: Run e2e tests
         run: npx nx affected:e2e --base=origin/main

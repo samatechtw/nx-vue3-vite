@@ -18,6 +18,7 @@ describe('library e2e', () => {
 
     // Check files exist
     checkFilesExist(
+      `libs/${library}/postcss.config.js`,
       `libs/${library}/project.json`,
       `libs/${library}/vite.config.ts`,
       `libs/${library}/src/index.ts`,
