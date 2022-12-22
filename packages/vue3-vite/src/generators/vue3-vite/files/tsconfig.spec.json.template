@@ -6,5 +6,11 @@
     "types": ["vue-i18n", "jest", "node"],
     "composite": true
   },
-  "include": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.vue", "**/*.d.ts"]
+  "include": [
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.vue",
+    "**/*.d.ts",
+    "**/*.ts"
+  ]
 }

@@ -25,11 +25,11 @@ export const stylelintConfigVersion = '^29.0.0';
 export const tslibVersion = '^2.4.1';
 export const tsConfigVersion = '^7.0.0';
 export const unpluginVueComponentsVersion = '^0.22.12';
-export const nrwlJestVersion = '^15.3.3';
-export const typescriptVersion = '~4.8.2';
+export const nrwlJestVersion = '^15.4.2';
+export const typescriptVersion = '~4.8.4';
 
 export const CypressDevDependencies = {
-  cypress: '^12.1.0',
+  cypress: '^12.2.0',
   '@cypress/vue': '^5.0.2',
   '@cypress/vite-dev-server': '^5.0.2',
   '@cypress/code-coverage': '^3.10.0',
@@ -59,8 +59,8 @@ export const ProjectDevDependencies = {
   '@vue/vue3-jest': vue3JestVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
-  '@typescript-eslint/eslint-plugin': '5.47.0',
-  '@typescript-eslint/parser': '5.47.0',
+  '@typescript-eslint/eslint-plugin': '5.47.1',
+  '@typescript-eslint/parser': '5.47.1',
   'eslint-config-prettier': '^8.5.0',
   'babel-jest': babelJestVersion,
   '@jest/globals': jestGlobalsVersion,

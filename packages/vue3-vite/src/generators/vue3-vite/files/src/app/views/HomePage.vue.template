@@ -9,7 +9,7 @@
   <AppLogo />
   <div v-html="$t('generated')" />
   <transition name="hide">
-    <Cookies v-if="!cookiesAccepted" />
+    <CookiesConsent v-if="!cookiesAccepted" />
   </transition>
 </div>
 </template>

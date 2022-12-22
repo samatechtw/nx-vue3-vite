@@ -1,5 +1,5 @@
 import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, writeJson, readJson } from '@nrwl/devkit';
+import { Tree, updateJson } from '@nrwl/devkit';
 import { isPackageBasedRepo } from './is-package-based-repo';
 
 describe('isPackageBasedRepo', () => {
@@ -9,19 +9,20 @@ describe('isPackageBasedRepo', () => {
     appTree = createTreeWithEmptyWorkspace();
   });
 
-  it('should return false when "workspaces" property does not exist in package.json', async () => {
-    const result = isPackageBasedRepo(appTree);
-    expect(result).toEqual(false);
-  });
-
-  it('should return true when "workspaces" in package.json is an array', async () => {
+  it('should return true when `packageJson.workspaces` is an array', async () => {
     // Add "workspaces" property in package.json
-    const packageJson = readJson(appTree, 'package.json');
-    packageJson.workspaces = ['packages/*'];
-    writeJson(appTree, 'package.json', packageJson);
+    updateJson(appTree, 'package.json', (json) => {
+      json.workspaces = ['packages/*'];
+      return json;
+    });
 
     // Verify result
     const result = isPackageBasedRepo(appTree);
     expect(result).toEqual(true);
+  });
+
+  it('should return false when `packageJson.workspaces` is not an array', async () => {
+    const result = isPackageBasedRepo(appTree);
+    expect(result).toEqual(false);
   });
 });

@@ -1,5 +1,5 @@
 <template>
-<img src="@assets/img/vue-logo.png">
+  <img src="@assets/img/vue-logo.png" alt="Logo" />
 </template>
 
 <style lang="postcss" scoped>
