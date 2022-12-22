@@ -1,3 +1,1 @@
-export {
-  MyWidget
-} from '@lib/MyWidget.vue'
+export { default as MyWidget } from './lib/MyWidget.vue'

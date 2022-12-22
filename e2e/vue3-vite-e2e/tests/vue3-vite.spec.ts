@@ -18,9 +18,14 @@ describe('vue3-vite e2e', () => {
     // Check files exist
     checkFilesExist(
       `apps/${app}/index.html`,
+      `apps/${app}/postcss.config.js`,
       `apps/${app}/project.json`,
       `apps/${app}/src/app/main.ts`,
-      `apps/${app}/vite.config.ts`
+      `apps/${app}/vite.config.ts`,
+      `.prettierrc`,
+      `nx.json`,
+      `package.json`,
+      `tsconfig.base.json`
     );
 
     // Build app

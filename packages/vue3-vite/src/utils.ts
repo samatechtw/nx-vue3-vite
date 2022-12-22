@@ -41,10 +41,27 @@ export function updateDependencies(
   devDeps: Record<string, string>
 ) {
   // Make sure we don't have dependency duplicates
+  ensureDepsInPackageJson(host);
   const depKeys = Object.keys(deps);
   const devDepKeys = Object.keys(devDeps);
   removeDependenciesFromPackageJson(host, depKeys, devDepKeys);
   return addDependenciesToPackageJson(host, deps, devDeps);
+}
+
+/**
+ * Ensures that both `dependencies` and `devDependencies` exists in `package.json`.
+ * If not, this function will create them in `package.json`.
+ */
+export function ensureDepsInPackageJson(host: Tree) {
+  updateJson(host, 'package.json', (json) => {
+    if (!json.dependencies) {
+      json.dependencies = {};
+    }
+    if (!json.devDependencies) {
+      json.devDependencies = {};
+    }
+    return json;
+  });
 }
 
 export function updateScripts(host: Tree, scripts: Record<string, string>) {

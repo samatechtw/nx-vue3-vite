@@ -7,8 +7,8 @@
   "peerDependencies": {
     "vite": "^2.9.15 || ^3.2.4 || ^4.0.3",
     "@vitejs/plugin-vue": "^4.0.0",
-    "@nrwl/devkit": "^15.3.3",
-    "cypress": "^12.1.0",
+    "@nrwl/devkit": "^15.4.2",
+    "cypress": "^12.2.0",
     "@cypress/vite-dev-server": "^5.0.2"
   },
   "repository": {
