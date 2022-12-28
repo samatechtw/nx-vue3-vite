@@ -10,9 +10,11 @@
     "target": "ESNext",
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@app/*": ["./src/app/*"],
-      "@public/*": ["./src/public/*"]
+      <% if (!useGlobalPath) { %>
+        "@assets/*": ["./src/assets/*"],
+        "@app/*": ["./src/app/*"],
+        "@public/*": ["./src/public/*"]
+      <% } %>
     }
   },
   "references": [

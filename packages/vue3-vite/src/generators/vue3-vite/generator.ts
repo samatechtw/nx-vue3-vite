@@ -18,6 +18,7 @@ import {
   recommendedExtensions,
 } from '../../defaults';
 import { updateDependencies, updateScripts } from '../../utils';
+import { PathAlias } from './path-alias';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -25,6 +26,7 @@ interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
+  useGlobalPath: boolean;
 }
 
 function normalizeOptions(
@@ -44,6 +46,7 @@ function normalizeOptions(
   const parsedTags = options.tags
     ? options.tags.split(',').map((s) => s.trim())
     : [];
+  const useGlobalPath = options.path === PathAlias.Global;
 
   return {
     ...options,
@@ -52,6 +55,7 @@ function normalizeOptions(
     projectRoot,
     projectDirectory,
     parsedTags,
+    useGlobalPath,
   };
 }
 
