@@ -17,7 +17,7 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { updateDependencies, updateScripts } from '../../utils';
+import { parseTags, updateDependencies, updateScripts } from '../../utils';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -41,9 +41,7 @@ function normalizeOptions(
     getWorkspaceLayout(host).appsDir,
     projectDirectory
   );
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  const parsedTags = parseTags(options.tags);
 
   return {
     ...options,

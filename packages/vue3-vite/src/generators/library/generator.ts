@@ -18,9 +18,15 @@ import {
   VSCodeExtensionsFilePath,
   recommendedExtensions,
 } from '../../defaults';
-import { updateDependencies } from '../../utils';
+import {
+  getCaseAwareFileName,
+  parseTags,
+  updateDependencies,
+} from '../../utils';
+import { extractLayoutDirectory } from '@nrwl/devkit';
 
 interface NormalizedSchema extends LibraryGeneratorSchema {
+  fileName: string;
   libraryName: string;
   libraryRoot: string;
   libraryDirectory: string;
@@ -31,20 +37,28 @@ function normalizeOptions(
   host: Tree,
   options: LibraryGeneratorSchema
 ): NormalizedSchema {
-  const { fileName, name } = names(options.name);
-  const libraryDirectory = options.directory
-    ? names(options.directory).fileName
-    : fileName;
-  const libraryRoot = joinPathFragments(
-    getWorkspaceLayout(host).libsDir,
-    libraryDirectory
-  );
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  const { layoutDirectory, projectDirectory: libraryDirectory } =
+    extractLayoutDirectory(options.directory);
+  const { libsDir: defaultLibsDir } = getWorkspaceLayout(host);
+  const libsDir = layoutDirectory ?? defaultLibsDir;
+
+  const name = names(options.name).fileName;
+  const fullLibraryDirectory = libraryDirectory
+    ? `${names(libraryDirectory).fileName}/${name}`
+    : name;
+
+  const libraryName = fullLibraryDirectory.replace(new RegExp('/', 'g'), '-');
+  const fileName = getCaseAwareFileName({
+    fileName: libraryName,
+    pascalCaseFiles: options.pascalCaseFiles,
+  });
+  const libraryRoot = joinPathFragments(libsDir, fullLibraryDirectory);
+
+  const parsedTags = parseTags(options.tags);
 
   return {
     ...options,
+    fileName,
     libraryName: name,
     libraryRoot,
     libraryDirectory,
@@ -78,7 +92,7 @@ function ensureRootFiles(host: Tree, options: NormalizedSchema) {
 function addFiles(host: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
-    ...names(options.name),
+    ...names(options.fileName),
     offsetFromRoot: offsetFromRoot(options.libraryRoot),
     libraryRoot: options.libraryRoot,
     // Hack for copying dotfiles - use as a template in the filename

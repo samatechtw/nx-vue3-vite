@@ -6,7 +6,7 @@ describe('isPackageBasedRepo', () => {
   let appTree: Tree;
 
   beforeEach(() => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should return true when `packageJson.workspaces` is an array', async () => {

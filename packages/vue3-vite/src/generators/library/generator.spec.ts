@@ -8,7 +8,7 @@ describe('vue3-vite library generator', () => {
   const options: LibraryGeneratorSchema = { name: 'test' };
 
   beforeEach(async () => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
   });
 
   it('should run successfully', async () => {
@@ -59,13 +59,14 @@ describe('vue3-vite library generator', () => {
     });
 
     it('should add path to `tsconfigBaseJson.compilerOptions.paths`', async () => {
+      const { name } = options;
       // Run generator
       await generator(appTree, options);
 
       // Evaluate key and path
       const { npmScope } = readJson(appTree, 'nx.json');
-      const key = `@${npmScope}/${options.name}`;
-      const path = `libs/${options.name}/src/index.ts`;
+      const key = `@${npmScope}/${name}`;
+      const path = `libs/${name}/src/index.ts`;
 
       // Check if path is added to `tsconfigBaseJson.compilerOptions.paths` correctly
       const tsConfigBaseJson = readJson(appTree, 'tsconfig.base.json');
