@@ -9,6 +9,7 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
+  readJson,
 } from '@nrwl/devkit';
 import { LibraryGeneratorSchema } from './schema';
 import {
@@ -49,6 +50,29 @@ function normalizeOptions(
     libraryDirectory,
     parsedTags,
   };
+}
+
+function ensureRootFiles(host: Tree, options: NormalizedSchema) {
+  if (!host.exists('tsconfig.base.json')) {
+    generateFiles(host, path.join(__dirname, 'root-files'), '', {});
+  }
+  // Add path to `tsconfig.base.json`
+  updateJson(host, 'tsconfig.base.json', (json) => {
+    // Ensure `compilerOptions.paths`
+    if (!json.compilerOptions) {
+      json.compilerOptions = {};
+    }
+    if (!json.compilerOptions.paths) {
+      json.compilerOptions.paths = {};
+    }
+
+    // Add path to `compilerOptions.paths`
+    const { npmScope } = readJson(host, 'nx.json');
+    const key = `@${npmScope}/${options.libraryName}`;
+    json.compilerOptions.paths[key] = [`${options.libraryRoot}/src/index.ts`];
+
+    return json;
+  });
 }
 
 function addFiles(host: Tree, options: NormalizedSchema) {
@@ -128,6 +152,7 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
     tags: normalizedOptions.parsedTags,
   });
 
+  ensureRootFiles(host, normalizedOptions);
   addFiles(host, normalizedOptions);
 
   const depsTask = updateDependencies(
