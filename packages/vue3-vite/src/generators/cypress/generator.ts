@@ -11,7 +11,7 @@ import {
 import * as path from 'path';
 import { CypressGeneratorSchema } from './schema';
 import { CypressDevDependencies } from '../../defaults';
-import { runTasksInSerial, updateDependencies } from '../../utils';
+import { parseTags, runTasksInSerial, updateDependencies } from '../../utils';
 
 interface NormalizedSchema extends CypressGeneratorSchema {
   targetProject?: string;
@@ -36,9 +36,7 @@ function normalizeOptions(
     getWorkspaceLayout(host).appsDir,
     projectDirectory
   );
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+  const parsedTags = parseTags(options.tags);
 
   return {
     ...options,

@@ -141,7 +141,7 @@ nx g nx-vue3-vite:library <lib-name> [options]
 | Options     | Default | Description                                  |
 | ----------- | ------- | -------------------------------------------- |
 | --tags      | -       | Comma delimited tags for linting             |
-| --directory | apps    | Workspace directory to place the Vue library |
+| --directory | -       | Workspace directory to place the Vue library |
 
 ### Vitepress Docs
 

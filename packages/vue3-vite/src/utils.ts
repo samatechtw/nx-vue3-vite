@@ -6,6 +6,7 @@ import {
   Tree,
   GeneratorCallback,
   updateJson,
+  names,
 } from '@nrwl/devkit';
 import { jestProjectGenerator } from '@nrwl/jest';
 
@@ -73,6 +74,19 @@ export function updateScripts(host: Tree, scripts: Record<string, string>) {
 
     return json;
   });
+}
+
+export function getCaseAwareFileName(options: {
+  pascalCaseFiles: boolean;
+  fileName: string;
+}) {
+  const normalized = names(options.fileName);
+
+  return options.pascalCaseFiles ? normalized.className : normalized.fileName;
+}
+
+export function parseTags(tagsStr: string): string[] {
+  return tagsStr ? tagsStr.split(',').map((s) => s.trim()) : [];
 }
 
 export async function addJest(host: Tree, projectName: string) {

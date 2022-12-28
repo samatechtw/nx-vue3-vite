@@ -17,7 +17,7 @@ describe('component generator', () => {
   };
 
   beforeEach(async () => {
-    appTree = createTreeWithEmptyWorkspace();
+    appTree = createTreeWithEmptyWorkspace({ layout: 'apps-libs' });
     await appGenerator(appTree, { name: projectName });
   });
 
