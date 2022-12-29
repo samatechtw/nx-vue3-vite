@@ -8,12 +8,14 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "ESNext",
-    "baseUrl": ".",
-    "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@app/*": ["./src/app/*"],
-      "@public/*": ["./src/public/*"]
-    }
+    <% if (useLocalAlias) { -%>
+      "baseUrl": ".",
+      "paths": {
+        "@assets/*": ["./src/assets/*"],
+        "@app/*": ["./src/app/*"],
+        "@public/*": ["./src/public/*"]
+      }
+    <% } %>
   },
   "references": [
     {

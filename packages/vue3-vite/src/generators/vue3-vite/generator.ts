@@ -18,6 +18,7 @@ import {
   recommendedExtensions,
 } from '../../defaults';
 import { parseTags, updateDependencies, updateScripts } from '../../utils';
+import { PathAlias } from './path-alias';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -25,6 +26,7 @@ interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectRoot: string;
   projectDirectory: string;
   parsedTags: string[];
+  useLocalAlias: boolean;
 }
 
 function normalizeOptions(
@@ -42,6 +44,7 @@ function normalizeOptions(
     projectDirectory
   );
   const parsedTags = parseTags(options.tags);
+  const useLocalAlias = (options.alias || PathAlias.Local) === PathAlias.Local;
 
   return {
     ...options,
@@ -50,6 +53,7 @@ function normalizeOptions(
     projectRoot,
     projectDirectory,
     parsedTags,
+    useLocalAlias,
   };
 }
 

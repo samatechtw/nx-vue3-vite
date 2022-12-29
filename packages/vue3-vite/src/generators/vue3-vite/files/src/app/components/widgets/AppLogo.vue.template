@@ -1,5 +1,7 @@
+<% const $assetPath = useLocalAlias ? '@assets' : '../../assets' %>
+
 <template>
-  <img src="@assets/img/vue-logo.png" alt="Logo" />
+  <img src="<%= $assetPath %>/img/vue-logo.png" alt="Logo" />
 </template>
 
 <style lang="postcss" scoped>

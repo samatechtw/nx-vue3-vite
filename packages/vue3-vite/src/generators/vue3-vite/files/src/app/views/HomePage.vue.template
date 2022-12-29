@@ -1,3 +1,6 @@
+<% const $appPath = useLocalAlias ? '@app' : '..' %>
+<% const $assetsPath = useLocalAlias ? '@assets' : '../../assets' %>
+
 <template>
 <div class="home-wrap">
   <div class="home-title">
@@ -15,13 +18,13 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from '@app/store'
+import { useStore } from '<%= $appPath %>/store'
 
 const { cookiesAccepted } = useStore();
 </script>
 
 <style lang="postcss">
-@import '@assets/css/global.css';
+@import '<%= $assetsPath %>/css/global.css';
 
 .home-wrap {
   background-color: white;
