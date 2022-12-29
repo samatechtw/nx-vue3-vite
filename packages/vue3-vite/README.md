@@ -100,11 +100,12 @@ nx g nx-vue3-vite:app <app-name> [options]
 | --------- | ----------------------------- |
 | app-name  | The name of the generated app |
 
-| Options     | Default | Description                                  |
-| ----------- | ------- | -------------------------------------------- |
-| --title     | -       | Project title, defaults to <app-name>        |
-| --tags      | -       | Comma delimited tags for linting             |
-| --directory | apps    | Workspace directory to place the Vue project |
+| Options     | Default | Description                                                  |
+| ----------- | ------- | ------------------------------------------------------------ |
+| --title     | -       | Project title, defaults to <app-name>                        |
+| --tags      | -       | Comma delimited tags for linting                             |
+| --directory | apps    | Workspace directory to place the Vue project                 |
+| --alias     | local   | Decide whether to use local or global path alias in tsconfig |
 
 ### Component
 
