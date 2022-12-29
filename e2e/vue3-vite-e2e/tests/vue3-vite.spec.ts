@@ -35,10 +35,31 @@ describe('vue3-vite e2e', () => {
     expect(result.stdout).toContain('Build complete');
   });
 
+  it('should create and build vue3-vite app with global alias', async () => {
+    // Create app
+    const app = uniq('vue3-vite');
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
+    await runNxCommandAsync(`generate nx-vue3-vite:app ${app} --alias global`);
+
+    // Build app
+    const result = await runNxCommandAsync(`build ${app}`);
+    expect(result.stdout).toContain('Build complete');
+  });
+
   it('should pass lint check', async () => {
     // Create app
     const app = uniq('vue3-vite');
     await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
+
+    // Lint
+    const lintResult = await runNxCommandAsync(`lint ${app}`);
+    expect(lintResult.stdout).toContain('All files pass linting.');
+  });
+
+  it('should pass lint check with global alias', async () => {
+    // Create app
+    const app = uniq('vue3-vite');
+    await runNxCommandAsync(`generate nx-vue3-vite:app ${app} --alias global`);
 
     // Lint
     const lintResult = await runNxCommandAsync(`lint ${app}`);

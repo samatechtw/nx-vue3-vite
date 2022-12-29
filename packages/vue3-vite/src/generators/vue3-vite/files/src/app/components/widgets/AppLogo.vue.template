@@ -1,4 +1,4 @@
-<% const $assetPath = useLocalAlias ? '@assets' : '../../assets' %>
+<% const $assetPath = useLocalAlias ? '@assets' : '../../../assets' %>
 
 <template>
   <img src="<%= $assetPath %>/img/vue-logo.png" alt="Logo" />
