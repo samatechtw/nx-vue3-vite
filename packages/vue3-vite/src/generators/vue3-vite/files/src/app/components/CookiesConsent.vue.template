@@ -1,3 +1,6 @@
+<% const $appPath = useLocalAlias ? '@app' : '..' %>
+<% const $assetsPath = useLocalAlias ? '@assets' : '../../assets' %>
+
 <template>
   <div class="cookies" @click="hide">
     {{ t('cookies') }}
@@ -6,7 +9,7 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
-import { useStore } from '@app/store';
+import { useStore } from '<%= $appPath %>/store';
 
 const { t } = useI18n();
 const store = useStore();
@@ -17,7 +20,7 @@ const hide = () => {
 </script>
 
 <style lang="postcss" scoped>
-@import '@assets/css/global.css';
+@import '<%= $assetsPath %>/css/global.css';
 
 .cookies {
   @mixin text 15px;

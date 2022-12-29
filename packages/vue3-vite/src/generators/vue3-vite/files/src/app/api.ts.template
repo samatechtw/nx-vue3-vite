@@ -1,5 +1,7 @@
+<% const $appPath = useLocalAlias ? '@app' : '.' %>
+
 import { FetchApi } from '@sampullman/fetch-api';
-import { API_URL } from '@app/utils/config';
+import { API_URL } from '<%= $appPath %>/utils/config';
 
 class ApiResponse extends Response {
   data!: Record<string, unknown>;

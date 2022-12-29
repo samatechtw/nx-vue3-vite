@@ -1,5 +1,7 @@
+<% const $appPath = useLocalAlias ? '@app' : '.' %>
+
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '@app/views/HomePage.vue'
+import HomePage from '<%= $appPath %>/views/HomePage.vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
