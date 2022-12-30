@@ -5,7 +5,7 @@ import {
 } from '@nrwl/devkit';
 import { DevServerExecutorSchema } from './schema';
 import { createServer } from 'vitepress';
-import { getProjectRoot } from '../../utils';
+import { getProjectRoot } from '../../util/utils';
 
 export default async function runExecutor(
   options: DevServerExecutorSchema,

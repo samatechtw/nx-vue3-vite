@@ -16,8 +16,12 @@ import {
   DocsDependencies,
   VSCodeExtensionsFilePath,
   recommendedExtensions,
-} from '../../defaults';
-import { parseTags, runTasksInSerial, updateDependencies } from '../../utils';
+} from '../../util/defaults';
+import {
+  parseTags,
+  runTasksInSerial,
+  updateDependencies,
+} from '../../util/utils';
 
 interface NormalizedSchema extends DocsGeneratorSchema {
   projectName: string;
