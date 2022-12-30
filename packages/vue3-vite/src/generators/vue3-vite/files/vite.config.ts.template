@@ -3,29 +3,7 @@ import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import Components from 'unplugin-vue-components/vite'
 <% if (!useLocalAlias) { -%>
-  import tsconfigBase from '../../tsconfig.base.json'
-<% } %>
-
-<% if (!useLocalAlias) { %>
-  const rootOffset = '../..'
-
-  const resolve = (p: string): string => path.resolve(__dirname, p)
-
-  const tsconfigBaseAliases = (): Record<string, string> => {
-    const paths = tsconfigBase.compilerOptions?.paths || []
-    const aliases: Record<string, string> = {}
-    for (const [name, path] of Object.entries(paths)) {
-      const simplePath = path[0].replace('/*', '/')
-      const relative = `${rootOffset}${simplePath}`
-      if (name.includes('/*')) {
-        const resolved = `${resolve(relative)}/`
-        aliases[name.replace('/*', '/')] = resolved
-      } else {
-        aliases[name] = resolve(relative)
-      }
-    }
-    return aliases
-  }
+  import { tsconfigBaseAliases } from 'nx-vue3-vite';
 <% } %>
 
 export default defineConfig({
@@ -37,8 +15,8 @@ export default defineConfig({
         '@app/': `${path.resolve(__dirname, './src/app')}/`,
         '@public/': `${path.resolve(__dirname, './src/public')}/`,
       <% } else { %>
-        ...tsconfigBaseAliases(),
-        // Add your alias here.
+        ...tsconfigBaseAliases(__dirname),
+        // Add your aliases here
       <% } %>
     },
   },

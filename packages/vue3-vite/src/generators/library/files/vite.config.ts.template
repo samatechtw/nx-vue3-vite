@@ -2,13 +2,21 @@ import path from 'path'
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import Components from 'unplugin-vue-components/vite'
+<% if (!useLocalAlias) { -%>
+  import { tsconfigBaseAliases } from 'nx-vue3-vite';
+<% } %>
 
 module.exports = defineConfig({
   assetsInclude:  /\.(pdf|jpg|png|svg)$/,
   resolve: {
     alias: {
+      <% if (useLocalAlias) { %>
       '@assets/': `${path.resolve(__dirname, './src/assets')}/`,
       '@lib/': `${path.resolve(__dirname, './src/lib')}/`,
+      <% } else { %>
+        ...tsconfigBaseAliases(__dirname),
+        // Add your aliases here
+      <% } %>
     },
   },
   plugins: [

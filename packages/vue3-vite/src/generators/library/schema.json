@@ -29,6 +29,12 @@
       "type": "string",
       "description": "A directory where the library is placed",
       "alias": "d"
+    },
+    "alias": {
+      "type": "string",
+      "description": "Decide whether to use local or global path alias in tsconfig",
+      "enum": ["local", "global"],
+      "default": "global"
     }
   },
   "required": ["name"]
