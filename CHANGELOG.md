@@ -2,6 +2,14 @@
 
 TODO -- automate changelog generation
 
+### v0.22.0 - 221230
+
+- Add lib path to tsconfig.base.json in generator
+- Improve lib directory selection
+- Add app generator alias option
+- Better unit and e2e testing
+- Export tsconfigBaseAliases function for vite.config.ts
+
 ### v0.21.0 - 221222
 
 - Upgrade Vite to 4.0.X
