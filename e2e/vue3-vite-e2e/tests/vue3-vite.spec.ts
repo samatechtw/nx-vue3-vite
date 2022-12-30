@@ -35,31 +35,10 @@ describe('vue3-vite e2e', () => {
     expect(result.stdout).toContain('Build complete');
   });
 
-  it('should create and build vue3-vite app with global alias', async () => {
-    // Create app
-    const app = uniq('vue3-vite');
-    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
-    await runNxCommandAsync(`generate nx-vue3-vite:app ${app} --alias global`);
-
-    // Build app
-    const result = await runNxCommandAsync(`build ${app}`);
-    expect(result.stdout).toContain('Build complete');
-  });
-
   it('should pass lint check', async () => {
     // Create app
     const app = uniq('vue3-vite');
     await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
-
-    // Lint
-    const lintResult = await runNxCommandAsync(`lint ${app}`);
-    expect(lintResult.stdout).toContain('All files pass linting.');
-  });
-
-  it('should pass lint check with global alias', async () => {
-    // Create app
-    const app = uniq('vue3-vite');
-    await runNxCommandAsync(`generate nx-vue3-vite:app ${app} --alias global`);
 
     // Lint
     const lintResult = await runNxCommandAsync(`lint ${app}`);
@@ -83,36 +62,30 @@ describe('vue3-vite e2e', () => {
   });
 
   describe('--alias', () => {
-    it('should use local path alias by default', async () => {
+    it('should use global path alias by default', async () => {
       // Create app
       const app = uniq('vue3-vite');
       await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
 
       // Read paths
       const tsConfigJson = readJson(`apps/${app}/tsconfig.json`);
-      const { paths } = tsConfigJson.compilerOptions;
+      const { baseUrl, paths } = tsConfigJson.compilerOptions;
 
       // Verify `tsConfigJson.compilerOptions.paths`
-      expect(Object.keys(paths)).toHaveLength(3);
-      expect(paths).toMatchObject({
-        '@assets/*': ['./src/assets/*'],
-        '@app/*': ['./src/app/*'],
-        '@public/*': ['./src/public/*'],
-      });
+      expect(baseUrl).toBeUndefined();
+      expect(paths).toBeUndefined();
 
       // Verify `vite.config.ts`
       const viteConfig = readFile(`apps/${app}/vite.config.ts`);
-      expect(viteConfig).not.toContain('tsconfig.base.json');
-      expect(viteConfig).not.toContain('tsconfigBaseAliases');
       expect(viteConfig).toContain(
-        "'@assets/': `${path.resolve(__dirname, './src/assets')}/`"
+        "import tsconfigBase from '../../tsconfig.base.json'"
       );
+      expect(viteConfig).toContain("const rootOffset = '../..'");
       expect(viteConfig).toContain(
-        "'@app/': `${path.resolve(__dirname, './src/app')}/`"
+        'const tsconfigBaseAliases = (): Record<string, string> => {'
       );
-      expect(viteConfig).toContain(
-        "'@public/': `${path.resolve(__dirname, './src/public')}/"
-      );
+      expect(viteConfig).toContain('...tsconfigBaseAliases(),');
+      expect(viteConfig).toContain('// Add your alias here.');
     });
 
     it('should use local path alias when `alias` equals to "local"', async () => {
@@ -147,7 +120,7 @@ describe('vue3-vite e2e', () => {
       );
     });
 
-    it('should use global path alias when `alias` equals to "global"', async () => {
+    it('lints and builds with global paths when `alias` is "global"', async () => {
       // Create app
       const app = uniq('vue3-vite');
       await runNxCommandAsync(
@@ -173,6 +146,14 @@ describe('vue3-vite e2e', () => {
       );
       expect(viteConfig).toContain('...tsconfigBaseAliases(),');
       expect(viteConfig).toContain('// Add your alias here.');
+
+      // Lint
+      const lintResult = await runNxCommandAsync(`lint ${app}`);
+      expect(lintResult.stdout).toContain('All files pass linting.');
+
+      // Build app
+      const result = await runNxCommandAsync(`build ${app}`);
+      expect(result.stdout).toContain('Build complete');
     });
 
     it('should fail when `alias` is not a valid value', async () => {

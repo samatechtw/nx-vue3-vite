@@ -1,5 +1,3 @@
-<% const $assetsPath = useLocalAlias ? '@assets' : '../assets' %>
-
 <template>
 <div class="app">
   <router-view />
@@ -7,8 +5,8 @@
 </template>
 
 <style lang="postcss">
-@import '<%= $assetsPath %>/css/font.css';
-@import '<%= $assetsPath %>/css/global.css';
+@import '<%= assetPath('..') %>/css/font.css';
+@import '<%= assetPath('..') %>/css/global.css';
 
 html,body {
   padding: 0;
