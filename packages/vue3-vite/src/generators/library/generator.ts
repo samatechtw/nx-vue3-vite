@@ -24,6 +24,7 @@ import {
   updateDependencies,
 } from '../../util/utils';
 import { extractLayoutDirectory } from '@nrwl/devkit';
+import { PathAlias } from '../../util/path-alias';
 
 interface NormalizedSchema extends LibraryGeneratorSchema {
   fileName: string;
@@ -31,6 +32,7 @@ interface NormalizedSchema extends LibraryGeneratorSchema {
   libraryRoot: string;
   libraryDirectory: string;
   parsedTags: string[];
+  useLocalAlias: boolean;
 }
 
 function normalizeOptions(
@@ -55,6 +57,8 @@ function normalizeOptions(
   const libraryRoot = joinPathFragments(libsDir, fullLibraryDirectory);
 
   const parsedTags = parseTags(options.tags);
+  // Default to global paths
+  const useLocalAlias = options.alias === PathAlias.Local;
 
   return {
     ...options,
@@ -63,6 +67,7 @@ function normalizeOptions(
     libraryRoot,
     libraryDirectory,
     parsedTags,
+    useLocalAlias,
   };
 }
 

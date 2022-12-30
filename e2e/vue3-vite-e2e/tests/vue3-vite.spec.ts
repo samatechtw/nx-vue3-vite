@@ -7,7 +7,7 @@ import {
   uniq,
 } from '@nrwl/nx-plugin/testing';
 
-jest.setTimeout(60000);
+jest.setTimeout(90000);
 
 describe('vue3-vite e2e', () => {
   it('should create and build vue3-vite app', async () => {
@@ -78,14 +78,9 @@ describe('vue3-vite e2e', () => {
       // Verify `vite.config.ts`
       const viteConfig = readFile(`apps/${app}/vite.config.ts`);
       expect(viteConfig).toContain(
-        "import tsconfigBase from '../../tsconfig.base.json'"
+        "import { tsconfigBaseAliases } from 'nx-vue3-vite'"
       );
-      expect(viteConfig).toContain("const rootOffset = '../..'");
-      expect(viteConfig).toContain(
-        'const tsconfigBaseAliases = (): Record<string, string> => {'
-      );
-      expect(viteConfig).toContain('...tsconfigBaseAliases(),');
-      expect(viteConfig).toContain('// Add your alias here.');
+      expect(viteConfig).toContain('...tsconfigBaseAliases(__dirname),');
     });
 
     it('should use local path alias when `alias` equals to "local"', async () => {
@@ -107,7 +102,6 @@ describe('vue3-vite e2e', () => {
 
       // Verify `vite.config.ts`
       const viteConfig = readFile(`apps/${app}/vite.config.ts`);
-      expect(viteConfig).not.toContain('tsconfig.base.json');
       expect(viteConfig).not.toContain('tsconfigBaseAliases');
       expect(viteConfig).toContain(
         "'@assets/': `${path.resolve(__dirname, './src/assets')}/`"
@@ -138,14 +132,9 @@ describe('vue3-vite e2e', () => {
       // Verify `vite.config.ts`
       const viteConfig = readFile(`apps/${app}/vite.config.ts`);
       expect(viteConfig).toContain(
-        "import tsconfigBase from '../../tsconfig.base.json'"
+        "import { tsconfigBaseAliases } from 'nx-vue3-vite'"
       );
-      expect(viteConfig).toContain("const rootOffset = '../..'");
-      expect(viteConfig).toContain(
-        'const tsconfigBaseAliases = (): Record<string, string> => {'
-      );
-      expect(viteConfig).toContain('...tsconfigBaseAliases(),');
-      expect(viteConfig).toContain('// Add your alias here.');
+      expect(viteConfig).toContain('...tsconfigBaseAliases(__dirname),');
 
       // Lint
       const lintResult = await runNxCommandAsync(`lint ${app}`);

@@ -3,4 +3,5 @@ export interface LibraryGeneratorSchema {
   pascalCaseFiles?: boolean;
   tags?: string;
   directory?: string;
+  alias?: PathAlias;
 }

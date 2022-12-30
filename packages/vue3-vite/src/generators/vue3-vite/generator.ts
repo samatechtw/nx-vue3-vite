@@ -18,7 +18,7 @@ import {
   recommendedExtensions,
 } from '../../util/defaults';
 import { parseTags, updateDependencies, updateScripts } from '../../util/utils';
-import { PathAlias } from './path-alias';
+import { PathAlias } from '../../util/path-alias';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
