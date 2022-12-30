@@ -1,6 +1,6 @@
 import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
 import { build } from 'vite';
-import { getProjectRoot, getWorkspaceRoot } from '../../utils';
+import { getProjectRoot, getWorkspaceRoot } from '../../util/utils';
 import { BuildAppExecutorSchema } from './schema';
 
 export default async function runExecutor(

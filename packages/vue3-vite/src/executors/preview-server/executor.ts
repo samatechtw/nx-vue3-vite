@@ -1,9 +1,9 @@
 import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
 import { PreviewServer, preview } from 'vite';
-import { getProjectRoot, getWorkspaceRoot } from '../../utils';
+import { getProjectRoot, getWorkspaceRoot } from '../../util/utils';
 import { PreviewServerExecutorSchema } from './schema';
-import { DevServerLogger, createLogger } from '../../custom-logger';
-import { waitServerClose } from '../../server-utils';
+import { DevServerLogger, createLogger } from '../../util/custom-logger';
+import { waitServerClose } from '../../util/server-utils';
 
 interface PreviewExecutorResult {
   server: PreviewServer;

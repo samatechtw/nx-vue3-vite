@@ -16,8 +16,8 @@ import {
   ProjectDependencies,
   VSCodeExtensionsFilePath,
   recommendedExtensions,
-} from '../../defaults';
-import { parseTags, updateDependencies, updateScripts } from '../../utils';
+} from '../../util/defaults';
+import { parseTags, updateDependencies, updateScripts } from '../../util/utils';
 import { PathAlias } from './path-alias';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {

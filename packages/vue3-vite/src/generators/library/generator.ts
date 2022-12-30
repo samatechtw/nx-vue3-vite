@@ -17,12 +17,12 @@ import {
   LibraryDependencies,
   VSCodeExtensionsFilePath,
   recommendedExtensions,
-} from '../../defaults';
+} from '../../util/defaults';
 import {
   getCaseAwareFileName,
   parseTags,
   updateDependencies,
-} from '../../utils';
+} from '../../util/utils';
 import { extractLayoutDirectory } from '@nrwl/devkit';
 
 interface NormalizedSchema extends LibraryGeneratorSchema {

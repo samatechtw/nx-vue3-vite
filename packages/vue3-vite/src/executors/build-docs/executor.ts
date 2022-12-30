@@ -1,7 +1,7 @@
 import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
 import fs from 'fs';
 import { build } from 'vitepress';
-import { getProjectRoot, projectRelativePath } from '../../utils';
+import { getProjectRoot, projectRelativePath } from '../../util/utils';
 import { BuildDocsExecutorSchema } from './schema';
 
 export default async function runExecutor(

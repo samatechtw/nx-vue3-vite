@@ -10,8 +10,12 @@ import {
 } from '@nrwl/devkit';
 import * as path from 'path';
 import { CypressGeneratorSchema } from './schema';
-import { CypressDevDependencies } from '../../defaults';
-import { parseTags, runTasksInSerial, updateDependencies } from '../../utils';
+import { CypressDevDependencies } from '../../util/defaults';
+import {
+  parseTags,
+  runTasksInSerial,
+  updateDependencies,
+} from '../../util/utils';
 
 interface NormalizedSchema extends CypressGeneratorSchema {
   targetProject?: string;
