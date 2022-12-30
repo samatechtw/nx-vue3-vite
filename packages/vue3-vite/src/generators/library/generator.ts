@@ -72,15 +72,17 @@ function ensureRootFiles(host: Tree, options: NormalizedSchema) {
   }
   // Add path to `tsconfig.base.json`
   updateJson(host, 'tsconfig.base.json', (json) => {
-    // Ensure `compilerOptions.paths`
+    // Ensure `compilerOptions`
     if (!json.compilerOptions) {
       json.compilerOptions = {};
     }
+    // resolveJsonModule required for vite.config.ts aliasing
+    json.compilerOptions.resolveJsonModule = true;
+
+    // Add path to `compilerOptions.paths`
     if (!json.compilerOptions.paths) {
       json.compilerOptions.paths = {};
     }
-
-    // Add path to `compilerOptions.paths`
     const { npmScope } = readJson(host, 'nx.json');
     const key = `@${npmScope}/${options.libraryName}`;
     json.compilerOptions.paths[key] = [`${options.libraryRoot}/src/index.ts`];

@@ -32,7 +32,7 @@
       "type": "string",
       "description": "Decide whether to use local or global path alias in tsconfig",
       "enum": ["local", "global"],
-      "default": "local"
+      "default": "global"
     }
   },
   "required": ["name"]

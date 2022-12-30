@@ -44,7 +44,8 @@ function normalizeOptions(
     projectDirectory
   );
   const parsedTags = parseTags(options.tags);
-  const useLocalAlias = (options.alias || PathAlias.Local) === PathAlias.Local;
+  // Default to global paths
+  const useLocalAlias = options.alias === PathAlias.Local;
 
   return {
     ...options,
@@ -57,12 +58,23 @@ function normalizeOptions(
   };
 }
 
+function makeAssetPath(useLocalAlias: boolean) {
+  return (localRoot: string) =>
+    useLocalAlias ? '@assets' : `${localRoot}/assets`;
+}
+
+function makeAppPath(useLocalAlias: boolean) {
+  return (localRoot: string) => (useLocalAlias ? '@app' : localRoot);
+}
+
 function addFiles(host: Tree, options: NormalizedSchema) {
   const templateOptions = {
     ...options,
     ...names(options.name),
     offsetFromRoot: offsetFromRoot(options.projectRoot),
     projectRoot: options.projectRoot,
+    assetPath: makeAssetPath(options.useLocalAlias),
+    appPath: makeAppPath(options.useLocalAlias),
     // Hack for copying dotfiles - use as a template in the filename
     // e.g. "__dot__eslintrc.js" => ".eslintrc.js"
     dot: '.',
@@ -80,6 +92,15 @@ function ensureRootFiles(host: Tree) {
   if (!host.exists('tsconfig.base.json')) {
     generateFiles(host, path.join(__dirname, 'root-files'), '', {});
   }
+  updateJson(host, 'tsconfig.base.json', (json) => {
+    // Ensure `compilerOptions`
+    if (!json.compilerOptions) {
+      json.compilerOptions = {};
+    }
+    // resolveJsonModule required for vite.config.ts aliasing
+    json.compilerOptions.resolveJsonModule = true;
+    return json;
+  });
 }
 
 function updateExtensionRecommendations(host: Tree) {
