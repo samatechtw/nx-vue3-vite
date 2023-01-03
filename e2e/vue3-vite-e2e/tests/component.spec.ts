@@ -24,53 +24,53 @@ describe('component e2e', () => {
     // Check file exists
     const componentName = names(component).className;
     checkFilesExist(
-      `apps/${app}/src/components/${componentName}.cy.ts`,
-      `apps/${app}/src/components/${componentName}.vue`
+      `apps/${app}/src/app/components/${componentName}.cy.ts`,
+      `apps/${app}/src/app/components/${componentName}.vue`
     );
   });
 
   describe('--project', () => {
     it('should create component in the specified project', async () => {
-      // Create apps
-      const firstApp = uniq('first-vue3-vite-cmp');
-      const secondApp = uniq('second-vue3-vite-cmp');
-      await runNxCommandAsync(`generate nx-vue3-vite:app ${firstApp}`);
-      await runNxCommandAsync(`generate nx-vue3-vite:app ${secondApp}`);
+      // Create projects
+      const app = uniq('vue3-vite-cmp');
+      const library = uniq('library-cmp');
+      await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
+      await runNxCommandAsync(`generate nx-vue3-vite:library ${library}`);
 
       // Create components
-      const firstComponent = uniq('first-component');
-      const secondComponent = uniq('second-component');
+      const componentForApp = uniq('component-for-app');
+      const componentForLibrary = uniq('component-for-library');
       await runNxCommandAsync(
         [
-          `generate nx-vue3-vite:component ${firstComponent}`,
-          `--project ${firstApp}`,
+          `generate nx-vue3-vite:component ${componentForApp}`,
+          `--project ${app}`,
           '--style postcss',
           '--lang ts',
         ].join(' ')
       );
       await runNxCommandAsync(
         [
-          `generate nx-vue3-vite:component ${secondComponent}`,
-          `--project ${secondApp}`,
+          `generate nx-vue3-vite:component ${componentForLibrary}`,
+          `--project ${library}`,
           '--style postcss',
           '--lang ts',
         ].join(' ')
       );
 
-      // Check file exists
-      const firstComponentName = names(firstComponent).className;
-      const secondComponentName = names(secondComponent).className;
+      // Check files exist
+      const componentNameForApp = names(componentForApp).className;
+      const componentNameForLibrary = names(componentForLibrary).className;
       checkFilesExist(
-        `apps/${firstApp}/src/components/${firstComponentName}.cy.ts`,
-        `apps/${firstApp}/src/components/${firstComponentName}.vue`,
-        `apps/${secondApp}/src/components/${secondComponentName}.cy.ts`,
-        `apps/${secondApp}/src/components/${secondComponentName}.vue`
+        `apps/${app}/src/app/components/${componentNameForApp}.cy.ts`,
+        `apps/${app}/src/app/components/${componentNameForApp}.vue`,
+        `libs/${library}/src/lib/${componentNameForLibrary}.cy.ts`,
+        `libs/${library}/src/lib/${componentNameForLibrary}.vue`
       );
     });
   });
 
   describe('--directory', () => {
-    it('should create component in the specified directory', async () => {
+    it('should create component in the specified directory of an app', async () => {
       // Create app
       const app = uniq('vue3-vite-cmp');
       await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
@@ -92,6 +92,32 @@ describe('component e2e', () => {
       checkFilesExist(
         `apps/${app}/src/mydirectory/${componentName}.cy.ts`,
         `apps/${app}/src/mydirectory/${componentName}.vue`
+      );
+    });
+
+    it('should create component in the specified directory of a library', async () => {
+      // Create a library
+      const library = uniq('library');
+      await runNxCommandAsync(`generate nx-vue3-vite:library ${library}`);
+
+      // Create a component
+      const component = uniq('component');
+      const directory = 'some/random/library';
+      await runNxCommandAsync(
+        [
+          `generate nx-vue3-vite:component ${component}`,
+          `--project ${library}`,
+          `--directory ${directory}`,
+          '--style postcss',
+          '--lang ts',
+        ].join(' ')
+      );
+
+      // Check files exist
+      const componentName = names(component).className;
+      checkFilesExist(
+        `libs/${library}/src/${directory}/${componentName}.cy.ts`,
+        `libs/${library}/src/${directory}/${componentName}.vue`
       );
     });
   });
