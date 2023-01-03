@@ -26,8 +26,7 @@
     "directory": {
       "type": "string",
       "description": "Create the component under this directory (can be nested).",
-      "alias": "d",
-      "default": "components"
+      "alias": "d"
     },
     "scoped": {
       "type": "boolean",

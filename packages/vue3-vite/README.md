@@ -120,14 +120,14 @@ nx g nx-vue3-vite:c <name> [options]
 | --------- | -------------------------- |
 | name      | The name of the component. |
 
-| Options     | Default | Description                                                                                  |
-| ----------- | ------- | -------------------------------------------------------------------------------------------- |
-| --project   | -       | The name of the project.                                                                     |
-| --directory | -       | Directory relative to `src` where the component will be generated                            |
-| --lang      | ts      | Script language: ['ts', 'js']                                                                |
-| --setup     | true    | [Script setup](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) syntax sugar |
-| --style     | postcss | CSS Preprocessor: ['css', 'scss', 'less', 'stylus', 'postcss']                               |
-| --scoped    | false   | Whether the component's style block is scoped                                                |
+| Options     | Default                                                    | Description                                                                                  |
+| ----------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| --project   | -                                                          | The name of the project.                                                                     |
+| --directory | `app/components` for applications, and `lib` for libraries | Directory relative to `src` where the component will be generated                            |
+| --lang      | ts                                                         | Script language: ['ts', 'js']                                                                |
+| --setup     | true                                                       | [Script setup](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) syntax sugar |
+| --style     | postcss                                                    | CSS Preprocessor: ['css', 'scss', 'less', 'stylus', 'postcss']                               |
+| --scoped    | false                                                      | Whether the component's style block is scoped                                                |
 
 ### Library
 

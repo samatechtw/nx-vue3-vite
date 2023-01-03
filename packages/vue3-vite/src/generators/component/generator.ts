@@ -21,8 +21,13 @@ function normalizeOptions(
   host: Tree,
   options: ComponentGeneratorSchema
 ): NormalizedSchema {
-  const { sourceRoot } = readProjectConfiguration(host, options.project);
-  const relPath = names(options.directory ?? '').fileName;
+  const { sourceRoot, projectType } = readProjectConfiguration(
+    host,
+    options.project
+  );
+  const defaultComponentRoot =
+    projectType === 'library' ? 'lib' : 'app/components';
+  const relPath = names(options.directory ?? defaultComponentRoot).fileName;
   const componentPath = joinPathFragments(sourceRoot, relPath);
   return {
     ...options,
