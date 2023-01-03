@@ -2,6 +2,10 @@
 
 TODO -- automate changelog generation
 
+### v0.22.1 - 230103
+
+- Fix directory for component generator
+
 ### v0.22.0 - 221230
 
 - Add lib path to tsconfig.base.json in generator
