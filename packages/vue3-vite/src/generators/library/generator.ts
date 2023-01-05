@@ -25,6 +25,8 @@ import {
 } from '../../util/utils';
 import { extractLayoutDirectory } from '@nrwl/devkit';
 import { PathAlias } from '../../util/path-alias';
+import { TestFramework } from '../../util/test-framework';
+import { generateTestTarget } from '../../util/generate-test-target';
 
 interface NormalizedSchema extends LibraryGeneratorSchema {
   fileName: string;
@@ -33,6 +35,7 @@ interface NormalizedSchema extends LibraryGeneratorSchema {
   libraryDirectory: string;
   parsedTags: string[];
   useLocalAlias: boolean;
+  testFramework: TestFramework;
 }
 
 function normalizeOptions(
@@ -59,6 +62,8 @@ function normalizeOptions(
   const parsedTags = parseTags(options.tags);
   // Default to global paths
   const useLocalAlias = options.alias === PathAlias.Local;
+  // Default to vitest
+  const testFramework = options.test || TestFramework.Vitest;
 
   return {
     ...options,
@@ -68,12 +73,20 @@ function normalizeOptions(
     libraryDirectory,
     parsedTags,
     useLocalAlias,
+    testFramework,
   };
 }
 
 function ensureRootFiles(host: Tree, options: NormalizedSchema) {
+  // Ensure `jest.preset.js`
+  const useJest = options.testFramework === TestFramework.Jest;
+  if (useJest && !host.exists('jest.preset.js')) {
+    generateFiles(host, path.join(__dirname, 'root-files/jest'), '', {});
+  }
+
+  // Ensure `tsconfig.base.json`
   if (!host.exists('tsconfig.base.json')) {
-    generateFiles(host, path.join(__dirname, 'root-files'), '', {});
+    generateFiles(host, path.join(__dirname, 'root-files/tsconfig'), '', {});
   }
   // Add path to `tsconfig.base.json`
   updateJson(host, 'tsconfig.base.json', (json) => {
@@ -135,7 +148,7 @@ function updateExtensionRecommendations(host: Tree) {
 
 export default async function (host: Tree, options: LibraryGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
-  const { libraryRoot, libraryName } = normalizedOptions;
+  const { libraryRoot, libraryName, testFramework } = normalizedOptions;
 
   addProjectConfiguration(host, libraryName, {
     root: libraryRoot,
@@ -161,14 +174,7 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
           lintFilePatterns: [`${libraryRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
-      test: {
-        executor: '@nrwl/jest:jest',
-        outputs: ['coverage/libs/e2e/libs'],
-        options: {
-          jestConfig: `${libraryRoot}/jest.config.ts`,
-          passWithNoTests: true,
-        },
-      },
+      test: generateTestTarget(libraryRoot, testFramework),
     },
     tags: normalizedOptions.parsedTags,
   });

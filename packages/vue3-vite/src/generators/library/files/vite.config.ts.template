@@ -41,5 +41,10 @@ module.exports = defineConfig({
         }
       }
     }
-  }
+  },
+  <% if (testFramework === 'vitest') { -%>
+    test: {
+      environment: 'happy-dom',
+    }
+  <% } %>
 })

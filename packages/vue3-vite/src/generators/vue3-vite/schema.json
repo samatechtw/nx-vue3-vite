@@ -33,6 +33,12 @@
       "description": "Decide whether to use local or global path alias in tsconfig",
       "enum": ["local", "global"],
       "default": "global"
+    },
+    "test": {
+      "type": "string",
+      "description": "The testing framework of the project",
+      "enum": ["vitest", "jest"],
+      "default": "vitest"
     }
   },
   "required": ["name"]

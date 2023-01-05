@@ -27,4 +27,9 @@ export default defineConfig({
       dirs: ['src/app/components'],
     }),
   ],
+  <% if (testFramework === 'vitest') { -%>
+    test: {
+      environment: 'happy-dom',
+    }
+  <% } %>
 });

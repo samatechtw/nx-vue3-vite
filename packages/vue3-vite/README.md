@@ -106,6 +106,7 @@ nx g nx-vue3-vite:app <app-name> [options]
 | --tags      | -       | Comma delimited tags for linting                                                         |
 | --directory | apps    | Workspace directory to place the Vue project                                             |
 | --alias     | global  | Whether to use local (project tsconfig) or global (root tsconfig.base.json) path aliases |
+| --test      | vitest  | The testing framework of the project                                                     |
 
 ### Component
 
@@ -143,6 +144,7 @@ nx g nx-vue3-vite:library <lib-name> [options]
 | ----------- | ------- | -------------------------------------------- |
 | --tags      | -       | Comma delimited tags for linting             |
 | --directory | -       | Workspace directory to place the Vue library |
+| --test      | vitest  | The testing framework of the project         |
 
 ### Vitepress Docs
 

@@ -1,29 +1,19 @@
-import { createApp, h } from 'vue';
-import { expect } from '@jest/globals';
+import { mount } from '@vue/test-utils';
+<% if (testFramework === 'vitest') { -%>
+  import { vitest, expect, test } from 'vitest';
+<% } else { -%>
+  import { expect } from '@jest/globals';
+<% } -%>
+import CookiesConsent from './CookiesConsent.vue';
 
-jest.mock('vue-i18n', () => ({
+<%= testFramework %>.mock('vue-i18n', () => ({
   useI18n: () => ({
     t: () => 'Cookies',
   }),
 }));
 
-import CookiesConsent from './CookiesConsent.vue';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mount(Component: any) {
-  document.getElementsByTagName('html')[0].innerHTML = '';
-  const el = document.createElement('div');
-  el.id = 'app';
-  document.body.appendChild(el);
-  const Parent = {
-    render() {
-      return h(Component);
-    },
-  };
-  createApp(Parent).mount(el);
-}
-
 test('shows cookie text', () => {
-  mount(CookiesConsent);
-  expect(document.body.outerHTML).toContain('Cookies');
+  expect(CookiesConsent).toBeTruthy();
+  const wrapper = mount(CookiesConsent);
+  expect(wrapper.text()).toContain('Cookies');
 });

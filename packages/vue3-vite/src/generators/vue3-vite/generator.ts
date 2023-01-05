@@ -19,6 +19,8 @@ import {
 } from '../../util/defaults';
 import { parseTags, updateDependencies, updateScripts } from '../../util/utils';
 import { PathAlias } from '../../util/path-alias';
+import { TestFramework } from '../../util/test-framework';
+import { generateTestTarget } from '../../util/generate-test-target';
 
 interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectName: string;
@@ -27,6 +29,7 @@ interface NormalizedSchema extends Vue3ViteGeneratorSchema {
   projectDirectory: string;
   parsedTags: string[];
   useLocalAlias: boolean;
+  testFramework: TestFramework;
 }
 
 function normalizeOptions(
@@ -46,6 +49,8 @@ function normalizeOptions(
   const parsedTags = parseTags(options.tags);
   // Default to global paths
   const useLocalAlias = options.alias === PathAlias.Local;
+  // Default to vitest
+  const testFramework = options.test || TestFramework.Vitest;
 
   return {
     ...options,
@@ -55,6 +60,7 @@ function normalizeOptions(
     projectDirectory,
     parsedTags,
     useLocalAlias,
+    testFramework,
   };
 }
 
@@ -88,9 +94,18 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-function ensureRootFiles(host: Tree) {
+function ensureRootFiles(host: Tree, normalizedOptions: NormalizedSchema) {
+  // Ensure `jest.preset.js`
+  if (
+    normalizedOptions.testFramework === TestFramework.Jest &&
+    !host.exists('jest.preset.js')
+  ) {
+    generateFiles(host, path.join(__dirname, 'root-files/jest'), '', {});
+  }
+
+  // Ensure `tsconfig.base.json`
   if (!host.exists('tsconfig.base.json')) {
-    generateFiles(host, path.join(__dirname, 'root-files'), '', {});
+    generateFiles(host, path.join(__dirname, 'root-files/tsconfig'), '', {});
   }
   updateJson(host, 'tsconfig.base.json', (json) => {
     // Ensure `compilerOptions`
@@ -123,7 +138,7 @@ function updateExtensionRecommendations(host: Tree) {
 
 export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
-  const { projectRoot, projectName } = normalizedOptions;
+  const { projectRoot, projectName, testFramework } = normalizedOptions;
 
   addProjectConfiguration(host, projectName, {
     root: projectRoot,
@@ -152,14 +167,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
-      test: {
-        executor: '@nrwl/jest:jest',
-        outputs: ['coverage/libs/e2e/apps'],
-        options: {
-          jestConfig: `${projectRoot}/jest.config.ts`,
-          passWithNoTests: true,
-        },
-      },
+      test: generateTestTarget(projectRoot, testFramework),
     },
     tags: normalizedOptions.parsedTags,
   });
@@ -170,7 +178,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   );
   updateScripts(host, { nx: 'nx' });
 
-  ensureRootFiles(host);
+  ensureRootFiles(host, normalizedOptions);
   addFiles(host, normalizedOptions);
 
   updateExtensionRecommendations(host);

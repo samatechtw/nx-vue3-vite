@@ -1,0 +1,13 @@
+import { mount } from '@vue/test-utils';
+<% if (testFramework === 'vitest') { -%>
+  import { expect, test } from 'vitest';
+<% } else { -%>
+  import { expect } from '@jest/globals';
+<% } -%>
+import MyWidget from './MyWidget.vue';
+
+test('shows text', () => {
+  expect(MyWidget).toBeTruthy();
+  const wrapper = mount(MyWidget);
+  expect(wrapper.text()).toContain('MyWidget');
+});
