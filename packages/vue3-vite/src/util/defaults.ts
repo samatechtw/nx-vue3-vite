@@ -37,6 +37,18 @@ export const CypressDevDependencies = {
   '@nrwl/cypress': '*',
 };
 
+export const VitestDevDependencies = {
+  '@nrwl/vite': '^15.4.2',
+  '@vue/test-utils': '^2.2.6',
+  'happy-dom': '^8.1.1',
+  vitest: '^0.25.8',
+};
+
+export const JestDevDependencies = {
+  '@vue/vue3-jest': vue3JestVersion,
+  'jest-environment-jsdom': '^29.3.1',
+};
+
 export const ProjectDependencies = {
   vue: vueVersion,
   'vue-i18n': vueI18nVersion,
@@ -56,7 +68,6 @@ export const ProjectDevDependencies = {
   'vue-eslint-parser': '^9.1.0',
   '@vue/eslint-config-typescript': '^11.0.2',
   '@vue/compiler-sfc': vueVersion,
-  '@vue/vue3-jest': vue3JestVersion,
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
   '@typescript-eslint/eslint-plugin': '5.47.1',
@@ -75,6 +86,8 @@ export const ProjectDevDependencies = {
   'unplugin-vue-components': unpluginVueComponentsVersion,
   '@nrwl/jest': nrwlJestVersion,
   ...CypressDevDependencies,
+  ...VitestDevDependencies,
+  ...JestDevDependencies,
 };
 
 export const LibraryDependencies = {
@@ -97,6 +110,8 @@ export const LibraryDevDependencies = {
   'unplugin-vue-components': unpluginVueComponentsVersion,
   typescript: typescriptVersion,
   ...CypressDevDependencies,
+  ...VitestDevDependencies,
+  ...JestDevDependencies,
 };
 
 export const DocsDependencies = {};
