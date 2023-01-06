@@ -94,15 +94,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
   );
 }
 
-function ensureRootFiles(host: Tree, normalizedOptions: NormalizedSchema) {
-  // Ensure `jest.preset.js`
-  if (
-    normalizedOptions.testFramework === TestFramework.Jest &&
-    !host.exists('jest.preset.js')
-  ) {
-    generateFiles(host, path.join(__dirname, 'root-files/jest'), '', {});
-  }
-
+function ensureRootFiles(host: Tree) {
   // Ensure `tsconfig.base.json`
   if (!host.exists('tsconfig.base.json')) {
     generateFiles(host, path.join(__dirname, 'root-files/tsconfig'), '', {});
@@ -178,7 +170,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   );
   updateScripts(host, { nx: 'nx' });
 
-  ensureRootFiles(host, normalizedOptions);
+  ensureRootFiles(host);
   addFiles(host, normalizedOptions);
 
   updateExtensionRecommendations(host);

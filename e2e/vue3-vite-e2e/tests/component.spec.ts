@@ -9,10 +9,13 @@ import {
 jest.setTimeout(60000);
 
 describe('component e2e', () => {
+  beforeEach(() => {
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
+  });
+
   it('should create component', async () => {
     // Create app
     const app = uniq('vue3-vite-cmp');
-    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
     await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
 
     // Create component

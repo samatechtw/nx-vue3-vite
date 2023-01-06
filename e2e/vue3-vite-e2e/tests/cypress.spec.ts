@@ -1,5 +1,6 @@
 import {
   checkFilesExist,
+  ensureNxProject,
   runNxCommandAsync,
   uniq,
 } from '@nrwl/nx-plugin/testing';
@@ -7,6 +8,10 @@ import {
 jest.setTimeout(60000);
 
 describe('cypress e2e', () => {
+  beforeEach(() => {
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
+  });
+
   it('should create a cypress app', async () => {
     // Create app
     const cypress = uniq('cypress');

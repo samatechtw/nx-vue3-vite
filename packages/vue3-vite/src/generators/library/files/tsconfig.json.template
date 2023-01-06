@@ -7,7 +7,6 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "target": "ESNext",
     "paths": {
       "@assets/*": ["./src/assets/*"],

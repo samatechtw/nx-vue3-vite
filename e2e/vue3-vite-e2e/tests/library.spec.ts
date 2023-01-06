@@ -1,5 +1,6 @@
 import {
   checkFilesExist,
+  ensureNxProject,
   readFile,
   readJson,
   runNxCommandAsync,
@@ -9,6 +10,10 @@ import {
 jest.setTimeout(60000);
 
 describe('library e2e', () => {
+  beforeEach(() => {
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
+  });
+
   it('should create library', async () => {
     // Create library
     const library = uniq('library');

@@ -78,12 +78,6 @@ function normalizeOptions(
 }
 
 function ensureRootFiles(host: Tree, options: NormalizedSchema) {
-  // Ensure `jest.preset.js`
-  const useJest = options.testFramework === TestFramework.Jest;
-  if (useJest && !host.exists('jest.preset.js')) {
-    generateFiles(host, path.join(__dirname, 'root-files/jest'), '', {});
-  }
-
   // Ensure `tsconfig.base.json`
   if (!host.exists('tsconfig.base.json')) {
     generateFiles(host, path.join(__dirname, 'root-files/tsconfig'), '', {});

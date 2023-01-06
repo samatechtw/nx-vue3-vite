@@ -10,10 +10,13 @@ import {
 jest.setTimeout(90000);
 
 describe('vue3-vite e2e', () => {
+  beforeEach(() => {
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
+  });
+
   it('should create and build vue3-vite app', async () => {
     // Create app
     const app = uniq('vue3-vite');
-    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
     await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
 
     // Check files exist
@@ -48,7 +51,6 @@ describe('vue3-vite e2e', () => {
   describe('--directory', () => {
     it('should create app in the specified directory and add tags to nx.json', async () => {
       const plugin = uniq('vue3-vite');
-      ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
       await runNxCommandAsync(
         `generate nx-vue3-vite:app ${plugin} --directory subdir/${plugin} --tags e2etag,e2ePackage`
       );
