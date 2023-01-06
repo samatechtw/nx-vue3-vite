@@ -1,5 +1,6 @@
 import {
   checkFilesExist,
+  ensureNxProject,
   readFile,
   runNxCommandAsync,
   uniq,
@@ -8,6 +9,10 @@ import {
 jest.setTimeout(60000);
 
 describe('docs e2e', () => {
+  beforeEach(() => {
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
+  });
+
   it.skip('should create and build vitepress app', async () => {
     // Create app
     const docs = uniq('docs');
