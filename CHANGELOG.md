@@ -2,6 +2,12 @@
 
 TODO -- automate changelog generation
 
+### v0.23.0 - 230106
+
+- Improve E2E tests for app/lib testing
+- Support both Jest and Vitest for app/lib
+- Update packages
+
 ### v0.22.1 - 230103
 
 - Fix directory for component generator
