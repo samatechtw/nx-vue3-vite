@@ -2,6 +2,10 @@
 
 TODO -- automate changelog generation
 
+### v0.23.1 - 230108
+
+- Update extension recommendations
+
 ### v0.23.0 - 230106
 
 - Improve E2E tests for app/lib testing
