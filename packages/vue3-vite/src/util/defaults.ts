@@ -1,9 +1,6 @@
 export const VSCodeExtensionsFilePath = '.vscode/extensions.json';
 
-export const recommendedExtensions = [
-  'johnsoncodehk.volar',
-  'samatech.postcss-vue',
-];
+export const recommendedExtensions = ['vue.volar', 'cpylua.language-postcss'];
 
 // dependency versions
 export const vueVersion = '^3.2.45';
@@ -30,7 +27,7 @@ export const typescriptVersion = '~4.8.4';
 
 export const CypressDevDependencies = {
   cypress: '^12.3.0',
-  '@cypress/vue': '^5.0.2',
+  '@cypress/vue': '^5.0.3',
   '@cypress/vite-dev-server': '^5.0.2',
   '@cypress/code-coverage': '^3.10.0',
   'eslint-plugin-cypress': '^2.12.1',
