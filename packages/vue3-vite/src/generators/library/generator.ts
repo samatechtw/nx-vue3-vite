@@ -78,6 +78,7 @@ function normalizeOptions(
 }
 
 function ensureRootFiles(host: Tree, options: NormalizedSchema) {
+  const { libraryRoot, libraryName, directory } = options;
   // Ensure `tsconfig.base.json`
   if (!host.exists('tsconfig.base.json')) {
     generateFiles(host, path.join(__dirname, 'root-files/tsconfig'), '', {});
@@ -96,8 +97,9 @@ function ensureRootFiles(host: Tree, options: NormalizedSchema) {
       json.compilerOptions.paths = {};
     }
     const { npmScope } = readJson(host, 'nx.json');
-    const key = `@${npmScope}/${options.libraryName}`;
-    json.compilerOptions.paths[key] = [`${options.libraryRoot}/src/index.ts`];
+    const keyDir = directory ? `${directory}/` : '';
+    const key = `@${npmScope}/${keyDir}${libraryName}`;
+    json.compilerOptions.paths[key] = [`${libraryRoot}/src/index.ts`];
 
     return json;
   });
