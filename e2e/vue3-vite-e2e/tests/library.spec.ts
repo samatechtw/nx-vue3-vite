@@ -63,6 +63,12 @@ describe('library e2e', () => {
         const library = uniq('lib-test');
         await runNxCommandAsync(`generate nx-vue3-vite:library ${library}`);
 
+        // Read and verify `package.json`
+        const packageJson = readFile('package.json');
+        expect(packageJson).toContain('vitest');
+        expect(packageJson).toContain('happy-dom');
+        expect(packageJson).not.toContain('jest');
+
         // Read and verify `vite.config.ts`
         const viteConfig = readFile(`libs/${library}/vite.config.ts`);
         expect(viteConfig).toContain("environment: 'happy-dom'");
@@ -83,6 +89,12 @@ describe('library e2e', () => {
         await runNxCommandAsync(
           `generate nx-vue3-vite:library ${library} --test jest`
         );
+
+        // Read and verify `package.json`
+        const packageJson = readFile('package.json');
+        expect(packageJson).toContain('jest');
+        expect(packageJson).not.toContain('vitest');
+        expect(packageJson).not.toContain('happy-dom');
 
         // Read and verify `vite.config.ts`
         const viteConfig = readFile(`libs/${library}/vite.config.ts`);

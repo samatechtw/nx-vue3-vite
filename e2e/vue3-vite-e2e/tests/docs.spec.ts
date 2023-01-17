@@ -13,7 +13,7 @@ describe('docs e2e', () => {
     ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite');
   });
 
-  it.skip('should create and build vitepress app', async () => {
+  it('should create and build vitepress app', async () => {
     // Create app
     const docs = uniq('docs');
     await runNxCommandAsync(`generate nx-vue3-vite:docs ${docs}`);
@@ -28,7 +28,7 @@ describe('docs e2e', () => {
 
     // Build
     const result = await runNxCommandAsync(`build ${docs}`);
-    expect(result.stdout).toContain('Build complete');
+    expect(result.stdout).toContain('build complete');
   });
 
   describe('--title', () => {

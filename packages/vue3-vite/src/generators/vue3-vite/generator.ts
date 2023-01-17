@@ -16,6 +16,8 @@ import {
   ProjectDependencies,
   VSCodeExtensionsFilePath,
   recommendedExtensions,
+  JestDevDependencies,
+  VitestDevDependencies,
 } from '../../util/defaults';
 import { parseTags, updateDependencies, updateScripts } from '../../util/utils';
 import { PathAlias } from '../../util/path-alias';
@@ -163,10 +165,21 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
     },
     tags: normalizedOptions.parsedTags,
   });
+
+  const testDevDependencies =
+    testFramework === TestFramework.Jest
+      ? JestDevDependencies
+      : VitestDevDependencies;
+
+  const devDependencies = {
+    ...ProjectDevDependencies,
+    ...testDevDependencies,
+  };
+
   const depsTask = updateDependencies(
     host,
     ProjectDependencies,
-    ProjectDevDependencies
+    devDependencies
   );
   updateScripts(host, { nx: 'nx' });
 
