@@ -4,6 +4,7 @@ import {
   ensureNxProject,
   readFile,
   readJson,
+  runCommandAsync,
   runNxCommandAsync,
   uniq,
 } from './utils';
@@ -59,9 +60,61 @@ describe('library e2e', () => {
     const path = `libs/${library}/src/index.ts`;
 
     // Check if path is added to `tsConfigBaseJson.compilerOptions.paths` correctly
-    const tsConfigBaseJson = readJson(proj, `tsconfig.base.json`);
+    const tsConfigBaseJson = readJson(proj, 'tsconfig.base.json');
     const { paths } = tsConfigBaseJson.compilerOptions;
     expect(paths[key]).toEqual([path]);
+  });
+
+  it('should not overwrite `dependencies` in `package.json`', async () => {
+    // Reset project to verify correct dependencies are installed
+    proj = uniq('vue3-vite');
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+
+    // Install Vue 2
+    const packageName = 'vue';
+    const oldVersion = '^2.7.14';
+    await runCommandAsync(
+      proj,
+      `npm install ${packageName}@${oldVersion} --save`
+    );
+
+    // Verify `dependencies` after install
+    let packageJson = readJson(proj, 'package.json');
+    expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
+
+    // Create library
+    const library = uniq('library-dep');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
+
+    // Verify `dependencies` after running the generator
+    packageJson = readJson(proj, 'package.json');
+    expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
+  });
+
+  it('should not overwrite `devDependencies` in `package.json`', async () => {
+    // Reset project to verify correct dependencies are installed
+    proj = uniq('vue3-vite');
+    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+
+    // Install Vite 3
+    const packageName = 'vite';
+    const oldVersion = '^3.2.5';
+    await runCommandAsync(
+      proj,
+      `npm install ${packageName}@${oldVersion} --save-dev`
+    );
+
+    // Verify `dependencies` after install
+    let packageJson = readJson(proj, 'package.json');
+    expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
+
+    // Create library
+    const library = uniq('library-dev-dep');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
+
+    // Verify `devDepndencies` after running the generator
+    packageJson = readJson(proj, 'package.json');
+    expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
   });
 
   describe('--test', () => {

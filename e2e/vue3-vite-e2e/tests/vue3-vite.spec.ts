@@ -4,6 +4,7 @@ import {
   ensureNxProject,
   readFile,
   readJson,
+  runCommandAsync,
   runNxCommandAsync,
   uniq,
 } from './utils';
@@ -54,6 +55,50 @@ describe('vue3-vite e2e', () => {
     // Lint
     const lintResult = await runNxCommandAsync(proj, `lint ${app}`);
     expect(lintResult.stdout).toContain('All files pass linting.');
+  });
+
+  it('should not overwrite `dependencies` in `package.json`', async () => {
+    // Install Vue 2
+    const packageName = 'vue';
+    const oldVersion = '^2.7.14';
+    await runCommandAsync(
+      proj,
+      `npm install ${packageName}@${oldVersion} --force --save`
+    );
+
+    // Verify `dependencies` after install
+    let packageJson = readJson(proj, 'package.json');
+    expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
+
+    // Create app
+    const app = uniq('vue3-vite-dep');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:app ${app}`);
+
+    // Verify `dependencies` after running the generator
+    packageJson = readJson(proj, 'package.json');
+    expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
+  });
+
+  it('should not overwrite `devDependencies` in `package.json`', async () => {
+    // Install Vite 3
+    const packageName = 'vite';
+    const oldVersion = '^3.2.5';
+    await runCommandAsync(
+      proj,
+      `npm install ${packageName}@${oldVersion} --force --save-dev`
+    );
+
+    // Verify `dependencies` after install
+    let packageJson = readJson(proj, 'package.json');
+    expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
+
+    // Create app
+    const app = uniq('vue3-vite-dev-dep');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:app ${app}`);
+
+    // Verify `devDepndencies` after running the generator
+    packageJson = readJson(proj, 'package.json');
+    expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
   });
 
   describe('--directory', () => {
@@ -129,6 +174,10 @@ describe('vue3-vite e2e', () => {
     });
 
     it('lints and builds with global paths when `alias` is "global"', async () => {
+      // Reset project to avoid issues with previous project state
+      proj = uniq('vue3-vite');
+      ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+
       // Create app
       const app = uniq('vue3-vite');
       await runNxCommandAsync(
