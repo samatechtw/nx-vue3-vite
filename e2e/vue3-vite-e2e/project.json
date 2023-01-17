@@ -4,11 +4,10 @@
   "sourceRoot": "e2e/vue3-vite-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/api"],
       "options": {
-        "target": "vue3-vite:build",
-        "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts",
-        "runInBand": true
+        "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts"
       }
     }
   },
