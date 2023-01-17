@@ -17,6 +17,8 @@ import {
   LibraryDependencies,
   VSCodeExtensionsFilePath,
   recommendedExtensions,
+  JestDevDependencies,
+  VitestDevDependencies,
 } from '../../util/defaults';
 import {
   getCaseAwareFileName,
@@ -178,10 +180,20 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
   ensureRootFiles(host, normalizedOptions);
   addFiles(host, normalizedOptions);
 
+  const testDevDependencies =
+    testFramework === TestFramework.Jest
+      ? JestDevDependencies
+      : VitestDevDependencies;
+
+  const devDependencies = {
+    ...LibraryDevDependencies,
+    ...testDevDependencies,
+  };
+
   const depsTask = updateDependencies(
     host,
     LibraryDependencies,
-    LibraryDevDependencies
+    devDependencies
   );
 
   updateExtensionRecommendations(host);

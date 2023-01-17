@@ -15,6 +15,7 @@ export const babelJestVersion = '^29.3.1';
 export const jestGlobalsVersion = '^29.3.1';
 export const vue3JestVersion = '^29.2.2';
 export const babelCommonjsVersion = '^7.19.6';
+export const babelPresetEnvVersion = '^7.20.2';
 export const postcssVersion = '^8.4.20';
 export const postcssBasicsVersion = '^0.5.0';
 export const stylelintVersion = '^14.16.0';
@@ -34,17 +35,21 @@ export const CypressDevDependencies = {
   '@nrwl/cypress': '*',
 };
 
+export const VueDevDependencies = {
+  '@vue/test-utils': '^2.2.6',
+};
+
 export const VitestDevDependencies = {
   '@nrwl/vite': '^15.4.4',
-  '@vue/test-utils': '^2.2.6',
   'happy-dom': '^8.1.1',
   vitest: '^0.26.3',
 };
 
 export const JestDevDependencies = {
-  '@babel/preset-env': '^7.20.2',
+  '@nrwl/jest': nrwlJestVersion,
   '@jest/globals': jestGlobalsVersion,
   '@vue/vue3-jest': vue3JestVersion,
+  'babel-jest': babelJestVersion,
   'jest-environment-jsdom': '^29.3.1',
 };
 
@@ -76,18 +81,16 @@ export const ProjectDevDependencies = {
   'class-transformer': '^0.5.1',
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
-  'babel-jest': babelJestVersion,
   '@babel/plugin-transform-modules-commonjs': babelCommonjsVersion,
+  '@babel/preset-env': babelPresetEnvVersion,
   '@babel/core': '^7.20.5',
   '@samatech/postcss-basics': postcssBasicsVersion,
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
   'unplugin-vue-components': unpluginVueComponentsVersion,
-  '@nrwl/jest': nrwlJestVersion,
   ...LintDevDependencies,
   ...CypressDevDependencies,
-  ...VitestDevDependencies,
-  ...JestDevDependencies,
+  ...VueDevDependencies,
 };
 
 export const LibraryDependencies = {
@@ -99,6 +102,7 @@ export const LibraryDependencies = {
 export const LibraryDevDependencies = {
   vite: viteVersion,
   postcss: postcssVersion,
+  '@babel/preset-env': babelPresetEnvVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
   '@samatech/postcss-basics': postcssBasicsVersion,
   tslib: tslibVersion,
@@ -107,8 +111,7 @@ export const LibraryDevDependencies = {
   typescript: typescriptVersion,
   ...LintDevDependencies,
   ...CypressDevDependencies,
-  ...VitestDevDependencies,
-  ...JestDevDependencies,
+  ...VueDevDependencies,
 };
 
 export const DocsDependencies = {};

@@ -175,6 +175,12 @@ describe('vue3-vite e2e', () => {
         const app = uniq('vue3-vite');
         await runNxCommandAsync(`generate nx-vue3-vite:app ${app}`);
 
+        // Read and verify `package.json`
+        const packageJson = readFile('package.json');
+        expect(packageJson).toContain('vitest');
+        expect(packageJson).toContain('happy-dom');
+        expect(packageJson).not.toContain('jest');
+
         // Read and verify `vite.config.ts`
         const viteConfig = readFile(`apps/${app}/vite.config.ts`);
         expect(viteConfig).toContain("environment: 'happy-dom'");
@@ -195,6 +201,12 @@ describe('vue3-vite e2e', () => {
         // Create app
         const app = uniq('vue3-vite');
         await runNxCommandAsync(`generate nx-vue3-vite:app ${app} --test jest`);
+
+        // Read and verify `package.json`
+        const packageJson = readFile('package.json');
+        expect(packageJson).toContain('jest');
+        expect(packageJson).not.toContain('vitest');
+        expect(packageJson).not.toContain('happy-dom');
 
         // Read and verify `vite.config.ts`
         const viteConfig = readFile(`apps/${app}/vite.config.ts`);

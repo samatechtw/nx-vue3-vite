@@ -7,7 +7,8 @@
       "executor": "@nrwl/nx-plugin:e2e",
       "options": {
         "target": "vue3-vite:build",
-        "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts"
+        "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts",
+        "runInBand": true
       }
     }
   },
