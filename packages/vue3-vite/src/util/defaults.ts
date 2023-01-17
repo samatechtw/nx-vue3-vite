@@ -9,7 +9,7 @@ export const vueRouterVersion = '^4.1.6';
 
 // devDependency versions
 export const viteVersion = '^4.0.4';
-export const eslintVersion = '^8.31.0';
+export const eslintVersion = '^8.32.0';
 export const vuePluginVersion = '^4.0.0';
 export const babelJestVersion = '^29.3.1';
 export const jestGlobalsVersion = '^29.3.1';
@@ -23,7 +23,7 @@ export const stylelintConfigVersion = '^29.0.0';
 export const tslibVersion = '^2.4.1';
 export const tsConfigVersion = '^7.0.0';
 export const unpluginVueComponentsVersion = '^0.22.12';
-export const nrwlJestVersion = '^15.4.4';
+export const nrwlJestVersion = '^15.5.1';
 export const typescriptVersion = '~4.8.4';
 
 export const CypressDevDependencies = {
@@ -40,9 +40,9 @@ export const VueDevDependencies = {
 };
 
 export const VitestDevDependencies = {
-  '@nrwl/vite': '^15.4.4',
-  'happy-dom': '^8.1.1',
-  vitest: '^0.26.3',
+  '@nrwl/vite': '^15.5.1',
+  'happy-dom': '^8.1.4',
+  vitest: '^0.27.2',
 };
 
 export const JestDevDependencies = {
