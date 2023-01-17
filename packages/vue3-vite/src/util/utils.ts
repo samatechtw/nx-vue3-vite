@@ -2,7 +2,6 @@ import {
   ExecutorContext,
   joinPathFragments,
   addDependenciesToPackageJson,
-  removeDependenciesFromPackageJson,
   Tree,
   GeneratorCallback,
   updateJson,
@@ -41,19 +40,28 @@ export function updateDependencies(
   deps: Record<string, string>,
   devDeps: Record<string, string>
 ) {
-  // Make sure we don't have dependency duplicates
-  ensureDepsInPackageJson(host);
-  const depKeys = Object.keys(deps);
-  const devDepKeys = Object.keys(devDeps);
-  removeDependenciesFromPackageJson(host, depKeys, devDepKeys);
-  return addDependenciesToPackageJson(host, deps, devDeps);
+  const packageJson = ensureDepsInPackageJson(host);
+  const oldDeps = packageJson.dependencies as Record<string, string>;
+  const oldDevDeps = packageJson.devDependencies as Record<string, string>;
+
+  const depsToBeInstalled = { ...deps, ...oldDeps };
+  const devDepsToBeInstalled = { ...devDeps, ...oldDevDeps };
+
+  // Add dependencies
+  return addDependenciesToPackageJson(
+    host,
+    depsToBeInstalled,
+    devDepsToBeInstalled
+  );
 }
 
 /**
  * Ensures that both `dependencies` and `devDependencies` exists in `package.json`.
  * If not, this function will create them in `package.json`.
+ * @returns `package.json` in JSON format.
  */
-export function ensureDepsInPackageJson(host: Tree) {
+export function ensureDepsInPackageJson(host: Tree): Record<string, unknown> {
+  let packageJson: Record<string, unknown> = {};
   updateJson(host, 'package.json', (json) => {
     if (!json.dependencies) {
       json.dependencies = {};
@@ -61,8 +69,10 @@ export function ensureDepsInPackageJson(host: Tree) {
     if (!json.devDependencies) {
       json.devDependencies = {};
     }
+    packageJson = json;
     return json;
   });
+  return packageJson;
 }
 
 export function updateScripts(host: Tree, scripts: Record<string, string>) {
