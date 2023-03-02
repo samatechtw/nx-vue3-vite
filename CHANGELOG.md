@@ -2,6 +2,10 @@
 
 TODO -- automate changelog generation
 
+### v0.23.2 - 230302
+
+- Update packages
+
 ### v0.23.1 - 230108
 
 - Update extension recommendations
