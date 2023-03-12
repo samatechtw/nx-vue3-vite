@@ -2,6 +2,10 @@
 
 TODO -- automate changelog generation
 
+### v0.23.4 - 230312
+
+- Cypress executor logging and bugfixes
+
 ### v0.23.2 - 230302
 
 - Update packages
