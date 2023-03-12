@@ -55,7 +55,8 @@ function normalizeOptions(
 }
 
 function checkSupportedBrowser({ browser }: CypressExecutorOptions) {
-  // Browser was not passed in as an option, cypress will use whatever default it has set and we dont need to check it
+  // Browser was not passed as an option.
+  // Cypress will use it's default and we don't need to check it
   if (!browser) {
     return;
   }
@@ -81,7 +82,7 @@ async function* startDevServer(
     return;
   }
 
-  const target = parseTargetString(opts.devServerTarget);
+  const target = parseTargetString(opts.devServerTarget, context.projectGraph);
 
   for await (const output of await runExecutor<{
     success: boolean;
@@ -141,5 +142,8 @@ async function runCypress(baseUrl: string, opts: CypressExecutorOptions) {
    * `cypress.open` is the graphical UI, so it will be obvious to know what wasn't
    * working. Forcing the build to success when `cypress.open` is used.
    */
+  logger.info(
+    `Cypress completed with ${result.totalFailed} failures: ${result.failures}`
+  );
   return !result.totalFailed && !result.failures;
 }

@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "vue3-vite": "packages/vue3-vite",
-    "vue3-vite-e2e": "e2e/vue3-vite-e2e"
-  }
-}
