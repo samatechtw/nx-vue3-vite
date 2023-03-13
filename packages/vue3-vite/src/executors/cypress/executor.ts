@@ -132,18 +132,22 @@ async function runCypress(baseUrl: string, opts: CypressExecutorOptions) {
   options.reporterOptions = opts.reporterOptions;
   options.testingType = opts.testingType;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const result: any =
-    (await (opts.headless ? Cypress.run(options) : Cypress.open(options))) ??
-    {};
-
   /**
-   * `cypress.open` is returning `0` and is not of the same type as `cypress.run`.
+   * `cypress.open` returns `0` and is not of the same type as `cypress.run`.
    * `cypress.open` is the graphical UI, so it will be obvious to know what wasn't
    * working. Forcing the build to success when `cypress.open` is used.
    */
-  logger.info(
-    `Cypress completed with status: ${result.status} failed=${result.totalFailed}`
-  );
-  return (result.totalFailed ?? 0 <= 0) && !result.failures;
+  if (opts.headless) {
+    const result = await Cypress.run(options);
+    const success = result.status === 'finished';
+    const failures = success ? 0 : result.failures;
+    const message = success ? '' : `, ${result.message}`;
+    logger.info(
+      `Cypress completed with status: ${result.status}${message} failed=${failures}`
+    );
+    return success;
+  } else {
+    await Cypress.open(options);
+    return true;
+  }
 }
