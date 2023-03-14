@@ -145,7 +145,7 @@ async function runCypress(baseUrl: string, opts: CypressExecutorOptions) {
     logger.info(
       `Cypress completed with status: ${result.status}${message} failed=${failures}`
     );
-    return success;
+    return success && failures <= 0;
   } else {
     await Cypress.open(options);
     return true;
