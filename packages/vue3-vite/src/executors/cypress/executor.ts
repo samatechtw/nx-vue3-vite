@@ -142,6 +142,7 @@ async function runCypress(baseUrl: string, opts: CypressExecutorOptions) {
     const success = result.status === 'finished';
     const failures = success ? 0 : result.failures;
     const message = success ? '' : `, ${result.message}`;
+    logger.info(JSON.stringify(result));
     logger.info(
       `Cypress completed with status: ${result.status}${message} failed=${failures}`
     );
