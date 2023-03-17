@@ -140,13 +140,11 @@ async function runCypress(baseUrl: string, opts: CypressExecutorOptions) {
   if (opts.headless) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result = (await Cypress.run(options)) as any;
-    delete result.runs;
 
     const finished = result.status === 'finished';
-    const failures = finished ? 0 : result.totalFailed;
+    const failures = result.totalFailed ?? 0;
     const message = finished ? '' : `, ${result.message}`;
 
-    logger.info(JSON.stringify(result));
     logger.info(
       `Cypress completed with status: ${result.status}${message} failed=${failures}`
     );
