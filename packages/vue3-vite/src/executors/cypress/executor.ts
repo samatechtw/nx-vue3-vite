@@ -138,15 +138,19 @@ async function runCypress(baseUrl: string, opts: CypressExecutorOptions) {
    * working. Forcing the build to success when `cypress.open` is used.
    */
   if (opts.headless) {
-    const result = await Cypress.run(options);
-    const success = result.status === 'finished';
-    const failures = success ? 0 : result.failures;
-    const message = success ? '' : `, ${result.message}`;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = (await Cypress.run(options)) as any;
+    delete result.runs;
+
+    const finished = result.status === 'finished';
+    const failures = finished ? 0 : result.totalFailed;
+    const message = finished ? '' : `, ${result.message}`;
+
     logger.info(JSON.stringify(result));
     logger.info(
       `Cypress completed with status: ${result.status}${message} failed=${failures}`
     );
-    return success && failures <= 0;
+    return failures <= 0;
   } else {
     await Cypress.open(options);
     return true;
