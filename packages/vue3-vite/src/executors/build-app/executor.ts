@@ -2,6 +2,7 @@ import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
 import { build } from 'vite';
 import { getProjectRoot, getWorkspaceRoot } from '../../util/utils';
 import { BuildAppExecutorSchema } from './schema';
+import { copyPackageJsonPlugin } from '../../external';
 
 export default async function runExecutor(
   options: BuildAppExecutorSchema,
@@ -31,6 +32,9 @@ export default async function runExecutor(
     build: {
       outDir,
       minify,
+      rollupOptions: {
+        plugins: [copyPackageJsonPlugin(projectRoot)],
+      },
     },
   });
   console.log('Build complete');

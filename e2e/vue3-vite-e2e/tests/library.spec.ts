@@ -2,11 +2,13 @@ import {
   checkFilesExist,
   cleanup,
   ensureNxProject,
+  exists,
   readFile,
   readJson,
   runCommandAsync,
   runNxCommandAsync,
   uniq,
+  updateFile,
 } from './utils';
 
 jest.setTimeout(60000);
@@ -23,7 +25,7 @@ describe('library e2e', () => {
     cleanup(proj);
   });
 
-  it('should create library', async () => {
+  it('should create library and build', async () => {
     // Create library
     const library = uniq('library');
     await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
@@ -37,6 +39,57 @@ describe('library e2e', () => {
       `libs/${library}/src/lib/MyWidget.vue`,
       `libs/${library}/src/lib/MyWidget.spec.ts`,
     ]);
+
+    // Build library
+    const result = await runNxCommandAsync(proj, `build ${library}`);
+    expect(result.stdout).toContain('Build complete');
+  });
+
+  it('should make a copy of `package.json` to `dist` if it exists', async () => {
+    // Create library
+    const library = uniq('library');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
+
+    // Create `package.json`
+    const stringifiedPackageJson = JSON.stringify({
+      name: library,
+      version: '0.0.1',
+    });
+    updateFile(
+      'package.json',
+      stringifiedPackageJson,
+      `${proj}/libs/${library}`
+    );
+    checkFilesExist(proj, [`libs/${library}/package.json`]);
+
+    // Build library
+    const result = await runNxCommandAsync(proj, `build ${library}`);
+    expect(result.stdout).toContain('Build complete');
+
+    // Verify `package.json` is copied
+    const copiedPackageJson = readJson(
+      proj,
+      `dist/libs/${library}/package.json`
+    );
+    expect(JSON.stringify(copiedPackageJson)).toEqual(stringifiedPackageJson);
+  });
+
+  it('should not make a copy of `package.json` to `dist` if it does not exist', async () => {
+    // Create library
+    const library = uniq('library');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
+
+    // Build library
+    const result = await runNxCommandAsync(proj, `build ${library}`);
+    expect(result.stdout).toContain('Build complete');
+
+    // Verify `package.json` does not exist in library folder
+    const packageJsonInLibrary = `${proj}/libs/${library}/package.json`;
+    expect(exists(packageJsonInLibrary)).toEqual(false);
+
+    // Verify `package.json` does not exist in `dist` folder
+    const packageJsonInDist = `${proj}/dist/libs/${library}/package.json`;
+    expect(exists(packageJsonInDist)).toEqual(false);
   });
 
   it('should pass lint check', async () => {
