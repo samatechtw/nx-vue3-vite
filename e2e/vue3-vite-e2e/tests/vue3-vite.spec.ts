@@ -2,11 +2,13 @@ import {
   checkFilesExist,
   cleanup,
   ensureNxProject,
+  exists,
   readFile,
   readJson,
   runCommandAsync,
   runNxCommandAsync,
   uniq,
+  updateFile,
 } from './utils';
 
 jest.setTimeout(90000);
@@ -36,7 +38,6 @@ describe('vue3-vite e2e', () => {
       `apps/${app}/src/app/main.ts`,
       `apps/${app}/tsconfig.json`,
       `apps/${app}/vite.config.ts`,
-      `.prettierrc`,
       `nx.json`,
       `package.json`,
       `tsconfig.base.json`,
@@ -45,6 +46,46 @@ describe('vue3-vite e2e', () => {
     // Build app
     const result = await runNxCommandAsync(proj, `build ${app}`);
     expect(result.stdout).toContain('Build complete');
+  });
+
+  it('should make a copy of `package.json` to `dist` if it exists', async () => {
+    // Create app
+    const app = uniq('vue3-vite');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:app ${app}`);
+
+    // Create `package.json`
+    const stringifiedPackageJson = JSON.stringify({
+      name: app,
+      version: '0.0.1',
+    });
+    updateFile('package.json', stringifiedPackageJson, `${proj}/apps/${app}`);
+    checkFilesExist(proj, [`apps/${app}/package.json`]);
+
+    // Build app
+    const result = await runNxCommandAsync(proj, `build ${app}`);
+    expect(result.stdout).toContain('Build complete');
+
+    // Verify `package.json` is copied
+    const copiedPackageJson = readJson(proj, `dist/apps/${app}/package.json`);
+    expect(JSON.stringify(copiedPackageJson)).toEqual(stringifiedPackageJson);
+  });
+
+  it('should not make a copy of `package.json` to `dist` if it does not exist', async () => {
+    // Create app
+    const app = uniq('vue3-vite');
+    await runNxCommandAsync(proj, `generate nx-vue3-vite:app ${app}`);
+
+    // Build app
+    const result = await runNxCommandAsync(proj, `build ${app}`);
+    expect(result.stdout).toContain('Build complete');
+
+    // Verify `package.json` does not exist in app folder
+    const packageJsonInApp = `${proj}/apps/${app}/package.json`;
+    expect(exists(packageJsonInApp)).toEqual(false);
+
+    // Verify `package.json` does not exist in `dist` folder
+    const packageJsonInDist = `${proj}/dist/apps/${app}/package.json`;
+    expect(exists(packageJsonInDist)).toEqual(false);
   });
 
   it('should pass lint check', async () => {
@@ -133,8 +174,8 @@ describe('vue3-vite e2e', () => {
 
       // Verify `vite.config.ts`
       const viteConfig = readFile(proj, `apps/${app}/vite.config.ts`);
-      expect(viteConfig).toContain(
-        "import { tsconfigBaseAliases } from 'nx-vue3-vite'"
+      expect(viteConfig).toMatch(
+        /import\s{.*tsconfigBaseAliases.*}\sfrom\s'nx-vue3-vite'/
       );
       expect(viteConfig).toContain('...tsconfigBaseAliases(__dirname),');
     });
@@ -195,8 +236,8 @@ describe('vue3-vite e2e', () => {
 
       // Verify `vite.config.ts`
       const viteConfig = readFile(proj, `apps/${app}/vite.config.ts`);
-      expect(viteConfig).toContain(
-        "import { tsconfigBaseAliases } from 'nx-vue3-vite'"
+      expect(viteConfig).toMatch(
+        /import\s{.*tsconfigBaseAliases.*}\sfrom\s'nx-vue3-vite'/
       );
       expect(viteConfig).toContain('...tsconfigBaseAliases(__dirname),');
 

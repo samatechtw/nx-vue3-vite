@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import Components from 'unplugin-vue-components/vite'
 <% if (!useLocalAlias) { -%>
-  import { tsconfigBaseAliases } from 'nx-vue3-vite';
+  import { tsconfigBaseAliases } from 'nx-vue3-vite'
 <% } %>
 
 export default defineConfig({
