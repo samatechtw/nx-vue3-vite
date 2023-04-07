@@ -2,6 +2,12 @@
 
 TODO -- automate changelog generation
 
+### v0.24.0 - 230407
+
+- Copy project package.json to lib/app dist on build
+- Cypress executor fixes
+- Update packages
+
 ### v0.23.4 - 230312
 
 - Cypress executor logging and bugfixes
