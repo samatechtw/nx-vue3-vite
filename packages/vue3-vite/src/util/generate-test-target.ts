@@ -5,7 +5,7 @@ export const generateTestTarget = (
   testFramework: TestFramework
 ) => {
   const useVitest = testFramework === TestFramework.Vitest;
-  const executor = useVitest ? '@nrwl/vite:test' : '@nrwl/jest:jest';
+  const executor = useVitest ? '@nx/vite:test' : '@nx/jest:jest';
   const config = useVitest
     ? {
         config: 'vite.config.ts',

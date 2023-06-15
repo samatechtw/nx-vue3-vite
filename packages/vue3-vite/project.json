@@ -4,7 +4,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/vue3-vite",
@@ -36,13 +36,13 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": ["packages/vue3-vite/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/packages/vue3-vite"],
       "options": {
         "jestConfig": "packages/vue3-vite/jest.config.ts",

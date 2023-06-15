@@ -1,4 +1,4 @@
-import { Tree, readJson } from '@nrwl/devkit';
+import { Tree, readJson } from '@nx/devkit';
 
 // Package-based repositories usually have `"workspaces": ["packages/*"]` in package.json.
 // This may not be a reliable way to detect repository type

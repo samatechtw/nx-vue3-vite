@@ -6,8 +6,8 @@ import {
   GeneratorCallback,
   updateJson,
   names,
-} from '@nrwl/devkit';
-import { jestProjectGenerator } from '@nrwl/jest';
+} from '@nx/devkit';
+import { jestProjectGenerator } from '@nx/jest';
 
 function sortObjectByKeys(obj: unknown): unknown {
   return Object.keys(obj)

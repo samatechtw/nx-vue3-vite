@@ -1,5 +1,5 @@
-import { Tree, readProjectConfiguration } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
+import { Tree, readProjectConfiguration } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
 import appGenerator from '../vue3-vite/generator';
 import generator from './generator';
 import { ComponentGeneratorSchema } from './schema';

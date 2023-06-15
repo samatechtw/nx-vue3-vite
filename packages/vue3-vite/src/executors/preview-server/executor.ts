@@ -1,4 +1,4 @@
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments } from '@nx/devkit';
 import { PreviewServer, preview } from 'vite';
 import { getProjectRoot, getWorkspaceRoot } from '../../util/utils';
 import { PreviewServerExecutorSchema } from './schema';

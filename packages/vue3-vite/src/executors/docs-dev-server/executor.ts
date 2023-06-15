@@ -1,8 +1,4 @@
-import {
-  ExecutorContext,
-  joinPathFragments,
-  offsetFromRoot,
-} from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments, offsetFromRoot } from '@nx/devkit';
 import { DevServerExecutorSchema } from './schema';
 import { createServer } from 'vitepress';
 import { getProjectRoot } from '../../util/utils';

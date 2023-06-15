@@ -7,7 +7,7 @@
   "peerDependencies": {
     "vite": "^2.9.15 || ^3.2.4 || ^4.0.4",
     "@vitejs/plugin-vue": "^4.1.0",
-    "@nrwl/devkit": "^15.9.2",
+    "@nx/devkit": "^16.3.2",
     "cypress": "^12.9.0",
     "@cypress/vite-dev-server": "^5.0.5"
   },

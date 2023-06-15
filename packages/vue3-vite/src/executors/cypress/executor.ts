@@ -6,7 +6,7 @@ import {
   parseTargetString,
   runExecutor,
   stripIndents,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { CypressExecutorOptions } from './schema';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

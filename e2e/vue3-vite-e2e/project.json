@@ -4,7 +4,7 @@
   "sourceRoot": "e2e/vue3-vite-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["coverage/apps/api"],
       "options": {
         "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts"

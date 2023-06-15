@@ -1,11 +1,11 @@
-// Copied from https://github.com/nrwl/nx/blob/3b21f4dfeaed2058b1d773c95526ffa6761c251e/packages/nx-plugin/src/utils/testing-utils/nx-project.ts
+// Copied from https://github.com/nx/nx/blob/3b21f4dfeaed2058b1d773c95526ffa6761c251e/packages/nx-plugin/src/utils/testing-utils/nx-project.ts
 
-import { workspaceRoot } from '@nrwl/devkit';
+import { workspaceRoot } from '@nx/devkit';
 import {
   getPackageManagerCommand,
   readJsonFile,
   writeJsonFile,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { execSync } from 'child_process';
 import { dirname } from 'path';
 import { ensureDirSync } from 'fs-extra';
@@ -17,7 +17,7 @@ function runNxNewCommand(args: string, silent: boolean, projectPath: string) {
   return execSync(
     `node ${require.resolve(
       'nx'
-    )} new ${projectPath} --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nrwl/workspace --npmScope=${projectPath} --preset=empty ${
+    )} new ${projectPath} --nx-workspace-root=${localTmpDir} --no-interactive --skip-install --collection=@nx/workspace --npmScope=${projectPath} --preset=empty ${
       args || ''
     }`,
     {
@@ -83,7 +83,7 @@ export function newNxProject(
 
 /**
  * Ensures that a project has been setup in the e2e directory
- * It will also copy `@nrwl` packages to the e2e directory
+ * It will also copy `@nx` packages to the e2e directory
  */
 export function ensureNxProject(
   npmPackageName: string,

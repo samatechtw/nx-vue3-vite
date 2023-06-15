@@ -8,7 +8,7 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import * as path from 'path';
 import { Vue3ViteGeneratorSchema } from './schema';
 import {
@@ -156,7 +156,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
         },
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         options: {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },

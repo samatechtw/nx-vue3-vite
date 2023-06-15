@@ -7,7 +7,7 @@ import {
   offsetFromRoot,
   Tree,
   joinPathFragments,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import * as path from 'path';
 import { CypressGeneratorSchema } from './schema';
 import { CypressDevDependencies } from '../../util/defaults';
@@ -95,7 +95,7 @@ export default async function (host: Tree, options: CypressGeneratorSchema) {
     targets: {
       e2e: e2eTarget,
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         options: {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },

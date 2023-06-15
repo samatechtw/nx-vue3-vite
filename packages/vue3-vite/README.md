@@ -283,7 +283,7 @@ nx build <app-name> [options]
 nx lint <app-name> [options]
 ```
 
-See [options](https://nx.dev/latest/angular/linter/eslint) for `@nrwl/linter`
+See [options](https://nx.dev/latest/angular/linter/eslint) for `@nx/linter`
 
 ### Unit Testing
 
@@ -293,7 +293,7 @@ Note: see [vite-jest](#vite-jest) section for progress on testing code that reli
 nx test <app-name> [options]
 ```
 
-See [options](https://nx.dev/latest/angular/jest/jest) for `@nrwl/jest`
+See [options](https://nx.dev/latest/angular/jest/jest) for `@nx/jest`
 
 ### E2E Testing
 
@@ -303,7 +303,7 @@ Generator TBD
 nx e2e <app-name> [options]
 ```
 
-See [options](https://nx.dev/latest/angular/cypress/overview) for `@nrwl/cypress`
+See [options](https://nx.dev/latest/angular/cypress/overview) for `@nx/cypress`
 
 ## Workarounds
 
@@ -317,7 +317,7 @@ The `build` and `serve` executors in this plugin automatically check your worksp
 
 Patch details: https://github.com/ZachJW34/nx-plus/tree/master/libs/vue#nx-dependency-graph-support
 
-Related NX issue: https://github.com/nrwl/nx/issues/2960
+Related NX issue: https://github.com/nx/nx/issues/2960
 
 ### vite-jest
 
