@@ -3,34 +3,33 @@ export const VSCodeExtensionsFilePath = '.vscode/extensions.json';
 export const recommendedExtensions = ['vue.volar', 'cpylua.language-postcss'];
 
 // dependency versions
-export const vueVersion = '^3.2.47';
+export const vueVersion = '^3.3.4';
 export const vueI18nVersion = '^9.2.2';
-export const vueRouterVersion = '^4.1.6';
+export const vueRouterVersion = '^4.2.2';
 
 // devDependency versions
-export const viteVersion = '^4.2.1';
-export const eslintVersion = '^8.37.0';
-export const vuePluginVersion = '^4.1.0';
+export const viteVersion = '^4.3.9';
+export const eslintVersion = '^8.42.0';
+export const vuePluginVersion = '^4.2.3';
 export const babelJestVersion = '^29.5.0';
 export const jestGlobalsVersion = '^29.5.0';
-export const vue3JestVersion = '^29.2.3';
-export const babelPresetEnvVersion = '^7.21.4';
-export const postcssVersion = '^8.4.21';
+export const vue3JestVersion = '^29.2.4';
+export const babelPresetEnvVersion = '^7.22.5';
+export const postcssVersion = '^8.4.24';
 export const postcssBasicsVersion = '^0.6.0';
-export const stylelintVersion = '^15.4.0';
-export const stylelintConfigVersion = '^32.0.0';
-export const tslibVersion = '^2.5.0';
+export const stylelintVersion = '^15.7.0';
+export const stylelintConfigVersion = '^33.0.0';
+export const tslibVersion = '^2.5.3';
 export const tsConfigVersion = '^7.0.0';
-export const unpluginVueComponentsVersion = '^0.24.1';
 export const nrwlJestVersion = '^16.3.2';
-export const typescriptVersion = '~4.9.5';
+export const typescriptVersion = '~5.1.3';
 
 export const CypressDevDependencies = {
-  cypress: '^12.9.0',
+  cypress: '^12.14.0',
   '@cypress/vue': '^5.0.5',
   '@cypress/vite-dev-server': '^5.0.5',
-  '@cypress/code-coverage': '^3.10.3',
-  'eslint-plugin-cypress': '^2.13.2',
+  '@cypress/code-coverage': '^3.10.7',
+  'eslint-plugin-cypress': '^2.13.3',
   '@nx/cypress': '*',
 };
 
@@ -40,8 +39,8 @@ export const VueDevDependencies = {
 
 export const VitestDevDependencies = {
   '@nx/vite': '^16.3.2',
-  'happy-dom': '^9.1.7',
-  vitest: '^0.29.8',
+  'happy-dom': '^9.20.3',
+  vitest: '^0.32.0',
 };
 
 export const JestDevDependencies = {
@@ -54,24 +53,23 @@ export const JestDevDependencies = {
 
 export const LintDevDependencies = {
   '@intlify/eslint-plugin-vue-i18n': '^2.0.0',
-  '@vue/eslint-config-typescript': '^11.0.2',
+  '@vue/eslint-config-typescript': '^11.0.3',
   eslint: eslintVersion,
   'eslint-config-prettier': '^8.8.0',
   'eslint-plugin-import': '^2.27.5',
-  'eslint-plugin-vue': '^9.10.0',
+  'eslint-plugin-vue': '^9.14.1',
   stylelint: stylelintVersion,
   'stylelint-config-standard': stylelintConfigVersion,
-  '@typescript-eslint/eslint-plugin': '5.57.1',
-  '@typescript-eslint/parser': '5.57.1',
-  'vue-eslint-parser': '^9.1.1',
+  '@typescript-eslint/eslint-plugin': '5.59.11',
+  '@typescript-eslint/parser': '5.59.11',
+  'vue-eslint-parser': '^9.3.1',
 };
 
 export const ProjectDependencies = {
   vue: vueVersion,
   'vue-i18n': vueI18nVersion,
   'vue-router': vueRouterVersion,
-  'date-fns': '^2.29.3',
-  '@sampullman/fetch-api': '^0.11.3',
+  'date-fns': '^2.30.0',
 };
 
 export const ProjectDevDependencies = {
@@ -80,13 +78,12 @@ export const ProjectDevDependencies = {
   'class-transformer': '^0.5.1',
   postcss: postcssVersion,
   '@vitejs/plugin-vue': vuePluginVersion,
-  '@babel/plugin-transform-modules-commonjs': '^7.21.2',
+  '@babel/plugin-transform-modules-commonjs': '^7.22.5',
   '@babel/preset-env': babelPresetEnvVersion,
-  '@babel/core': '^7.21.4',
+  '@babel/core': '^7.22.5',
   '@samatech/postcss-basics': postcssBasicsVersion,
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
-  'unplugin-vue-components': unpluginVueComponentsVersion,
   ...LintDevDependencies,
   ...CypressDevDependencies,
   ...VueDevDependencies,
@@ -106,7 +103,6 @@ export const LibraryDevDependencies = {
   '@samatech/postcss-basics': postcssBasicsVersion,
   tslib: tslibVersion,
   tsconfig: tsConfigVersion,
-  'unplugin-vue-components': unpluginVueComponentsVersion,
   typescript: typescriptVersion,
   ...LintDevDependencies,
   ...CypressDevDependencies,
