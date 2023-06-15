@@ -1,4 +1,4 @@
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments } from '@nx/devkit';
 import fs from 'fs';
 import { build } from 'vitepress';
 import { getProjectRoot, projectRelativePath } from '../../util/utils';

@@ -1,5 +1,5 @@
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Tree, updateJson } from '@nrwl/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Tree, updateJson } from '@nx/devkit';
 import { isPackageBasedRepo } from './is-package-based-repo';
 
 describe('isPackageBasedRepo', () => {

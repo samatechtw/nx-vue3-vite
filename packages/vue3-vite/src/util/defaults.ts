@@ -22,7 +22,7 @@ export const stylelintConfigVersion = '^32.0.0';
 export const tslibVersion = '^2.5.0';
 export const tsConfigVersion = '^7.0.0';
 export const unpluginVueComponentsVersion = '^0.24.1';
-export const nrwlJestVersion = '^15.9.2';
+export const nrwlJestVersion = '^16.3.2';
 export const typescriptVersion = '~4.9.5';
 
 export const CypressDevDependencies = {
@@ -31,7 +31,7 @@ export const CypressDevDependencies = {
   '@cypress/vite-dev-server': '^5.0.5',
   '@cypress/code-coverage': '^3.10.3',
   'eslint-plugin-cypress': '^2.13.2',
-  '@nrwl/cypress': '*',
+  '@nx/cypress': '*',
 };
 
 export const VueDevDependencies = {
@@ -39,13 +39,13 @@ export const VueDevDependencies = {
 };
 
 export const VitestDevDependencies = {
-  '@nrwl/vite': '^15.9.2',
+  '@nx/vite': '^16.3.2',
   'happy-dom': '^9.1.7',
   vitest: '^0.29.8',
 };
 
 export const JestDevDependencies = {
-  '@nrwl/jest': nrwlJestVersion,
+  '@nx/jest': nrwlJestVersion,
   '@jest/globals': jestGlobalsVersion,
   '@vue/vue3-jest': vue3JestVersion,
   'babel-jest': babelJestVersion,

@@ -8,7 +8,7 @@ import {
   Tree,
   joinPathFragments,
   updateJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import * as path from 'path';
 import { DocsGeneratorSchema } from './schema';
 import {
@@ -113,7 +113,7 @@ export default async function (host: Tree, options: DocsGeneratorSchema) {
         executor: 'nx-vue3-vite:docs-dev-server',
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         options: {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },

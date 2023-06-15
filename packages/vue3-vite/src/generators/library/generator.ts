@@ -10,7 +10,7 @@ import {
   joinPathFragments,
   updateJson,
   readJson,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { LibraryGeneratorSchema } from './schema';
 import {
   LibraryDevDependencies,
@@ -25,7 +25,7 @@ import {
   parseTags,
   updateDependencies,
 } from '../../util/utils';
-import { extractLayoutDirectory } from '@nrwl/devkit';
+import { extractLayoutDirectory } from '@nx/devkit';
 import { PathAlias } from '../../util/path-alias';
 import { TestFramework } from '../../util/test-framework';
 import { generateTestTarget } from '../../util/generate-test-target';
@@ -167,7 +167,7 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
         },
       },
       lint: {
-        executor: '@nrwl/linter:eslint',
+        executor: '@nx/linter:eslint',
         options: {
           lintFilePatterns: [`${libraryRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },

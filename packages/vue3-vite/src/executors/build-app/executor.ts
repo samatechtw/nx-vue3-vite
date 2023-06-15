@@ -1,4 +1,4 @@
-import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
+import { ExecutorContext, joinPathFragments } from '@nx/devkit';
 import { build } from 'vite';
 import { getProjectRoot, getWorkspaceRoot } from '../../util/utils';
 import { BuildAppExecutorSchema } from './schema';

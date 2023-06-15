@@ -1,4 +1,4 @@
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 import { createServer, ViteDevServer } from 'vite';
 import { DevServerExecutorSchema } from './schema';
 import { getProjectRoot, getWorkspaceRoot } from '../../util/utils';

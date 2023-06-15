@@ -10,8 +10,8 @@ import {
 } from 'fs-extra';
 import { dirname, isAbsolute } from 'path';
 import { tmpProjPath } from './paths';
-import { parseJson } from '@nrwl/devkit';
-import type { JsonParseOptions } from '@nrwl/devkit';
+import { parseJson } from '@nx/devkit';
+import type { JsonParseOptions } from '@nx/devkit';
 
 /**
  * Copies module folders from the working directory to the e2e directory

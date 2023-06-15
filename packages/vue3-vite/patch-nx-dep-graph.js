@@ -28,12 +28,12 @@ const path = require('path');
 
 /**
  * Patch dep-graph builder function to support Vue files.
- * @see https://github.com/nrwl/nx/issues/2960
+ * @see https://github.com/nx/nx/issues/2960
  */
 function patchNxDepGraph() {
   const filePath = path.join(
     process.env.INIT_CWD || '',
-    'node_modules/@nrwl/workspace/src/core/project-graph/build-dependencies/typescript-import-locator.js'
+    'node_modules/@nx/workspace/src/core/project-graph/build-dependencies/typescript-import-locator.js'
   );
   try {
     const fileContent = fs.readFileSync(filePath).toString('utf-8');
