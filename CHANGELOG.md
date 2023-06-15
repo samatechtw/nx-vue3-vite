@@ -2,6 +2,12 @@
 
 TODO -- automate changelog generation
 
+### v0.25.0 - 230616
+
+- Update packages
+- Remove unnecessary packages
+- Update to Nx 16.3.2
+
 ### v0.24.0 - 230407
 
 - Copy project package.json to lib/app dist on build
