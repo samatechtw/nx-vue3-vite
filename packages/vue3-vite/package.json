@@ -1,6 +1,6 @@
 {
   "name": "nx-vue3-vite",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",

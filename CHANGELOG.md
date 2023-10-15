@@ -2,6 +2,12 @@
 
 TODO -- automate changelog generation
 
+### v0.26.0 - 231015
+
+- Update packages
+- Update to Nx 16.10.0
+- Update to Cypress 13.3.1
+
 ### v0.25.0 - 230616
 
 - Update packages
