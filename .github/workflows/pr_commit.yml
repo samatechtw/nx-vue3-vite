@@ -10,16 +10,16 @@ env:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code into workspace directory
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v16)
+      - name: Set up NodeJS (v18)
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
       - name: Install npm modules
         run: npm i
       - name: Lint code
@@ -27,16 +27,16 @@ jobs:
 
   build-apps:
     name: Build Apps
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code into workspace directory
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v16)
+      - name: Set up NodeJS (v18)
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
       - name: Install npm modules
         run: npm i
       - name: Build apps
@@ -44,16 +44,16 @@ jobs:
 
   check-format:
     name: Check Format
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code into workspace directory
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v16)
+      - name: Set up NodeJS (v18)
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
       - name: Install npm modules
         run: npm i
       - name: Check code format
@@ -61,16 +61,16 @@ jobs:
 
   test:
     name: Unit Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code into workspace directory
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v16)
+      - name: Set up NodeJS (v18)
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
       - name: Install npm modules
         run: npm i
       - name: Run unit tests
@@ -78,16 +78,16 @@ jobs:
 
   e2e:
     name: E2E Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code into workspace directory
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v16)
+      - name: Set up NodeJS (v18)
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
       - name: Install npm modules
         run: npm i
       - name: Build plugins
