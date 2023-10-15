@@ -36,7 +36,7 @@ interface NormalizedSchema extends Vue3ViteGeneratorSchema {
 
 function normalizeOptions(
   host: Tree,
-  options: Vue3ViteGeneratorSchema
+  options: Vue3ViteGeneratorSchema,
 ): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
@@ -46,7 +46,7 @@ function normalizeOptions(
   const projectTitle = options.title || projectName;
   const projectRoot = joinPathFragments(
     getWorkspaceLayout(host).appsDir,
-    projectDirectory
+    projectDirectory,
   );
   const parsedTags = parseTags(options.tags);
   // Default to global paths
@@ -92,7 +92,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     host,
     path.join(__dirname, 'files'),
     options.projectRoot,
-    templateOptions
+    templateOptions,
   );
 }
 
@@ -179,7 +179,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
   const depsTask = updateDependencies(
     host,
     ProjectDependencies,
-    devDependencies
+    devDependencies,
   );
   updateScripts(host, { nx: 'nx' });
 

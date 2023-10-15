@@ -14,7 +14,7 @@ interface DevExecutorResult {
 const restartServer = async (
   options: DevServerExecutorSchema,
   context: ExecutorContext,
-  customLogger: DevServerLogger
+  customLogger: DevServerLogger,
 ): Promise<DevExecutorResult> => {
   const workspaceRoot = getWorkspaceRoot(context);
   const projectRoot = getProjectRoot(context);
@@ -43,7 +43,7 @@ const restartServer = async (
 
 export default async function* runExecutor(
   options: DevServerExecutorSchema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   const urlHttps = options.https ? 'https' : 'http';
   const urlPort = options.port ? `:${options.port}` : '';

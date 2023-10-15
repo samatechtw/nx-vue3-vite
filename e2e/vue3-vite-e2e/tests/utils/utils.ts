@@ -22,7 +22,7 @@ export function copyNodeModules(modules: string[], projectPath?: string) {
     removeSync(`${tmpProjPath(projectPath)}/node_modules/${module}`);
     copySync(
       `./node_modules/${module}`,
-      `${tmpProjPath(projectPath)}/node_modules/${module}`
+      `${tmpProjPath(projectPath)}/node_modules/${module}`,
     );
   });
 }
@@ -50,7 +50,7 @@ export function expectTestsPass(output: { stdout: string; stderr: string }) {
 export function updateFile(
   file: string,
   content: string | ((originalFileContent: string) => string),
-  projectPath?: string
+  projectPath?: string,
 ): void {
   const path = `${tmpProjPath(projectPath)}/${file}`;
   ensureDirSync(dirname(path));
@@ -69,7 +69,7 @@ export function updateFile(
 export function renameFile(
   path: string,
   newPath: string,
-  projectPath?: string
+  projectPath?: string,
 ): void {
   const p = `${tmpProjPath(projectPath)}/${path}`;
   const newP = `${tmpProjPath(projectPath)}/${newPath}`;
@@ -113,7 +113,7 @@ export function listFiles(projectPath: string, dirName: string): string[] {
 export function readJson<T extends object = any>(
   projectPath: string,
   path: string,
-  options?: JsonParseOptions
+  options?: JsonParseOptions,
 ): T {
   return parseJson<T>(readFile(projectPath, path), options);
 }

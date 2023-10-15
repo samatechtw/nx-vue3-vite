@@ -58,7 +58,7 @@ describe('library e2e', () => {
     updateFile(
       'package.json',
       stringifiedPackageJson,
-      `${proj}/libs/${library}`
+      `${proj}/libs/${library}`,
     );
     checkFilesExist(proj, [`libs/${library}/package.json`]);
 
@@ -69,7 +69,7 @@ describe('library e2e', () => {
     // Verify `package.json` is copied
     const copiedPackageJson = readJson(
       proj,
-      `dist/libs/${library}/package.json`
+      `dist/libs/${library}/package.json`,
     );
     expect(JSON.stringify(copiedPackageJson)).toEqual(stringifiedPackageJson);
   });
@@ -128,7 +128,7 @@ describe('library e2e', () => {
     const oldVersion = '^2.7.14';
     await runCommandAsync(
       proj,
-      `npm install ${packageName}@${oldVersion} --save`
+      `npm install ${packageName}@${oldVersion} --save`,
     );
 
     // Verify `dependencies` after install
@@ -154,7 +154,7 @@ describe('library e2e', () => {
     const oldVersion = '^3.2.7';
     await runCommandAsync(
       proj,
-      `npm install ${packageName}@${oldVersion} --save-dev`
+      `npm install ${packageName}@${oldVersion} --save-dev`,
     );
 
     // Verify `dependencies` after install
@@ -181,7 +181,7 @@ describe('library e2e', () => {
         const library = uniq('lib-test');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:library ${library}`
+          `generate nx-vue3-vite:library ${library}`,
         );
 
         // Read and verify `package.json`
@@ -197,7 +197,7 @@ describe('library e2e', () => {
         // Read and verify test file
         const testFile = readFile(
           proj,
-          `libs/${library}/src/lib/MyWidget.spec.ts`
+          `libs/${library}/src/lib/MyWidget.spec.ts`,
         );
         expect(testFile).toContain('vitest');
         expect(testFile).not.toContain('jest');
@@ -216,7 +216,7 @@ describe('library e2e', () => {
         const library = uniq('lib-test');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:library ${library} --test jest`
+          `generate nx-vue3-vite:library ${library} --test jest`,
         );
 
         // Read and verify `package.json`
@@ -232,7 +232,7 @@ describe('library e2e', () => {
         // Read and verify test file
         const testFile = readFile(
           proj,
-          `libs/${library}/src/lib/MyWidget.spec.ts`
+          `libs/${library}/src/lib/MyWidget.spec.ts`,
         );
         expect(testFile).toContain('jest');
         expect(testFile).not.toContain('vitest');
@@ -249,13 +249,13 @@ describe('library e2e', () => {
         const library = uniq('lib-test');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:library ${library} --test vitest`
+          `generate nx-vue3-vite:library ${library} --test vitest`,
         );
 
         // Run test
         const testResult = await runNxCommandAsync(proj, `test ${library}`);
         expect(testResult.stdout).toContain(
-          `Successfully ran target test for project ${library}`
+          `Successfully ran target test for project ${library}`,
         );
       });
 
@@ -264,13 +264,13 @@ describe('library e2e', () => {
         const library = uniq('lib-test');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:library ${library} --test jest`
+          `generate nx-vue3-vite:library ${library} --test jest`,
         );
 
         // Run test
         const testResult = await runNxCommandAsync(proj, `test ${library}`);
         expect(testResult.stdout).toContain(
-          `Successfully ran target test for project ${library}`
+          `Successfully ran target test for project ${library}`,
         );
       });
     });
@@ -291,7 +291,7 @@ describe('library e2e', () => {
         silenceError: true,
       });
       expect(result.stdout).toContain(
-        `Property 'test' does not match the schema. '${wrongValue}' should be one of vitest,jest.`
+        `Property 'test' does not match the schema. '${wrongValue}' should be one of vitest,jest.`,
       );
     });
   });

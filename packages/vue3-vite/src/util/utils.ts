@@ -38,7 +38,7 @@ export function getWorkspaceRoot(context: ExecutorContext): string {
 export function updateDependencies(
   host: Tree,
   deps: Record<string, string>,
-  devDeps: Record<string, string>
+  devDeps: Record<string, string>,
 ) {
   const packageJson = ensureDepsInPackageJson(host);
   const oldDeps = packageJson.dependencies as Record<string, string>;
@@ -51,7 +51,7 @@ export function updateDependencies(
   return addDependenciesToPackageJson(
     host,
     depsToBeInstalled,
-    devDepsToBeInstalled
+    devDepsToBeInstalled,
   );
 }
 

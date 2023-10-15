@@ -13,7 +13,7 @@ export function runCommandAsync(
   command: string,
   opts = {
     silenceError: false,
-  }
+  },
 ): Promise<{ stdout: string; stderr: string }> {
   return new Promise((resolve, reject) => {
     exec(
@@ -26,7 +26,7 @@ export function runCommandAsync(
           reject(err);
         }
         resolve({ stdout, stderr });
-      }
+      },
     );
   });
 }
@@ -41,7 +41,7 @@ export function runNxCommandAsync(
   command: string,
   opts = {
     silenceError: false,
-  }
+  },
 ): Promise<{ stdout: string; stderr: string }> {
   const pmc = getPackageManagerCommand();
   return runCommandAsync(projectPath, `${pmc.exec} nx ${command}`, opts);

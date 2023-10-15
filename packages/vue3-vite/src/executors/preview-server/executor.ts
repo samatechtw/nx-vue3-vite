@@ -14,7 +14,7 @@ interface PreviewExecutorResult {
 const restartServer = async (
   options: PreviewServerExecutorSchema,
   context: ExecutorContext,
-  customLogger: DevServerLogger
+  customLogger: DevServerLogger,
 ): Promise<PreviewExecutorResult> => {
   const workspaceRoot = getWorkspaceRoot(context);
   const projectRoot = getProjectRoot(context);
@@ -51,7 +51,7 @@ const restartServer = async (
 
 export default async function* runExecutor(
   options: PreviewServerExecutorSchema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   const urlHttps = options.https ? 'https' : 'http';
   const urlPort = options.port ? `:${options.port}` : '';

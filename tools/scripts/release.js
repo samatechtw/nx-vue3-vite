@@ -9,13 +9,13 @@ const vue3VitePkgFile = path.resolve(
   rootDir,
   'packages',
   'vue3-vite',
-  'package.json'
+  'package.json',
 );
 const vue3ViteGeneratorsFile = path.resolve(
   rootDir,
   'packages',
   'vue3-vite',
-  'generators.json'
+  'generators.json',
 );
 const pkg = require(pkgFile);
 const vue3VitePkg = require(vue3VitePkgFile);
@@ -86,7 +86,7 @@ try {
   vue3ViteGenerators.version = newVersion;
   fs.writeFileSync(
     vue3ViteGeneratorsFile,
-    JSON.stringify(vue3ViteGenerators, null, 2)
+    JSON.stringify(vue3ViteGenerators, null, 2),
   );
 } catch (e) {
   errorExit('Failed to write new version to package.json: ' + e.message);
@@ -97,7 +97,7 @@ console.log('...committing');
 runOrExit(
   'git',
   ['commit', '-am', `release: v${newVersion}`],
-  'Release commit failed'
+  'Release commit failed',
 );
 
 console.log('...tagging');
@@ -105,7 +105,7 @@ console.log('...tagging');
 runOrExit(
   'git',
   ['tag', '-a', `v${newVersion}`, '-m', `Version ${newVersion}`],
-  'Release tag failed'
+  'Release tag failed',
 );
 
 console.log('...pushing commit');

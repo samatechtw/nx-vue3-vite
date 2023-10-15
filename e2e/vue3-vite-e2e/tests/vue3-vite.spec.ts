@@ -104,7 +104,7 @@ describe('vue3-vite e2e', () => {
     const oldVersion = '^2.7.14';
     await runCommandAsync(
       proj,
-      `npm install ${packageName}@${oldVersion} --force --save`
+      `npm install ${packageName}@${oldVersion} --force --save`,
     );
 
     // Verify `dependencies` after install
@@ -126,7 +126,7 @@ describe('vue3-vite e2e', () => {
     const oldVersion = '^3.2.7';
     await runCommandAsync(
       proj,
-      `npm install ${packageName}@${oldVersion} --force --save-dev`
+      `npm install ${packageName}@${oldVersion} --force --save-dev`,
     );
 
     // Verify `dependencies` after install
@@ -147,11 +147,11 @@ describe('vue3-vite e2e', () => {
       const plugin = uniq('vue3-vite');
       await runNxCommandAsync(
         proj,
-        `generate nx-vue3-vite:app ${plugin} --directory subdir/${plugin} --tags e2etag,e2ePackage`
+        `generate nx-vue3-vite:app ${plugin} --directory subdir/${plugin} --tags e2etag,e2ePackage`,
       );
 
       expect(() =>
-        checkFilesExist(proj, [`apps/subdir/${plugin}/vite.config.ts`])
+        checkFilesExist(proj, [`apps/subdir/${plugin}/vite.config.ts`]),
       ).not.toThrow();
       const projectJson = readJson(proj, `apps/subdir/${plugin}/project.json`);
       expect(projectJson.tags).toEqual(['e2etag', 'e2ePackage']);
@@ -175,7 +175,7 @@ describe('vue3-vite e2e', () => {
       // Verify `vite.config.ts`
       const viteConfig = readFile(proj, `apps/${app}/vite.config.ts`);
       expect(viteConfig).toMatch(
-        /import\s{.*tsconfigBaseAliases.*}\sfrom\s'nx-vue3-vite'/
+        /import\s{.*tsconfigBaseAliases.*}\sfrom\s'nx-vue3-vite'/,
       );
       expect(viteConfig).toContain('...tsconfigBaseAliases(__dirname),');
     });
@@ -185,7 +185,7 @@ describe('vue3-vite e2e', () => {
       const app = uniq('vue3-vite');
       await runNxCommandAsync(
         proj,
-        `generate nx-vue3-vite:app ${app} --alias local`
+        `generate nx-vue3-vite:app ${app} --alias local`,
       );
 
       // Read paths
@@ -204,13 +204,13 @@ describe('vue3-vite e2e', () => {
       const viteConfig = readFile(proj, `apps/${app}/vite.config.ts`);
       expect(viteConfig).not.toContain('tsconfigBaseAliases');
       expect(viteConfig).toContain(
-        "'@assets/': `${path.resolve(__dirname, './src/assets')}/`"
+        "'@assets/': `${path.resolve(__dirname, './src/assets')}/`",
       );
       expect(viteConfig).toContain(
-        "'@app/': `${path.resolve(__dirname, './src/app')}/`"
+        "'@app/': `${path.resolve(__dirname, './src/app')}/`",
       );
       expect(viteConfig).toContain(
-        "'@public/': `${path.resolve(__dirname, './src/public')}/"
+        "'@public/': `${path.resolve(__dirname, './src/public')}/",
       );
     });
 
@@ -223,7 +223,7 @@ describe('vue3-vite e2e', () => {
       const app = uniq('vue3-vite');
       await runNxCommandAsync(
         proj,
-        `generate nx-vue3-vite:app ${app} --alias global`
+        `generate nx-vue3-vite:app ${app} --alias global`,
       );
 
       // Read paths
@@ -237,7 +237,7 @@ describe('vue3-vite e2e', () => {
       // Verify `vite.config.ts`
       const viteConfig = readFile(proj, `apps/${app}/vite.config.ts`);
       expect(viteConfig).toMatch(
-        /import\s{.*tsconfigBaseAliases.*}\sfrom\s'nx-vue3-vite'/
+        /import\s{.*tsconfigBaseAliases.*}\sfrom\s'nx-vue3-vite'/,
       );
       expect(viteConfig).toContain('...tsconfigBaseAliases(__dirname),');
 
@@ -266,7 +266,7 @@ describe('vue3-vite e2e', () => {
         silenceError: true,
       });
       expect(result.stdout).toContain(
-        `Property 'alias' does not match the schema. '${wrongValue}' should be one of local,global.`
+        `Property 'alias' does not match the schema. '${wrongValue}' should be one of local,global.`,
       );
     });
   });
@@ -295,7 +295,7 @@ describe('vue3-vite e2e', () => {
         // Read and verify test file
         const testFile = readFile(
           proj,
-          `apps/${app}/src/app/components/CookiesConsent.spec.ts`
+          `apps/${app}/src/app/components/CookiesConsent.spec.ts`,
         );
         expect(testFile).toContain('vitest');
         expect(testFile).not.toContain('jest');
@@ -314,7 +314,7 @@ describe('vue3-vite e2e', () => {
         const app = uniq('vue3-vite');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:app ${app} --test jest`
+          `generate nx-vue3-vite:app ${app} --test jest`,
         );
 
         // Read and verify `package.json`
@@ -330,7 +330,7 @@ describe('vue3-vite e2e', () => {
         // Read and verify test file
         const testFile = readFile(
           proj,
-          `apps/${app}/src/app/components/CookiesConsent.spec.ts`
+          `apps/${app}/src/app/components/CookiesConsent.spec.ts`,
         );
         expect(testFile).toContain('jest');
         expect(testFile).not.toContain('vitest');
@@ -347,13 +347,13 @@ describe('vue3-vite e2e', () => {
         const app = uniq('vue3-vite');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:app ${app} --test vitest`
+          `generate nx-vue3-vite:app ${app} --test vitest`,
         );
 
         // Runs tests
         const testResult = await runNxCommandAsync(proj, `test ${app}`);
         expect(testResult.stdout).toContain(
-          `Successfully ran target test for project ${app}`
+          `Successfully ran target test for project ${app}`,
         );
       });
 
@@ -362,13 +362,13 @@ describe('vue3-vite e2e', () => {
         const app = uniq('vue3-vite');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:app ${app} --test jest`
+          `generate nx-vue3-vite:app ${app} --test jest`,
         );
 
         // Runs tests
         const testResult = await runNxCommandAsync(proj, `test ${app}`);
         expect(testResult.stdout).toContain(
-          `Successfully ran target test for project ${app}`
+          `Successfully ran target test for project ${app}`,
         );
       });
     });
@@ -379,7 +379,7 @@ describe('vue3-vite e2e', () => {
         const app = uniq('vue3-vite');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:app ${app} --test vitest`
+          `generate nx-vue3-vite:app ${app} --test vitest`,
         );
 
         // Build app
@@ -392,7 +392,7 @@ describe('vue3-vite e2e', () => {
         const app = uniq('vue3-vite');
         await runNxCommandAsync(
           proj,
-          `generate nx-vue3-vite:app ${app} --test jest`
+          `generate nx-vue3-vite:app ${app} --test jest`,
         );
 
         // Build app
@@ -417,7 +417,7 @@ describe('vue3-vite e2e', () => {
         silenceError: true,
       });
       expect(result.stdout).toContain(
-        `Property 'test' does not match the schema. '${wrongValue}' should be one of vitest,jest.`
+        `Property 'test' does not match the schema. '${wrongValue}' should be one of vitest,jest.`,
       );
     });
   });

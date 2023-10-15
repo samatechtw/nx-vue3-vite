@@ -14,7 +14,7 @@ import Cypress from 'cypress'; // @NOTE: Importing via ES6 messes the whole test
 
 export default async function cypressExecutor(
   options: CypressExecutorOptions,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   options = normalizeOptions(options, context);
 
@@ -38,7 +38,7 @@ export default async function cypressExecutor(
 
 function normalizeOptions(
   options: CypressExecutorOptions,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   options.env = options.env || {};
   if (options.tsConfig) {
@@ -74,7 +74,7 @@ function checkSupportedBrowser({ browser }: CypressExecutorOptions) {
 
 async function* startDevServer(
   opts: CypressExecutorOptions,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   // no dev server, return the provisioned base url
   if (!opts.devServerTarget || opts.skipServe) {
@@ -146,7 +146,7 @@ async function runCypress(baseUrl: string, opts: CypressExecutorOptions) {
     const message = finished ? '' : `, ${result.message}`;
 
     logger.info(
-      `Cypress completed with status: ${result.status}${message} failed=${failures}`
+      `Cypress completed with status: ${result.status}${message} failed=${failures}`,
     );
     return failures <= 0;
   } else {

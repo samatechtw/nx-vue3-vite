@@ -42,7 +42,7 @@ interface NormalizedSchema extends LibraryGeneratorSchema {
 
 function normalizeOptions(
   host: Tree,
-  options: LibraryGeneratorSchema
+  options: LibraryGeneratorSchema,
 ): NormalizedSchema {
   const { layoutDirectory, projectDirectory: libraryDirectory } =
     extractLayoutDirectory(options.directory);
@@ -122,7 +122,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     host,
     path.join(__dirname, 'files'),
     options.libraryRoot,
-    templateOptions
+    templateOptions,
   );
 }
 
@@ -193,7 +193,7 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
   const depsTask = updateDependencies(
     host,
     LibraryDependencies,
-    devDependencies
+    devDependencies,
   );
 
   updateExtensionRecommendations(host);

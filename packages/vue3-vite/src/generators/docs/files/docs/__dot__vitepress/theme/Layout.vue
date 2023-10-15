@@ -52,7 +52,7 @@ import NavBar from './components/NavBar.vue';
 import SideBar from 'vitepress/dist/client/theme-default/components/SideBar.vue';
 import Page from 'vitepress/dist/client/theme-default/components/Page.vue';
 const Home = defineAsyncComponent(
-  () => import('vitepress/dist/client/theme-default/components/Home.vue')
+  () => import('vitepress/dist/client/theme-default/components/Home.vue'),
 );
 
 const NoopComponent = () => null;
@@ -62,7 +62,7 @@ const AlgoliaSearchBox = __ALGOLIA__
       () =>
         import(
           'vitepress/dist/client/theme-default/components/AlgoliaSearchBox.vue'
-        )
+        ),
     )
   : NoopComponent;
 
@@ -87,7 +87,7 @@ const showSidebar = computed(() => {
     return false;
   }
   return !isSideBarEmpty(
-    getSideBarConfig(theme.value.sidebar, route.data.relativePath)
+    getSideBarConfig(theme.value.sidebar, route.data.relativePath),
   );
 });
 const toggleSidebar = (to?: boolean) => {

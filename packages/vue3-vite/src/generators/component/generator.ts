@@ -19,11 +19,11 @@ interface NormalizedSchema extends ComponentGeneratorSchema {
 
 function normalizeOptions(
   host: Tree,
-  options: ComponentGeneratorSchema
+  options: ComponentGeneratorSchema,
 ): NormalizedSchema {
   const { sourceRoot, projectType } = readProjectConfiguration(
     host,
-    options.project
+    options.project,
   );
   const defaultComponentRoot =
     projectType === 'library' ? 'lib' : 'app/components';
@@ -48,7 +48,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     host,
     path.join(__dirname, 'files'),
     options.componentPath,
-    templateOptions
+    templateOptions,
   );
 }
 

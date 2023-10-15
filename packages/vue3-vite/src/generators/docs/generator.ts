@@ -33,7 +33,7 @@ interface NormalizedSchema extends DocsGeneratorSchema {
 
 function normalizeOptions(
   host: Tree,
-  options: DocsGeneratorSchema
+  options: DocsGeneratorSchema,
 ): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
@@ -44,7 +44,7 @@ function normalizeOptions(
   const projectTitle = options.title || projectName;
   const projectRoot = joinPathFragments(
     getWorkspaceLayout(host).appsDir,
-    projectDirectory
+    projectDirectory,
   );
   const parsedTags = parseTags(options.tags);
 
@@ -72,7 +72,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     host,
     path.join(__dirname, 'files'),
     options.projectRoot,
-    templateOptions
+    templateOptions,
   );
 }
 
@@ -127,7 +127,7 @@ export default async function (host: Tree, options: DocsGeneratorSchema) {
   const depsTask = updateDependencies(
     host,
     DocsDependencies,
-    DocsDevDependencies
+    DocsDevDependencies,
   );
 
   updateExtensionRecommendations(host);

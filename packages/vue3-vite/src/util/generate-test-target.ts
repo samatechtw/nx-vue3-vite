@@ -2,7 +2,7 @@ import { TestFramework } from './test-framework';
 
 export const generateTestTarget = (
   projectRoot: string,
-  testFramework: TestFramework
+  testFramework: TestFramework,
 ) => {
   const useVitest = testFramework === TestFramework.Vitest;
   const executor = useVitest ? '@nx/vite:test' : '@nx/jest:jest';
