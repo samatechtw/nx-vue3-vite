@@ -33,7 +33,7 @@ const path = require('path');
 function patchNxDepGraph() {
   const filePath = path.join(
     process.env.INIT_CWD || '',
-    'node_modules/@nx/workspace/src/core/project-graph/build-dependencies/typescript-import-locator.js'
+    'node_modules/@nx/workspace/src/core/project-graph/build-dependencies/typescript-import-locator.js',
   );
   try {
     const fileContent = fs.readFileSync(filePath).toString('utf-8');
@@ -43,7 +43,7 @@ function patchNxDepGraph() {
     }
     fs.writeFileSync(
       filePath,
-      fileContent.replace("extension !== '.ts'", replacement)
+      fileContent.replace("extension !== '.ts'", replacement),
     );
     console.log('Successfully patched Nx dep-graph for Vue support.');
   } catch (err) {

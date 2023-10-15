@@ -3,7 +3,7 @@ import { DevServerLogger } from './custom-logger';
 
 export const waitServerClose = async (
   server: ViteDevServer | PreviewServer,
-  customLogger: DevServerLogger
+  customLogger: DevServerLogger,
 ): Promise<boolean> => {
   return new Promise<boolean>((res) => {
     server.httpServer.on('error', (err) => {

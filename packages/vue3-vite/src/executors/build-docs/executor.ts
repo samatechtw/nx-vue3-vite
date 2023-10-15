@@ -6,7 +6,7 @@ import { BuildDocsExecutorSchema } from './schema';
 
 export default async function runExecutor(
   options: BuildDocsExecutorSchema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   const projectRoot = joinPathFragments(getProjectRoot(context), options.root);
   const projectRelative = projectRelativePath(context);

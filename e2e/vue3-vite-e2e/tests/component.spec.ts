@@ -30,7 +30,7 @@ describe('component e2e', () => {
     const component = uniq('component');
     await runNxCommandAsync(
       proj,
-      `generate nx-vue3-vite:component ${component} --project ${app} --style postcss --lang ts`
+      `generate nx-vue3-vite:component ${component} --project ${app} --style postcss --lang ts`,
     );
 
     // Check file exists
@@ -59,7 +59,7 @@ describe('component e2e', () => {
           `--project ${app}`,
           '--style postcss',
           '--lang ts',
-        ].join(' ')
+        ].join(' '),
       );
       await runNxCommandAsync(
         proj,
@@ -68,7 +68,7 @@ describe('component e2e', () => {
           `--project ${library}`,
           '--style postcss',
           '--lang ts',
-        ].join(' ')
+        ].join(' '),
       );
 
       // Check files exist
@@ -99,7 +99,7 @@ describe('component e2e', () => {
           '--directory mydirectory',
           '--style postcss',
           '--lang ts',
-        ].join(' ')
+        ].join(' '),
       );
 
       // Check file exists
@@ -126,7 +126,7 @@ describe('component e2e', () => {
           `--directory ${directory}`,
           '--style postcss',
           '--lang ts',
-        ].join(' ')
+        ].join(' '),
       );
 
       // Check files exist

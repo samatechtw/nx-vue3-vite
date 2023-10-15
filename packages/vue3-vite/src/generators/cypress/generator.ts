@@ -27,7 +27,7 @@ interface NormalizedSchema extends CypressGeneratorSchema {
 
 function normalizeOptions(
   host: Tree,
-  options: CypressGeneratorSchema
+  options: CypressGeneratorSchema,
 ): NormalizedSchema {
   if (!options.name && !options.project) {
     throw new Error('A name or a project is required');
@@ -38,7 +38,7 @@ function normalizeOptions(
     : name;
   const projectRoot = joinPathFragments(
     getWorkspaceLayout(host).appsDir,
-    projectDirectory
+    projectDirectory,
   );
   const parsedTags = parseTags(options.tags);
 
@@ -66,7 +66,7 @@ function addFiles(host: Tree, options: NormalizedSchema) {
     host,
     path.join(__dirname, 'files'),
     options.projectRoot,
-    templateOptions
+    templateOptions,
   );
 }
 

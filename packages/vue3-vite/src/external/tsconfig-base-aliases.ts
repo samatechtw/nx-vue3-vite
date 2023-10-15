@@ -3,7 +3,7 @@ import fs from 'fs';
 
 const offsetToFile = (
   searchPath: string,
-  configName = 'tsconfig.base.json'
+  configName = 'tsconfig.base.json',
 ): string | undefined => {
   let offset = './';
   let prevConfigPath = '';
@@ -22,7 +22,7 @@ const offsetToFile = (
 };
 
 export const tsconfigBaseAliases = (
-  fromPath: string
+  fromPath: string,
 ): Record<string, string> => {
   const resolve = (p: string): string => path.resolve(fromPath, p);
 

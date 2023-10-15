@@ -26,7 +26,7 @@ export interface RollupLogProps {
   message: string;
   name?: string;
   plugin?: string;
-  pluginCode?: string;
+  pluginCode?: unknown;
   pos?: number;
   url?: string;
 }

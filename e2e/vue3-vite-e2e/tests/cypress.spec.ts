@@ -44,7 +44,7 @@ describe('cypress e2e', () => {
       // Create cypress app
       await runNxCommandAsync(
         proj,
-        `generate nx-vue3-vite:cypress --project ${vueApp}`
+        `generate nx-vue3-vite:cypress --project ${vueApp}`,
       );
       const cypress = `${vueApp}-e2e`;
 

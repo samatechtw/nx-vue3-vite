@@ -46,13 +46,13 @@ describe('docs e2e', () => {
       const title = 'My Title';
       await runNxCommandAsync(
         proj,
-        `generate nx-vue3-vite:docs ${docs} --title "${title}"`
+        `generate nx-vue3-vite:docs ${docs} --title "${title}"`,
       );
 
       // Check title exists
       const vitePressConfig = readFile(
         proj,
-        `apps/${docs}/docs/.vitepress/config.js`
+        `apps/${docs}/docs/.vitepress/config.js`,
       );
       expect(vitePressConfig).toContain(`title: '${title}'`);
     });

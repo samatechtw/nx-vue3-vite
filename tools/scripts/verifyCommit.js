@@ -9,14 +9,14 @@ const commitRE =
 if (!releaseRE.test(msg) && !commitRE.test(msg)) {
   console.error(
     `  ${pc.bgRed(pc.white(' ERROR '))} ${pc.red(
-      `invalid commit message format.`
+      `invalid commit message format.`,
     )}\n\n` +
       pc.red(
-        `  Proper commit message format is required for automated changelog generation. Examples:\n\n`
+        `  Proper commit message format is required for automated changelog generation. Examples:\n\n`,
       ) +
       `    ${pc.green(`feat: add 'comments' option`)}\n` +
       `    ${pc.green(`fix: handle events on blur (close #28)`)}\n\n` +
-      pc.red(`  See .github/commit-convention.md for more details.\n`)
+      pc.red(`  See .github/commit-convention.md for more details.\n`),
   );
   process.exit(1);
 }

@@ -5,7 +5,7 @@ import { getProjectRoot } from '../../util/utils';
 
 export default async function runExecutor(
   options: DevServerExecutorSchema,
-  context: ExecutorContext
+  context: ExecutorContext,
 ) {
   console.log('Executor ran for DevServer', options);
   const projectRoot = getProjectRoot(context);
