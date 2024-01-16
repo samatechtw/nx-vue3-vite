@@ -95,7 +95,7 @@ export default async function (host: Tree, options: CypressGeneratorSchema) {
     targets: {
       e2e: e2eTarget,
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:lint',
         options: {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },

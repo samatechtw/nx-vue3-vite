@@ -283,7 +283,7 @@ nx build <app-name> [options]
 nx lint <app-name> [options]
 ```
 
-See [options](https://nx.dev/latest/angular/linter/eslint) for `@nx/linter`
+See [options](https://nx.dev/latest/angular/linter/eslint) for `@nx/eslint`
 
 ### Unit Testing
 

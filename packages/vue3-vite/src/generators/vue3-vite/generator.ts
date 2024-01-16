@@ -156,7 +156,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
         },
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:lint',
         options: {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },

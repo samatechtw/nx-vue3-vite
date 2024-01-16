@@ -167,7 +167,7 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
         },
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:lint',
         options: {
           lintFilePatterns: [`${libraryRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },

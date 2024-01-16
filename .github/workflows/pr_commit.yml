@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v18)
+      - name: Set up NodeJS (v20)
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - name: Install npm modules
         run: npm i
       - name: Lint code
@@ -33,10 +33,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v18)
+      - name: Set up NodeJS (v20)
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - name: Install npm modules
         run: npm i
       - name: Build apps
@@ -50,10 +50,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v18)
+      - name: Set up NodeJS (v20)
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - name: Install npm modules
         run: npm i
       - name: Check code format
@@ -67,10 +67,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v18)
+      - name: Set up NodeJS (v20)
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - name: Install npm modules
         run: npm i
       - name: Run unit tests
@@ -84,10 +84,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set up NodeJS (v18)
+      - name: Set up NodeJS (v20)
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - name: Install npm modules
         run: npm i
       - name: Build plugins

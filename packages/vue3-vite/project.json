@@ -1,5 +1,6 @@
 {
-  "root": "packages/vue3-vite",
+  "name": "vue3-vite",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/vue3-vite/src",
   "projectType": "application",
   "targets": {
@@ -36,14 +37,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": ["packages/vue3-vite/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["coverage/packages/vue3-vite"],
+      "outputs": ["{workspaceRoot}/coverage/packages/vue3-vite"],
       "options": {
         "jestConfig": "packages/vue3-vite/jest.config.ts",
         "passWithNoTests": true
