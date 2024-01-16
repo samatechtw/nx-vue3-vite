@@ -2,6 +2,11 @@
 
 TODO -- automate changelog generation
 
+### v0.27.0 - 240117
+
+- Update packages
+- Update to Nx 17.2.8
+
 ### v0.26.0 - 231015
 
 - Update packages

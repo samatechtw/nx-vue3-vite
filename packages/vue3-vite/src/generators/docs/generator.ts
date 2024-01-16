@@ -113,7 +113,7 @@ export default async function (host: Tree, options: DocsGeneratorSchema) {
         executor: 'nx-vue3-vite:docs-dev-server',
       },
       lint: {
-        executor: '@nx/linter:eslint',
+        executor: '@nx/eslint:lint',
         options: {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
