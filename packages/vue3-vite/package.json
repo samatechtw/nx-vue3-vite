@@ -11,6 +11,14 @@
     "cypress": "^13.9.0",
     "@cypress/vite-dev-server": "^5.0.7"
   },
+  "peerDependenciesMeta": {
+    "cypress": {
+      "optional": true
+    },
+    "@cypress/vite-dev-server": {
+      "optional": true
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/samatechtw/nx-vue3-vite.git"

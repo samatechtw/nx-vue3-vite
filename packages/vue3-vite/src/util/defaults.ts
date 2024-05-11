@@ -9,7 +9,7 @@ export const vueRouterVersion = '^4.3.2';
 
 // devDependency versions
 export const viteVersion = '^5.2.11';
-export const eslintVersion = '^9.2.0';
+export const eslintVersion = '^8.57.0';
 export const vuePluginVersion = '^5.0.4';
 export const babelJestVersion = '^29.7.0';
 export const jestGlobalsVersion = '^29.7.0';
