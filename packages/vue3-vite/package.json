@@ -6,9 +6,9 @@
   "executors": "./executors.json",
   "peerDependencies": {
     "vite": "^2.9.15 || ^3.2.4 || ^4.3.9 || ^5.0.11",
-    "@vitejs/plugin-vue": "^5.0.3",
-    "@nx/devkit": "^17.2.8",
-    "cypress": "^13.6.2",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@nx/devkit": "^18.3.4",
+    "cypress": "^13.9.0",
     "@cypress/vite-dev-server": "^5.0.7"
   },
   "repository": {

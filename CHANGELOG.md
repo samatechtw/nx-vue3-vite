@@ -2,6 +2,12 @@
 
 TODO -- automate changelog generation
 
+### v0.28.0 - 250511
+
+- Update packages
+- Update to Nx 18.3.4
+- Make Cypress optional peer dependency
+
 ### v0.27.0 - 240117
 
 - Update packages
