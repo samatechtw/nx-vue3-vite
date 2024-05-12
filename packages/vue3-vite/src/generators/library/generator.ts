@@ -22,6 +22,7 @@ import {
 } from '../../util/defaults';
 import {
   getCaseAwareFileName,
+  getLibsDir,
   parseTags,
   updateDependencies,
 } from '../../util/utils';
@@ -46,8 +47,7 @@ function normalizeOptions(
 ): NormalizedSchema {
   const { layoutDirectory, projectDirectory: libraryDirectory } =
     extractLayoutDirectory(options.directory);
-  const { libsDir: defaultLibsDir } = getWorkspaceLayout(host);
-  const libsDir = layoutDirectory ?? defaultLibsDir;
+  const libsDir = layoutDirectory ?? getLibsDir(host);
 
   const name = names(options.name).fileName;
   const fullLibraryDirectory = libraryDirectory
@@ -172,7 +172,7 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
           lintFilePatterns: [`${libraryRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
-      test: generateTestTarget(libraryRoot, testFramework),
+      test: generateTestTarget(libraryRoot, testFramework, libraryName),
     },
     tags: normalizedOptions.parsedTags,
   });

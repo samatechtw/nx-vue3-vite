@@ -6,6 +6,7 @@ import {
   GeneratorCallback,
   updateJson,
   names,
+  getWorkspaceLayout,
 } from '@nx/devkit';
 import { jestProjectGenerator } from '@nx/jest';
 
@@ -97,6 +98,16 @@ export function getCaseAwareFileName(options: {
 
 export function parseTags(tagsStr: string): string[] {
   return tagsStr ? tagsStr.split(',').map((s) => s.trim()) : [];
+}
+
+export function getAppsDir(host: Tree) {
+  const dir = getWorkspaceLayout(host).appsDir;
+  return !dir || dir === '.' ? 'apps' : dir;
+}
+
+export function getLibsDir(host: Tree) {
+  const dir = getWorkspaceLayout(host).libsDir;
+  return !dir || dir === '.' ? 'libs' : dir;
 }
 
 export async function addJest(host: Tree, projectName: string) {

@@ -2,7 +2,6 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
@@ -18,6 +17,7 @@ import {
   recommendedExtensions,
 } from '../../util/defaults';
 import {
+  getAppsDir,
   parseTags,
   runTasksInSerial,
   updateDependencies,
@@ -42,10 +42,7 @@ function normalizeOptions(
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
 
   const projectTitle = options.title || projectName;
-  const projectRoot = joinPathFragments(
-    getWorkspaceLayout(host).appsDir,
-    projectDirectory,
-  );
+  const projectRoot = joinPathFragments(getAppsDir(host), projectDirectory);
   const parsedTags = parseTags(options.tags);
 
   return {

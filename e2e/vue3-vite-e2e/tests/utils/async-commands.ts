@@ -44,5 +44,9 @@ export function runNxCommandAsync(
   },
 ): Promise<{ stdout: string; stderr: string }> {
   const pmc = getPackageManagerCommand();
-  return runCommandAsync(projectPath, `${pmc.exec} nx ${command}`, opts);
+  return runCommandAsync(
+    projectPath,
+    `NX_DAEMON=false ${pmc.exec} nx ${command}`,
+    opts,
+  );
 }
