@@ -101,7 +101,7 @@ describe('vue3-vite e2e', () => {
   it('should not overwrite `dependencies` in `package.json`', async () => {
     // Install Vue 2
     const packageName = 'vue';
-    const oldVersion = '^2.7.14';
+    const oldVersion = '^2.7.16';
     await runCommandAsync(
       proj,
       `npm install ${packageName}@${oldVersion} --force --save`,
@@ -123,7 +123,7 @@ describe('vue3-vite e2e', () => {
   it('should not overwrite `devDependencies` in `package.json`', async () => {
     // Install Vite 3
     const packageName = 'vite';
-    const oldVersion = '^3.2.7';
+    const oldVersion = '^3.2.10';
     await runCommandAsync(
       proj,
       `npm install ${packageName}@${oldVersion} --force --save-dev`,
