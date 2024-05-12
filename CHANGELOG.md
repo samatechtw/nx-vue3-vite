@@ -7,6 +7,8 @@ TODO -- automate changelog generation
 - Update packages
 - Update to Nx 18.3.4
 - Make Cypress optional peer dependency
+- BREAKING - may need to add project path to vitest executors in project.json. For example, `"config": "apps/myproject/vite.config.ts"`
+- BREAKING - postcss config may need to be renamed from `postcss.config.js` to `postcss.config.mjs`
 
 ### v0.27.0 - 240117
 

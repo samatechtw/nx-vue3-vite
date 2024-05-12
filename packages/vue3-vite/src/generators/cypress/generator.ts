@@ -2,7 +2,6 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
@@ -12,6 +11,7 @@ import * as path from 'path';
 import { CypressGeneratorSchema } from './schema';
 import { CypressDevDependencies } from '../../util/defaults';
 import {
+  getAppsDir,
   parseTags,
   runTasksInSerial,
   updateDependencies,
@@ -36,10 +36,7 @@ function normalizeOptions(
   const projectDirectory = options.directory
     ? names(options.directory).fileName
     : name;
-  const projectRoot = joinPathFragments(
-    getWorkspaceLayout(host).appsDir,
-    projectDirectory,
-  );
+  const projectRoot = joinPathFragments(getAppsDir(host), projectDirectory);
   const parsedTags = parseTags(options.tags);
 
   return {

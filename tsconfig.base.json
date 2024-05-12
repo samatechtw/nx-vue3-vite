@@ -17,7 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "nx-vue3-vite": ["packages/vue3-vite/src/index.ts"]
-    }
+    },
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "tmp"]
 }

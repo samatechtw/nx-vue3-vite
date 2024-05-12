@@ -1,3 +1,4 @@
+import { getPackageManagerCommand } from '@nx/devkit';
 import {
   checkFilesExist,
   cleanup,
@@ -16,14 +17,14 @@ jest.setTimeout(60000);
 describe('library e2e', () => {
   let proj: string;
 
-  afterAll(() => {
-    cleanup(proj);
-  });
-
   describe('basic library check', () => {
     beforeAll(() => {
       proj = uniq('vue3-vite');
       ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+    });
+
+    afterAll(() => {
+      cleanup(proj);
     });
 
     it('should create library and build', async () => {
@@ -33,7 +34,7 @@ describe('library e2e', () => {
 
       // Check files exist
       checkFilesExist(proj, [
-        `libs/${library}/postcss.config.js`,
+        `libs/${library}/postcss.config.mjs`,
         `libs/${library}/project.json`,
         `libs/${library}/vite.config.ts`,
         `libs/${library}/src/index.ts`,
@@ -100,7 +101,7 @@ describe('library e2e', () => {
 
       // Lint
       const lintResult = await runNxCommandAsync(proj, `lint ${library}`);
-      expect(lintResult.stdout).toContain('All files pass linting.');
+      expect(lintResult.stdout).toContain('All files pass linting');
     });
 
     it('should add path to `tsconfig.base.json`', async () => {
@@ -120,56 +121,67 @@ describe('library e2e', () => {
     });
   });
 
-  it('should not overwrite `dependencies` in `package.json`', async () => {
-    // Reset project to verify correct dependencies are installed
-    proj = uniq('vue3-vite');
-    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+  describe('update configuration', () => {
+    beforeEach(() => {
+      proj = uniq('vue3-vite');
+      ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+    });
 
-    // Install Vue 2
-    const packageName = 'vue';
-    const oldVersion = '^2.7.16';
-    await runCommandAsync(
-      proj,
-      `npm install ${packageName}@${oldVersion} --save`,
-    );
+    afterEach(() => {
+      cleanup(proj);
+    });
 
-    // Verify `dependencies` after install
-    let packageJson = readJson(proj, 'package.json');
-    expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
+    it('should not overwrite `dependencies` in `package.json`', async () => {
+      const pmc = getPackageManagerCommand();
 
-    // Create library
-    const library = uniq('library-dep');
-    await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
+      // Install Vue 2
+      const packageName = 'vue';
+      const oldVersion = '^2.7.16';
+      await runCommandAsync(
+        proj,
+        `${pmc.install} ${packageName}@${oldVersion} --save`,
+      );
 
-    // Verify `dependencies` after running the generator
-    packageJson = readJson(proj, 'package.json');
-    expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
-  });
+      // Verify `dependencies` after install
+      let packageJson = readJson(proj, 'package.json');
+      expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
 
-  it('should not overwrite `devDependencies` in `package.json`', async () => {
-    // Reset project to verify correct dependencies are installed
-    proj = uniq('vue3-vite');
-    ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+      // Create library
+      const library = uniq('library-dep');
+      await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
 
-    // Install Vite 3
-    const packageName = 'vite';
-    const oldVersion = '^3.2.10';
-    await runCommandAsync(
-      proj,
-      `npm install ${packageName}@${oldVersion} --save-dev`,
-    );
+      // Verify `dependencies` after running the generator
+      packageJson = readJson(proj, 'package.json');
+      expect(packageJson.dependencies[packageName]).toEqual(oldVersion);
+    });
 
-    // Verify `dependencies` after install
-    let packageJson = readJson(proj, 'package.json');
-    expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
+    it('should not overwrite `devDependencies` in `package.json`', async () => {
+      const pmc = getPackageManagerCommand();
 
-    // Create library
-    const library = uniq('library-dev-dep');
-    await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
+      // Install Vite 3
+      const packageName = 'vite';
+      const oldVersion = '5.2.5';
+      await runCommandAsync(
+        proj,
+        `${pmc.install} -D ${packageName}@${oldVersion}`,
+      );
 
-    // Verify `devDepndencies` after running the generator
-    packageJson = readJson(proj, 'package.json');
-    expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
+      // Verify `dependencies` after install
+      let packageJson = readJson(proj, 'package.json');
+      expect(packageJson.devDependencies[packageName]).toEqual(
+        `^${oldVersion}`,
+      );
+
+      // Create library
+      const library = uniq('library-dev-dep');
+      await runNxCommandAsync(proj, `generate nx-vue3-vite:library ${library}`);
+
+      // Verify `devDepndencies` after running the generator
+      packageJson = readJson(proj, 'package.json');
+      expect(packageJson.devDependencies[packageName]).toEqual(
+        `^${oldVersion}`,
+      );
+    });
   });
 
   describe('--test', () => {
@@ -179,11 +191,11 @@ describe('library e2e', () => {
         ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
       });
 
-      it.only('lints and uses Vitest as testing framework by default', async () => {
-        // Reset project to verify correct dependencies are installed
-        proj = uniq('vue3-vite');
-        ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+      afterAll(() => {
+        cleanup(proj);
+      });
 
+      it('lints and uses Vitest as testing framework by default', async () => {
         // Create library
         const library = uniq('lib-test');
         await runNxCommandAsync(
@@ -211,7 +223,7 @@ describe('library e2e', () => {
 
         // Lint
         const lintResult = await runNxCommandAsync(proj, `lint ${library}`);
-        expect(lintResult.stdout).toContain('All files pass linting.');
+        expect(lintResult.stdout).toContain('All files pass linting');
       });
 
       it('runs tests with Vitest when `test` equals to "vitest"', async () => {
@@ -236,11 +248,11 @@ describe('library e2e', () => {
         ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
       });
 
-      it('lints and uses Jest as testing framework when `test` equals to "jest"', async () => {
-        // Reset project to verify correct dependencies are installed
-        proj = uniq('vue3-vite');
-        ensureNxProject('nx-vue3-vite', 'dist/packages/vue3-vite', proj);
+      afterAll(() => {
+        cleanup(proj);
+      });
 
+      it('lints and uses Jest as testing framework when `test` equals to "jest"', async () => {
         // Create library
         const library = uniq('lib-test');
         await runNxCommandAsync(
@@ -268,7 +280,7 @@ describe('library e2e', () => {
 
         // Lint
         const lintResult = await runNxCommandAsync(proj, `lint ${library}`);
-        expect(lintResult.stdout).toContain('All files pass linting.');
+        expect(lintResult.stdout).toContain('All files pass linting');
       });
 
       it('runs tests with Jest when `test` equals to "jest"', async () => {

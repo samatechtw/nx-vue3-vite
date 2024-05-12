@@ -2,7 +2,6 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
@@ -19,7 +18,12 @@ import {
   JestDevDependencies,
   VitestDevDependencies,
 } from '../../util/defaults';
-import { parseTags, updateDependencies, updateScripts } from '../../util/utils';
+import {
+  getAppsDir,
+  parseTags,
+  updateDependencies,
+  updateScripts,
+} from '../../util/utils';
 import { PathAlias } from '../../util/path-alias';
 import { TestFramework } from '../../util/test-framework';
 import { generateTestTarget } from '../../util/generate-test-target';
@@ -44,10 +48,7 @@ function normalizeOptions(
     : name;
   const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
   const projectTitle = options.title || projectName;
-  const projectRoot = joinPathFragments(
-    getWorkspaceLayout(host).appsDir,
-    projectDirectory,
-  );
+  const projectRoot = joinPathFragments(getAppsDir(host), projectDirectory);
   const parsedTags = parseTags(options.tags);
   // Default to global paths
   const useLocalAlias = options.alias === PathAlias.Local;
@@ -161,7 +162,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
-      test: generateTestTarget(projectRoot, testFramework),
+      test: generateTestTarget(projectRoot, testFramework, projectName),
     },
     tags: normalizedOptions.parsedTags,
   });
