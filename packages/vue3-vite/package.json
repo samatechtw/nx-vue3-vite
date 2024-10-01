@@ -1,15 +1,15 @@
 {
   "name": "nx-vue3-vite",
-  "version": "0.28.0",
+  "version": "0.29.0",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
-    "vite": "^2.9.15 || ^3.2.4 || ^4.3.9 || ^5.0.11",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@nx/devkit": "^18.3.4",
-    "cypress": "^13.9.0",
-    "@cypress/vite-dev-server": "^5.0.7"
+    "vite": "^2.9.15 || ^3.2.4 || ^4.3.9 || ^5.2.0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "@nx/devkit": "^19.8.3",
+    "cypress": "^13.15.0",
+    "@cypress/vite-dev-server": "^5.2.0"
   },
   "peerDependenciesMeta": {
     "cypress": {

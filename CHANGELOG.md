@@ -2,6 +2,12 @@
 
 TODO -- automate changelog generation
 
+### v0.29.0 - 251002
+
+- Update packages
+- Update to Nx 19.8.3
+- Check pnpm lockfile into git
+
 ### v0.28.0 - 250511
 
 - Update packages
