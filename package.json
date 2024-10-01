@@ -22,7 +22,7 @@
     "help": "nx help",
     "lint": "nx workspace-lint && nx lint vue3-vite",
     "nx": "nx",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "nx test vue3-vite",
     "update": "nx migrate latest"
   },
