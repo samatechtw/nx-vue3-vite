@@ -39,7 +39,7 @@ export const VueDevDependencies = {
 
 export const VitestDevDependencies = {
   '@nx/vite': '^19.8.3',
-  'happy-dom': '^15.17.4',
+  'happy-dom': '^15.7.4',
   vitest: '^2.1.1',
 };
 
