@@ -15,5 +15,4 @@ module.exports = {
   },
   testEnvironment: 'jsdom',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'vue'],
-  testTimeout: 10000,
 };
