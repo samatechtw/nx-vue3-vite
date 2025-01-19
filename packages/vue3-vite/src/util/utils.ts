@@ -8,7 +8,7 @@ import {
   names,
   getWorkspaceLayout,
 } from '@nx/devkit';
-import { jestProjectGenerator } from '@nx/jest';
+import { configurationGenerator } from '@nx/jest';
 
 function sortObjectByKeys(obj: unknown): unknown {
   return Object.keys(obj)
@@ -29,7 +29,7 @@ export function getProjectRoot(context: ExecutorContext): string {
 }
 
 export function projectRelativePath(context: ExecutorContext): string {
-  return context.workspace.projects[context.projectName].root;
+  return context.projectsConfigurations.projects[context.projectName].root;
 }
 
 export function getWorkspaceRoot(context: ExecutorContext): string {
@@ -111,7 +111,7 @@ export function getLibsDir(host: Tree) {
 }
 
 export async function addJest(host: Tree, projectName: string) {
-  const jestTask = await jestProjectGenerator(host, {
+  const jestTask = await configurationGenerator(host, {
     project: projectName,
     supportTsx: false,
     skipSerializers: true,

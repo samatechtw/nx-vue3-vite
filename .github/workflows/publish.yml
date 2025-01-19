@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm i
+      - run: npm i --legacy-peer-deps
       - run: npx nx run vue3-vite:build
       - run: npm publish ./dist/packages/vue3-vite --access public
         env:

@@ -2,13 +2,18 @@
 
 TODO -- automate changelog generation
 
-### v0.29.0 - 251002
+### v0.30.0 - 250119
+
+- Update to Nx 20.3.2
+- Update to Vite 6
+
+### v0.29.0 - 241002
 
 - Update packages
 - Update to Nx 19.8.3
 - Check pnpm lockfile into git
 
-### v0.28.0 - 250511
+### v0.28.0 - 240511
 
 - Update packages
 - Update to Nx 18.3.4

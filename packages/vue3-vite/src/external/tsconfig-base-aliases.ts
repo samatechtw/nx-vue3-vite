@@ -34,7 +34,8 @@ export const tsconfigBaseAliases = (
   const tsconfigPath = path.join(fromPath, rootOffset, 'tsconfig.base.json');
   const tsconfigBase = JSON.parse(fs.readFileSync(tsconfigPath, 'utf-8'));
 
-  const paths = tsconfigBase.compilerOptions?.paths || [];
+  const paths: Record<string, string> =
+    tsconfigBase.compilerOptions?.paths || {};
   for (const [name, path] of Object.entries(paths)) {
     const simplePath = path[0].replace('/*', '/');
     const relative = `${rootOffset}${simplePath}`;

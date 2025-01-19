@@ -5,11 +5,11 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
-    "vite": "^2.9.15 || ^3.2.4 || ^4.3.9 || ^5.2.0",
-    "@vitejs/plugin-vue": "^5.1.4",
-    "@nx/devkit": "^19.8.3",
-    "cypress": "^13.15.0",
-    "@cypress/vite-dev-server": "^5.2.0"
+    "vite": "^2.9.15 || ^3.2.4 || ^4.3.9 || ^5.2.0 || ^6.0.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@nx/devkit": "^20.3.2",
+    "cypress": "^14.0.0",
+    "@cypress/vite-dev-server": "^6.0.1"
   },
   "peerDependenciesMeta": {
     "cypress": {

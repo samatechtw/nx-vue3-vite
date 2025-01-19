@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install npm modules
-        run: npm i
+        run: npm i --legacy-peer-deps
       - name: Lint code
         run: npx nx affected:lint --base=origin/main --parallel
 
@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install npm modules
-        run: npm i
+        run: npm i --legacy-peer-deps
       - name: Build apps
         run: npx nx affected:build --base=origin/main --parallel
 
@@ -55,7 +55,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install npm modules
-        run: npm i
+        run: npm i --legacy-peer-deps
       - name: Check code format
         run: npx nx format:check --base=origin/main
 
@@ -72,7 +72,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install npm modules
-        run: npm i
+        run: npm i --legacy-peer-deps
       - name: Run unit tests
         run: npx nx affected:test --base=origin/main --parallel
 
@@ -89,7 +89,7 @@ jobs:
         with:
           node-version: '20'
       - name: Install npm modules
-        run: npm i
+        run: npm i --legacy-peer-deps
       - name: Build plugins
         run: npm run build
       - name: Run e2e tests
