@@ -53,7 +53,7 @@ export const JestDevDependencies = {
 
 export const LintDevDependencies = {
   '@intlify/eslint-plugin-vue-i18n': '^3.2.0',
-  '@vue/eslint-config-typescript': '^14.3.0',
+  '@vue/eslint-config-typescript': '^13.0.0',
   eslint: eslintVersion,
   'eslint-config-prettier': '^10.0.1',
   'eslint-plugin-import': '^2.31.0',

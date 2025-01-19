@@ -8,6 +8,7 @@ import {
   readJson,
   runCommandAsync,
   runNxCommandAsync,
+  stripAnsi,
   uniq,
   updateFile,
 } from './utils';
@@ -139,7 +140,7 @@ describe('library e2e', () => {
       const oldVersion = '^2.7.16';
       await runCommandAsync(
         proj,
-        `${pmc.install} ${packageName}@${oldVersion} --save`,
+        `${pmc.add} ${packageName}@${oldVersion} --save`,
       );
 
       // Verify `dependencies` after install
@@ -163,14 +164,12 @@ describe('library e2e', () => {
       const oldVersion = '5.2.5';
       await runCommandAsync(
         proj,
-        `${pmc.install} -D ${packageName}@${oldVersion}`,
+        `${pmc.addDev} --save-exact ${packageName}@${oldVersion}`,
       );
 
       // Verify `dependencies` after install
       let packageJson = readJson(proj, 'package.json');
-      expect(packageJson.devDependencies[packageName]).toEqual(
-        `^${oldVersion}`,
-      );
+      expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
 
       // Create library
       const library = uniq('library-dev-dep');
@@ -178,9 +177,7 @@ describe('library e2e', () => {
 
       // Verify `devDepndencies` after running the generator
       packageJson = readJson(proj, 'package.json');
-      expect(packageJson.devDependencies[packageName]).toEqual(
-        `^${oldVersion}`,
-      );
+      expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
     });
   });
 
@@ -236,7 +233,7 @@ describe('library e2e', () => {
 
         // Run test
         const testResult = await runNxCommandAsync(proj, `test ${library}`);
-        expect(testResult.stdout).toContain(
+        expect(stripAnsi(testResult.stdout)).toContain(
           `Successfully ran target test for project ${library}`,
         );
       });
@@ -293,7 +290,7 @@ describe('library e2e', () => {
 
         // Run test
         const testResult = await runNxCommandAsync(proj, `test ${library}`);
-        expect(testResult.stdout).toContain(
+        expect(stripAnsi(testResult.stdout)).toContain(
           `Successfully ran target test for project ${library}`,
         );
       });

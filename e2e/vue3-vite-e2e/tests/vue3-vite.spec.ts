@@ -8,6 +8,7 @@ import {
   readJson,
   runCommandAsync,
   runNxCommandAsync,
+  stripAnsi,
   uniq,
   updateFile,
 } from './utils';
@@ -217,7 +218,7 @@ describe('vue3-vite e2e', () => {
       const oldVersion = '^2.7.16';
       await runCommandAsync(
         proj,
-        `${pmc.install} ${packageName}@${oldVersion} --force --save`,
+        `${pmc.add} ${packageName}@${oldVersion} --force --save`,
       );
 
       // Verify `dependencies` after install
@@ -241,14 +242,12 @@ describe('vue3-vite e2e', () => {
       const oldVersion = '5.2.5';
       await runCommandAsync(
         proj,
-        `${pmc.install} -D ${packageName}@${oldVersion} --force`,
+        `${pmc.add} --save-exact -D ${packageName}@${oldVersion} --force`,
       );
 
       // Verify `dependencies` after install
       let packageJson = readJson(proj, 'package.json');
-      expect(packageJson.devDependencies[packageName]).toEqual(
-        `^${oldVersion}`,
-      );
+      expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
 
       // Create app
       const app = uniq('vue3-vite-dev-dep');
@@ -256,9 +255,7 @@ describe('vue3-vite e2e', () => {
 
       // Verify `devDependencies` after running the generator
       packageJson = readJson(proj, 'package.json');
-      expect(packageJson.devDependencies[packageName]).toEqual(
-        `^${oldVersion}`,
-      );
+      expect(packageJson.devDependencies[packageName]).toEqual(oldVersion);
     });
   });
 
@@ -354,7 +351,7 @@ describe('vue3-vite e2e', () => {
 
         // Runs tests
         const testResult = await runNxCommandAsync(proj, `test ${app}`);
-        expect(testResult.stdout).toContain(
+        expect(stripAnsi(testResult.stdout)).toContain(
           `Successfully ran target test for project ${app}`,
         );
       });
@@ -424,7 +421,7 @@ describe('vue3-vite e2e', () => {
 
         // Runs tests
         const testResult = await runNxCommandAsync(proj, `test ${app}`);
-        expect(testResult.stdout).toContain(
+        expect(stripAnsi(testResult.stdout)).toContain(
           `Successfully ran target test for project ${app}`,
         );
       });
