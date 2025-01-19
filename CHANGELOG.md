@@ -6,6 +6,7 @@ TODO -- automate changelog generation
 
 - Update to Nx 20.3.2
 - Update to Vite 6
+- Update various packages
 
 ### v0.29.0 - 241002
 
