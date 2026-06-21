@@ -1,13 +1,13 @@
 {
   "name": "nx-vue3-vite",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
   "peerDependencies": {
-    "vite": "^2.9.15 || ^3.2.4 || ^4.3.9 || ^5.2.0 || ^6.0.0",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@nx/devkit": "^20.3.2",
+    "vite": "^2.9.15 || ^3.2.4 || ^4.3.9 || ^5.2.0 || ^6.0.0 || ^7.0.0",
+    "@vitejs/plugin-vue": "^5.2.1 || ^6.0.0",
+    "@nx/devkit": "^20.3.2 || ^21.0.0",
     "cypress": "^14.0.0",
     "@cypress/vite-dev-server": "^6.0.1"
   },

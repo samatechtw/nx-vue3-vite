@@ -2,6 +2,15 @@
 
 TODO -- automate changelog generation
 
+### v0.31.0 - 260621
+
+- Update to Nx 21
+- Vitest support in `library` and `app` generators
+- Decouple `@nx/jest` from the executor load path
+- Migrate unit/e2e tests from Jest to Vitest
+- Fix Jest generator option and include `environment.ts` as a template
+- Update to Vite 7, Vitest 4, `@vitejs/plugin-vue` 6, happy-dom 20, TypeScript 5.9
+
 ### v0.30.0 - 250119
 
 - Update to Nx 20.3.2

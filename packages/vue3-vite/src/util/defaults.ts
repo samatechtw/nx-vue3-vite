@@ -8,9 +8,9 @@ export const vueI18nVersion = '^11.0.1';
 export const vueRouterVersion = '^4.5.0';
 
 // devDependency versions
-export const viteVersion = '^6.0.7';
+export const viteVersion = '^7.1.12';
 export const eslintVersion = '^8.57.0';
-export const vuePluginVersion = '^5.2.1';
+export const vuePluginVersion = '^6.0.7';
 export const babelJestVersion = '^29.7.0';
 export const jestGlobalsVersion = '^29.7.0';
 export const vue3JestVersion = '^29.2.6';
@@ -21,8 +21,8 @@ export const stylelintVersion = '^16.13.2';
 export const stylelintConfigVersion = '^37.0.0';
 export const tslibVersion = '^2.8.1';
 export const tsConfigVersion = '^7.0.0';
-export const nrwlJestVersion = '^20.3.2';
-export const typescriptVersion = '~5.7.3';
+export const nrwlJestVersion = '^21.6.11';
+export const typescriptVersion = '~5.9.3';
 
 export const CypressDevDependencies = {
   cypress: '^14.0.0',
@@ -30,17 +30,18 @@ export const CypressDevDependencies = {
   '@cypress/vite-dev-server': '^6.0.1',
   '@cypress/code-coverage': '^3.13.10',
   'eslint-plugin-cypress': '^4.1.0',
-  '@nx/cypress': '*',
+  '@nx/cypress': '^21.6.11',
 };
 
 export const VueDevDependencies = {
   '@vue/test-utils': '^2.4.6',
 };
 
+// The vitest `test` target runs via `nx:run-commands`, so no `@nx/vite` executor
+// (and no `@nx/vite` peer-range coupling to vite/vitest) is needed.
 export const VitestDevDependencies = {
-  '@nx/vite': '^20.3.2',
-  'happy-dom': '^16.6.0',
-  vitest: '^3.0.2',
+  'happy-dom': '^20.10.6',
+  vitest: '^4.1.9',
 };
 
 export const JestDevDependencies = {
@@ -48,7 +49,11 @@ export const JestDevDependencies = {
   '@jest/globals': jestGlobalsVersion,
   '@vue/vue3-jest': vue3JestVersion,
   'babel-jest': babelJestVersion,
+  jest: '^29.7.0',
   'jest-environment-jsdom': '^29.7.0',
+  'ts-jest': '^29.2.5',
+  // Required by Jest to load TS `jest.config.ts`.
+  'ts-node': '^10.9.2',
 };
 
 export const LintDevDependencies = {

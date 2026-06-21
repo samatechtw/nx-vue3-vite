@@ -1,12 +1,12 @@
+<% if (useLocalAlias) { -%>
 import path from 'path'
-import { defineConfig } from 'vite';
-import Vue from '@vitejs/plugin-vue';
-<% if (!useLocalAlias) { -%>
+<% } else { -%>
 import { tsconfigBaseAliases } from 'nx-vue3-vite'
 <% } -%>
+import Vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  assetsInclude:  /\.(pdf|jpg|png|svg)$/,
   resolve: {
     alias: {
 <% if (useLocalAlias) { -%>
@@ -19,8 +19,11 @@ export default defineConfig({
 <% } -%>
     },
   },
-  publicDir: path.resolve(__dirname, './src/public'),
-  plugins: [
-    Vue(),
-  ],
-});
+  plugins: [Vue()],
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    root: __dirname,
+    include: ['src/**/*.spec.ts'],
+  },
+})

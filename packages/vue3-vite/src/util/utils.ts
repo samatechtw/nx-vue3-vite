@@ -8,7 +8,6 @@ import {
   names,
   getWorkspaceLayout,
 } from '@nx/devkit';
-import { configurationGenerator } from '@nx/jest';
 
 function sortObjectByKeys(obj: unknown): unknown {
   return Object.keys(obj)
@@ -108,18 +107,6 @@ export function getAppsDir(host: Tree) {
 export function getLibsDir(host: Tree) {
   const dir = getWorkspaceLayout(host).libsDir;
   return !dir || dir === '.' ? 'libs' : dir;
-}
-
-export async function addJest(host: Tree, projectName: string) {
-  const jestTask = await configurationGenerator(host, {
-    project: projectName,
-    supportTsx: false,
-    skipSerializers: true,
-    setupFile: 'none',
-    babelJest: true,
-  });
-
-  return jestTask;
 }
 
 // Borrowed from https://github.com/nrwl/nx/blob/a3c08a9153360371ee09771389299201b3407e00/packages/workspace/src/utilities/run-tasks-in-serial.ts

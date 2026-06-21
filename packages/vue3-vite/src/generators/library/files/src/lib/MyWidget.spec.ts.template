@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils';
 <% if (testFramework === 'vitest') { -%>
-  import { expect, test } from 'vitest';
+import { expect, test } from 'vitest';
 <% } else { -%>
-  import { expect } from '@jest/globals';
+import { expect } from '@jest/globals';
 <% } -%>
 import MyWidget from './MyWidget.vue';
 

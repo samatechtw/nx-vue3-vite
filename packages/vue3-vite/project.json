@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/vue3-vite/src",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -43,13 +44,12 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/coverage/packages/vue3-vite"],
       "options": {
-        "jestConfig": "packages/vue3-vite/jest.config.ts",
-        "passWithNoTests": true
+        "command": "vitest run --passWithNoTests",
+        "cwd": "packages/vue3-vite"
       }
     }
-  },
-  "tags": []
+  }
 }

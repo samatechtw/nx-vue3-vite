@@ -7,8 +7,6 @@ import {
   uniq,
 } from './utils';
 
-jest.setTimeout(60000);
-
 describe('component e2e', () => {
   let proj: string;
 

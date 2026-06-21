@@ -1,0 +1,28 @@
+<% if (useLocalAlias) { -%>
+import path from 'path'
+<% } else { -%>
+import { tsconfigBaseAliases } from 'nx-vue3-vite'
+<% } -%>
+import Vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  resolve: {
+    alias: {
+<% if (useLocalAlias) { -%>
+      '@assets/': `${path.resolve(__dirname, './src/assets')}/`,
+      '@lib/': `${path.resolve(__dirname, './src/lib')}/`,
+<% } else { -%>
+      ...tsconfigBaseAliases(__dirname),
+      // Add your aliases here
+<% } -%>
+    },
+  },
+  plugins: [Vue()],
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    root: __dirname,
+    include: ['src/**/*.spec.ts'],
+  },
+})

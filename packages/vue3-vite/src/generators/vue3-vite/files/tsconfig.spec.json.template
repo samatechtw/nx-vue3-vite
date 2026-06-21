@@ -2,8 +2,12 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "<%= offsetFromRoot %>dist/out-tsc",
+<% if (testFramework === 'jest') { -%>
     "module": "commonjs",
     "types": ["vue-i18n", "jest", "node"],
+<% } else { -%>
+    "types": ["vue-i18n", "vitest/globals", "node"],
+<% } -%>
     "composite": true
   },
   "include": [

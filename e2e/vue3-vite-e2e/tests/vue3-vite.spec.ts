@@ -13,8 +13,6 @@ import {
   updateFile,
 } from './utils';
 
-jest.setTimeout(90000);
-
 describe('vue3-vite e2e', () => {
   let proj: string;
 
@@ -41,6 +39,7 @@ describe('vue3-vite e2e', () => {
         `apps/${app}/src/app/main.ts`,
         `apps/${app}/tsconfig.json`,
         `apps/${app}/vite.config.ts`,
+        `apps/${app}/vitest.config.ts`,
         `nx.json`,
         `package.json`,
         `tsconfig.base.json`,
@@ -324,9 +323,9 @@ describe('vue3-vite e2e', () => {
         expect(packageJson).toContain('happy-dom');
         expect(packageJson).not.toContain('jest');
 
-        // Read and verify `vite.config.ts`
-        const viteConfig = readFile(proj, `apps/${app}/vite.config.ts`);
-        expect(viteConfig).toContain("environment: 'happy-dom'");
+        // Read and verify `vitest.config.ts`
+        const vitestConfig = readFile(proj, `apps/${app}/vitest.config.ts`);
+        expect(vitestConfig).toContain("environment: 'happy-dom'");
 
         // Read and verify test file
         const testFile = readFile(

@@ -162,7 +162,7 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
           lintFilePatterns: [`${projectRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
-      test: generateTestTarget(projectRoot, testFramework, projectName),
+      test: generateTestTarget(projectRoot, testFramework),
     },
     tags: normalizedOptions.parsedTags,
   });
@@ -186,6 +186,13 @@ export default async function (host: Tree, options: Vue3ViteGeneratorSchema) {
 
   ensureRootFiles(host);
   addFiles(host, normalizedOptions);
+
+  // `generateFiles` copies both test configs, only keep the one used.
+  const unusedTestConfig =
+    testFramework === TestFramework.Vitest
+      ? 'jest.config.ts'
+      : 'vitest.config.ts';
+  host.delete(joinPathFragments(projectRoot, unusedTestConfig));
 
   updateExtensionRecommendations(host);
 
