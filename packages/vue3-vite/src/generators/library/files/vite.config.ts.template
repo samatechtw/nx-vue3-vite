@@ -2,20 +2,20 @@ import path from 'path'
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 <% if (!useLocalAlias) { -%>
-  import { tsconfigBaseAliases } from 'nx-vue3-vite'
-<% } %>
+import { tsconfigBaseAliases } from 'nx-vue3-vite'
+<% } -%>
 
 module.exports = defineConfig({
   assetsInclude:  /\.(pdf|jpg|png|svg)$/,
   resolve: {
     alias: {
-      <% if (useLocalAlias) { %>
+<% if (useLocalAlias) { -%>
       '@assets/': `${path.resolve(__dirname, './src/assets')}/`,
       '@lib/': `${path.resolve(__dirname, './src/lib')}/`,
-      <% } else { %>
-        ...tsconfigBaseAliases(__dirname),
-        // Add your aliases here
-      <% } %>
+<% } else { -%>
+      ...tsconfigBaseAliases(__dirname),
+      // Add your aliases here
+<% } -%>
     },
   },
   plugins: [
@@ -38,9 +38,4 @@ module.exports = defineConfig({
       },
     },
   },
-  <% if (testFramework === 'vitest') { -%>
-    test: {
-      environment: 'happy-dom',
-    }
-  <% } %>
 })

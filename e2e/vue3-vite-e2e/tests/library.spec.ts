@@ -13,8 +13,6 @@ import {
   updateFile,
 } from './utils';
 
-jest.setTimeout(60000);
-
 describe('library e2e', () => {
   let proj: string;
 
@@ -38,6 +36,7 @@ describe('library e2e', () => {
         `libs/${library}/postcss.config.mjs`,
         `libs/${library}/project.json`,
         `libs/${library}/vite.config.ts`,
+        `libs/${library}/vitest.config.ts`,
         `libs/${library}/src/index.ts`,
         `libs/${library}/src/lib/MyWidget.vue`,
         `libs/${library}/src/lib/MyWidget.spec.ts`,
@@ -206,9 +205,9 @@ describe('library e2e', () => {
         expect(packageJson).toContain('happy-dom');
         expect(packageJson).not.toContain('jest');
 
-        // Read and verify `vite.config.ts`
-        const viteConfig = readFile(proj, `libs/${library}/vite.config.ts`);
-        expect(viteConfig).toContain("environment: 'happy-dom'");
+        // Read and verify `vitest.config.ts`
+        const vitestConfig = readFile(proj, `libs/${library}/vitest.config.ts`);
+        expect(vitestConfig).toContain("environment: 'happy-dom'");
 
         // Read and verify test file
         const testFile = readFile(

@@ -6,8 +6,6 @@ import {
   cleanup,
 } from './utils';
 
-jest.setTimeout(60000);
-
 describe('cypress e2e', () => {
   let proj: string;
 

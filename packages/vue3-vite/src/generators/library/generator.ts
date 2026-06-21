@@ -3,7 +3,6 @@ import {
   addProjectConfiguration,
   formatFiles,
   generateFiles,
-  getWorkspaceLayout,
   names,
   offsetFromRoot,
   Tree,
@@ -172,13 +171,20 @@ export default async function (host: Tree, options: LibraryGeneratorSchema) {
           lintFilePatterns: [`${libraryRoot}/**/*.{js,jsx,ts,tsx,vue}`],
         },
       },
-      test: generateTestTarget(libraryRoot, testFramework, libraryName),
+      test: generateTestTarget(libraryRoot, testFramework),
     },
     tags: normalizedOptions.parsedTags,
   });
 
   ensureRootFiles(host, normalizedOptions);
   addFiles(host, normalizedOptions);
+
+  // `generateFiles` copies both test configs, only keep the one used.
+  const unusedTestConfig =
+    testFramework === TestFramework.Vitest
+      ? 'jest.config.ts'
+      : 'vitest.config.ts';
+  host.delete(joinPathFragments(libraryRoot, unusedTestConfig));
 
   const testDevDependencies =
     testFramework === TestFramework.Jest

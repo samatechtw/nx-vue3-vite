@@ -3,15 +3,17 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "e2e/vue3-vite-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["vue3-vite"],
   "targets": {
     "e2e": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/api"],
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/coverage/e2e/vue3-vite-e2e"],
+      "dependsOn": ["^build"],
       "options": {
-        "jestConfig": "e2e/vue3-vite-e2e/jest.config.ts"
+        "command": "vitest run --passWithNoTests",
+        "cwd": "e2e/vue3-vite-e2e"
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["vue3-vite"]
+  }
 }
