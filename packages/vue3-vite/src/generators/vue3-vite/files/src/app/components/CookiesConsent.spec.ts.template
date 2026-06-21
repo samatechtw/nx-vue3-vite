@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 <% if (testFramework === 'vitest') { -%>
 import { vitest, expect, test } from 'vitest';
 <% } else { -%>
-import { expect } from '@jest/globals';
+import { jest, expect, test } from '@jest/globals';
 <% } -%>
 import CookiesConsent from './CookiesConsent.vue';
 
