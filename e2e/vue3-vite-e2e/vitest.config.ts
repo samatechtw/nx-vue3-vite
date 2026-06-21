@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
@@ -14,4 +14,4 @@ export default defineConfig({
     // Run the heavy e2e specs one file at a time to avoid saturating CPU/disk.
     fileParallelism: false,
   },
-})
+});
