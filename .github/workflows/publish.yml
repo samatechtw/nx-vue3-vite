@@ -19,8 +19,6 @@ jobs:
         with:
           node-version: '24'
       - run: node -v && npm -v
-      # npm >= 11.5.1 is needed for Trusted Publishing
-      - run: npm install -g npm@latest
       - run: npm i --legacy-peer-deps
       - run: npx nx run vue3-vite:build
       - run: npm publish ./dist/packages/vue3-vite --access public
