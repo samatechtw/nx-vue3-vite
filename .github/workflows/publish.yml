@@ -3,6 +3,11 @@ on:
   push:
     tags:
       - 'v*'
+permissions:
+  # let npm authenticate via OIDC for "Trusted Publishing"
+  id-token: write
+  # required for conventional-github-releaser to create GitHub releases
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,13 +17,13 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: '24'
+      - run: node -v && npm -v
+      # npm >= 11.5.1 is needed for Trusted Publishing
+      - run: npm install -g npm@latest
       - run: npm i --legacy-peer-deps
       - run: npx nx run vue3-vite:build
       - run: npm publish ./dist/packages/vue3-vite --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npx conventional-github-releaser -p angular
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
